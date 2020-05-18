@@ -1,8 +1,7 @@
+
 # SSMT-UI
 
-# Installation Procedure
-
-To install react tooling we need nodejs and npm. First let’s understand what these are and why we need them.
+We are creating the MOC OPS Dashboard through the React Web App listening to Flask based API's from the backend from where we will be displaying and visualizing the data. 
 
 # What is Nodejs and Why you need for react development?
 
@@ -14,41 +13,68 @@ Npm stands for node package manager, it is a dependency management tool for java
 
 Let’s start with nodejs installation post completion on nodejs we will install create-react-app command line and will create a new react project
 
+# Pre-Requisites and Pre-Conditions
 
-**sudo apt-get install curl**
+	- Install the latest version of [Node JS](https://nodejs.org/en/download/) to run 
 
-**curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -**
 
-**sudo apt-get install -y nodejs**
+# Installation Steps
 
-**Check the Version**
+**Install Curl**
 
-**npm -v**
+```sh
+$sudo apt-get install curl
+```
 
-**node -v**
+**Curl the setup files**
 
-**Install the Dependencies such as**
+```sh
+$curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+```
 
-**npm fund**
+**Install Node JS**
 
-**let’s install build-essential package, which is needed for Node to work properly:**
+```sh
+$sudo apt-get install -y nodejs**
+```
 
-**sudo apt-get install -y build-essential**
+**Check the Version of Node JS and npm Package Manager**
 
-**Now to Create the React App**
+```sh
+- $npm -v
+- $node -v
+```
 
-**sudo npm install -g create-react-app**
+**Install build-essential package, which is needed for Node to work properly:**
 
-**For Runnig this React App Run he Following Command**
+```sh
+$sudo apt-get install -y build-essential
+```
 
-**create-react-app dashboard-app**
+**Now  create the React app**
 
-Then enter the directory 
+```sh
+$sudo npm install -g create-react-app
+```
 
-**cd dashboard-app*
+**Run this React app Run he Following Command**
+
+```sh
+$create-react-app dashboard-app
+```
+
 
 **Run the react app**
 
-**npm start**
+```sh
+$npm start
+```
 
+#### Todo's
+
+- Add the PatternFly code
+- Integrate the PatternFly Design
+
+
+# License 
 
