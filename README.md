@@ -1,54 +1,102 @@
-# SSMT-UI
+# Patternfly Seed
 
-# Installation Procedure
+Patternfly Seed is an open source build scaffolding utility for web apps. The primary purpose of this project is to give developers a jump start when creating new projects that will use patternfly. A secondary purpose of this project is to serve as a reference for how to configure various aspects of an application that uses patternfly, webpack, react, typescript, etc.
 
-To install react tooling we need nodejs and npm. First let’s understand what these are and why we need them.
+Out of the box you'll get an app layout with chrome (header/sidebar), routing, build pipeline, test suite, and some code quality tools. Basically, all the essentials.
 
-# What is Nodejs and Why you need for react development?
+<img width="1058" alt="Out of box dashboard view of patternfly seed" src="https://user-images.githubusercontent.com/5942899/62715686-fa954980-b9ce-11e9-9fc2-217b7a4d1d81.png">
 
-Node.js is an open-source, cross-platform JavaScript run-time environment that executes JavaScript code outside of a browser. Node.js lets developers use JavaScript to develop wide variety of applications like network applications, command line tools, web api, web applications. You need nodejs for dev tooling (like local web server with live reloading features) and dev experience, you do not need nodejs to run react in production.
+## Quick-start
+```bash
+git clone https://github.com/patternfly/patternfly-react-seed # clone the project
+cd patternfly-react-seed # navigate into the project directory
+npm install # install patternfly-react-seed dependencies
+npm run start:dev # start the development server
+```
+## Development Scripts
 
-# What is npm and Why you need for react development?
+Install development/build dependencies
+`npm install`
 
-Npm stands for node package manager, it is a dependency management tool for javascript applications. This tool will help to install and the libraries and other tools to support react development.
+Start the development server
+`npm run start:dev`
 
-Let’s start with nodejs installation post completion on nodejs we will install create-react-app command line and will create a new react project
+Run a production build (outputs to "dist" dir)
+`npm run build`
 
+Run the test suite
+`npm run test`
 
-**sudo apt-get install curl**
+Run the linter
+`npm run lint`
 
-**curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -**
+Run the code formatter
+`npm run format`
 
-**sudo apt-get install -y nodejs**
+Launch a tool to inspect the bundle size
+`npm run bundle-profile:analyze`
 
-**Check the Version**
+Start the express server (run a production build first)
+`npm run start`
 
-**npm -v**
+Start storybook component explorer
+`npm run storybook`
 
-**node -v**
+Build storybook component explorer as standalone app (outputs to "storybook-static" dir)
+`npm run build:storybook`
 
-**Install the Dependencies such as**
+## Configurations
+* [TypeScript Config](./tsconfig.json)
+* [Webpack Config](./webpack.common.js)
+* [Jest Config](./jest.config.js)
+* [Editor Config](./.editorconfig)
 
-**npm fund**
+## Raster Image Support
 
-**let’s install build-essential package, which is needed for Node to work properly:**
+To use an image asset that's shipped with patternfly core, you'll prefix the paths with "@assets". `@assets` is an alias for the patternfly assets directory in node_modules.
 
-**sudo apt-get install -y build-essential**
+For example:
+```js
+import imgSrc from '@assets/images/g_sizing.png';
+<img src={imgSrc} alt="Some image" />
+```
 
-**Now to Create the React App**
+You can use a similar technique to import assets from your local app, just prefix the paths with "@app". `@app` is an alias for the main src/app directory.
 
-**sudo npm install -g create-react-app**
+```js
+import loader from '@app/assets/images/loader.gif';
+<img src={loader} alt="Content loading />
+```
 
-**For Runnig this React App Run he Following Command**
+## Vector Image Support
+Inlining SVG in the app's markup is also possible.
 
-**create-react-app dashboard-app**
+```js
+import logo from '@app/assets/images/logo.svg';
+<span dangerouslySetInnerHTML={{__html: logo}} />
+```
 
-Then enter the directory 
+You can also use SVG when applying background images with CSS. To do this, your SVG's must live under a `bgimages` directory (this directory name is configurable in [webpack.common.js](./webpack.common.js#L5)). This is necessary because you may need to use SVG's in several other context (inline images, fonts, icons, etc.) and so we need to be able to differentiate between these usages so the appropriate loader is invoked.
+```css
+body {
+  background: url(./assets/bgimages/img_avatar.svg);
+}
+```
 
-**cd dashboard-app*
+## Code Quality Tools
+* For accessibility compliance, we use [react-axe](https://github.com/dequelabs/react-axe)
+* To keep our bundle size in check, we use [webpack-bundle-analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer)
+* To keep our code formatting in check, we use [prettier](https://github.com/prettier/prettier)
+* To keep our code logic and test coverage in check, we use [jest](https://github.com/facebook/jest)
+* To ensure code styles remain consistent, we use [eslint](https://eslint.org/)
+* To provide a place to showcase custom components, we integrate with [storybook](https://storybook.js.org/)
 
-**Run the react app**
+## Multi environment configuration
+This project uses [dotenv-webpack](https://www.npmjs.com/package/dotenv-webpack) for exposing environment variables to your code. Either export them at the system level like `export MY_ENV_VAR=http://dev.myendpoint.com && npm run start:dev` or simply drop a `.env` file in the root that contains your key-value pairs like below:
 
-**npm start**
+```sh
+ENV_1=http://1.myendpoint.com
+ENV_2=http://2.myendpoint.com
+```
 
-
+With that in place, you can use the values in your code like `console.log(process.env.ENV_1);`
