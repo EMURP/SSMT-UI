@@ -34,6 +34,10 @@ const paddingChart= {
 
 } as React.CSSProperties
 
+
+import { Fetchdata } from '@app/fetchdata/fetchdata';
+// import { ChartPie, ChartThemeColor } from '@patternfly/react-charts';
+
 const Openshift: React.FunctionComponent<{}> = () => (
 
 
@@ -100,10 +104,15 @@ const Openshift: React.FunctionComponent<{}> = () => (
       width={400}
     />
 
+
     </div>
   
   </div>
 
+
+
+ 
+  
 
   </PageSection>
 )
