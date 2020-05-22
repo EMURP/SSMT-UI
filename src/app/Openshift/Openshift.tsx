@@ -25,7 +25,7 @@ const Openshift: React.FunctionComponent<{}> = () => (
       width={400}
     />
   </div>  */}
-  <Fetchdata/>
+  
   </PageSection>
 )
 
