@@ -1,5 +1,8 @@
 import * as React from 'react';
 import { PageSection, Title }  from '@patternfly/react-core';
+import { Fetchdata } from '@app/fetchdata/fetchdata';
+// import { ChartPie, ChartThemeColor } from '@patternfly/react-charts';
+
 import {SimpleTable} from '@app/myTable/SimpleTable'
 import { ChartPie, ChartThemeColor } from '@patternfly/react-charts';
 
@@ -33,6 +36,7 @@ const paddingChart= {
   width: '300px'
 
 } as React.CSSProperties
+
 
 const Openshift: React.FunctionComponent<{}> = () => (
 
@@ -103,6 +107,7 @@ const Openshift: React.FunctionComponent<{}> = () => (
     </div>
   
   </div>
+
 
 
   </PageSection>
