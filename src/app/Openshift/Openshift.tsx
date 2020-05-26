@@ -38,6 +38,8 @@ const paddingChart= {
 } as React.CSSProperties
 
 
+
+
 const Openshift: React.FunctionComponent<{}> = () => (
 
 
@@ -104,9 +106,14 @@ const Openshift: React.FunctionComponent<{}> = () => (
       width={400}
     />
 
+
+
+
     </div>
   
   </div>
+
+
 
 
 
