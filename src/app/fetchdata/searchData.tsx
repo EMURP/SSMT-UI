@@ -1,24 +1,21 @@
 import React from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import axios from "axios";
 import "@patternfly/react-core/dist/styles/base.css";
-import {
-    Table,
-    TableHeader,
-    TableBody,
-    TableVariant
-} from '@patternfly/react-table';
+// import {
+//     Table,
+//     TableHeader,
+//     TableBody,
+//     TableVariant
+// } from '@patternfly/react-table';
 import '../app.css';
-import { PaginationTop } from './paginationTop';
 import { PageSection } from '@patternfly/react-core';
+import { any } from 'prop-types';
 
-
-let cluster_data = [];
+let cluster_data = [] as any;
 
 const columns = [
-    // { title: 'Header cell' },
-    // 'Branches',
-    // { title: 'Pull requests', props: { className: 'pf-u-text-align-center' } }
+
     {
         title: "namespace"
 
@@ -48,11 +45,6 @@ let rows = [] as any;
 const SearchData: React.FunctionComponent<{}> = () => {
     const url =
         "https://bc2f9a92-a71f-4ad8-b93b-63ad65e50fa0.mock.pstmn.io/cluster_data";
-
-    
-
-
-    //const people = [];
 
     // store the api data in people array and searchResults
     React.useEffect(() => {
@@ -92,7 +84,6 @@ const SearchData: React.FunctionComponent<{}> = () => {
     const [searchTerm, setSearchTerm] = React.useState("");
     const [searchResults, setSearchResults] = React.useState([]);
 
-
     // habdlechange function to be called when we enter any string in the searchbox, stores the input in varialbe searchTerm
     const handleChange = e => {
         setSearchTerm(e.target.value);
@@ -109,10 +100,6 @@ const SearchData: React.FunctionComponent<{}> = () => {
                 // person.period__start.toLowerCase().includes(searchTerm) ||
                 cluster_item.pod.toLowerCase().includes(searchTerm)
             //person.pod_usage_cpu_core_seconds.toLowerCase().includes(searchTerm)
-
-
-
-
         );
         //rows = results;
         setSearchResults(results);
@@ -146,7 +133,7 @@ const SearchData: React.FunctionComponent<{}> = () => {
                     </thead>
                     <tbody>
 
-                        {searchResults.map(cluster_info => {
+                        {searchResults.map((cluster_info: { namespace: React.ReactNode; node: React.ReactNode; period_end: React.ReactNode; period_start: React.ReactNode; pod: React.ReactNode; pod_usage_cpu_core_seconds: React.ReactNode; }) => {
                             return (
                                 <React.Fragment>
                                     <tr>
@@ -181,15 +168,6 @@ const SearchData: React.FunctionComponent<{}> = () => {
 
                 </Table> */}
             </div>
-
-
-
-
-
-
-
-
-
 
         </PageSection>
 

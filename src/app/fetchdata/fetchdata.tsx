@@ -1,12 +1,9 @@
-
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 
 const Fetchdata: React.FunctionComponent<{}> = () => {
   const url = 'https://bc2f9a92-a71f-4ad8-b93b-63ad65e50fa0.mock.pstmn.io/cluster_data'
-
-
 
   const [data, setData] = useState([])
   const [rows, setRows] = useState([])

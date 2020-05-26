@@ -5,9 +5,6 @@ import axios from 'axios';
 const FilterData: React.FunctionComponent<{}> = () => {
 
     const url = 'https://bc2f9a92-a71f-4ad8-b93b-63ad65e50fa0.mock.pstmn.io/cluster_data'
-
-
-
     const [data, setData] = useState([])
     const [searchresults, setSearchResults] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
@@ -44,7 +41,7 @@ const FilterData: React.FunctionComponent<{}> = () => {
 
     return (
 
-        
+
         <div>
             <h1 id="title">Cluster Info Table</h1>
             <table id="cluster_info">
