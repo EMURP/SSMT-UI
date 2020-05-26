@@ -2,11 +2,90 @@ import * as React from 'react';
 import { PageSection, Title }  from '@patternfly/react-core';
 import { Fetchdata } from '@app/fetchdata/fetchdata';
 // import { ChartPie, ChartThemeColor } from '@patternfly/react-charts';
+
+import {SimpleTable} from '@app/myTable/SimpleTable'
+import { ChartPie, ChartThemeColor } from '@patternfly/react-charts';
+
+
+//import {Table}from 'react-bootstrap-table';
+//import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
+
+import { Card,  CardBody } from '@patternfly/react-core';
+
+const horizontalFlex= {
+  display: "flex",
+  flexDirection: "row",
+  marginRight: "30px",
+  marginLeft: "30px"
+} as React.CSSProperties
+
+const padding= {
+
+marginBottom: "30px",
+marginRight: "30px",
+marginLeft: "30px"
+
+} as React.CSSProperties
+
+const paddingChart= {
+
+  marginBottom: "30px",
+  marginRight: "30px",
+  marginLeft: "30px",
+  height: '275px',
+  width: '300px'
+
+} as React.CSSProperties
+
+
 const Openshift: React.FunctionComponent<{}> = () => (
+
+
   <PageSection>
+
+
     <Title headingLevel="h1" size="lg">Openshift </Title>
-    {/* <div style={{ height: '275px', width: '300px' }}>
-    <ChartPie
+
+  <div style={horizontalFlex}>
+
+      <div style={padding}>
+  
+          <Card>
+            <CardBody>Node Info Table </CardBody>
+          </Card>
+
+          <SimpleTable/>
+
+      </div>
+
+      <div style={padding}>
+
+        <Card>
+        <CardBody> Pod Info Table  </CardBody>
+        </Card>
+
+        <SimpleTable/>
+
+    </div>
+  
+  </div>
+
+  <div style={horizontalFlex}>
+
+      <div style={padding}>
+  
+          <Card>
+            <CardBody>Project Info Table </CardBody>
+          </Card>
+
+          <SimpleTable/>
+
+      </div>
+
+      <div style={paddingChart}>
+
+     
+      <ChartPie
       ariaDesc="Average number of Pods"
       ariaTitle="Pie chart example"
       constrainToVisibleArea={true}
@@ -24,8 +103,13 @@ const Openshift: React.FunctionComponent<{}> = () => (
       themeColor={ChartThemeColor.multiOrdered}
       width={400}
     />
-  </div>  */}
+
+    </div>
   
+  </div>
+
+
+
   </PageSection>
 )
 
