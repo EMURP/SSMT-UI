@@ -103,7 +103,8 @@ const Openshift: React.FunctionComponent<{}> = () => (
       themeColor={ChartThemeColor.multiOrdered}
       width={400}
     />
-<<<<<<< HEAD
+
+
 
 
     </div>
@@ -115,10 +116,7 @@ const Openshift: React.FunctionComponent<{}> = () => (
  
   
 
-=======
-  </div>  */}
-  
->>>>>>> snapshot deleted
+
   </PageSection>
 )
 
