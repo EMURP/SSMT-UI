@@ -54,9 +54,9 @@ const routes: IAppRoute[] = [
   {
     component: Dashboard,
     exact: true,
-    label: 'Dashboard',
+    label: 'Home',
     path: '/',
-    title: 'PatternFly Seed | Main Dashboard'
+    title: 'MOC Metering'
   },
   {
     component: Openshift,
@@ -64,7 +64,7 @@ const routes: IAppRoute[] = [
     isAsync: true,
     label: 'Openshift',
     path: '/openshift',
-    title: 'PatternFly Seed | Openshift Page'
+    title: 'MOC Metering'
   },
   {
     component: Openstack,
@@ -72,7 +72,7 @@ const routes: IAppRoute[] = [
     isAsync: true,
     label: 'Openstack',
     path: '/openstack',
-    title: 'PatternFly Seed | Openstack Page'
+    title: 'MOC Metering'
   },
   {
     component: Support,
@@ -80,7 +80,7 @@ const routes: IAppRoute[] = [
     isAsync: true,
     label: 'Support',
     path: '/support',
-    title: 'PatternFly Seed | Support Page'
+    title: 'MOC Metering'
   }
 ];
 
