@@ -1,13 +1,6 @@
 import React from "react";
-// import ReactDOM from "react-dom";
 import axios from "axios";
 import "@patternfly/react-core/dist/styles/base.css";
-// import {
-//     Table,
-//     TableHeader,
-//     TableBody,
-//     TableVariant
-// } from '@patternfly/react-table';
 import '../app.css';
 import { PageSection } from '@patternfly/react-core';
 import { any } from 'prop-types';
@@ -50,36 +43,12 @@ const Fetchdata: React.FunctionComponent<{}> = () => {
         axios.get(url).then(res => {
             cluster_data = res.data;
 
-            // rows = cluster_data.map(item => {
-
-            //     const cell1 = item.namespace;
-            //     //console.log(cell1);
-            //     const cell2 = item.node;
-            //     const cell3 = item.period_end;
-            //     const cell4 = item.period_start;
-            //     const cell5 = item.pod;
-            //     const cell6 = item.pod_usage_cpu_core_seconds;
-            //     const arr = [] as any;
-            //     arr.push(cell1, cell2, cell3, cell4, cell5, cell6);
-            //     //console.log(arr);
-
-            //     return (
-
-            //         arr
-            //     )
-
-            // }
-
-            // )
+            
             setSearchResults(cluster_data);
-            //console.log(data_row);
-            //rows.push(data_row);
-            //console.log(rows);
-
-            //rows = res.data;
+            
         });
     }, []);
-    //console.log(people);
+    
     const [searchTerm, setSearchTerm] = React.useState("");
     const [searchResults, setSearchResults] = React.useState([]);
 
@@ -100,10 +69,10 @@ const Fetchdata: React.FunctionComponent<{}> = () => {
                 cluster_item.pod.toLowerCase().includes(searchTerm)
             //person.pod_usage_cpu_core_seconds.toLowerCase().includes(searchTerm)
         );
-        //rows = results;
+        
         setSearchResults(results);
-        console.log(results);
-        //rows = results;
+        
+        
     }, [searchTerm]);
 
     // render Table UI
@@ -149,23 +118,8 @@ const Fetchdata: React.FunctionComponent<{}> = () => {
 
 
                         })}
-
-
-
                     </tbody>
-                </table>
-
-                {/* <Table aria-label="Compact Table" variant={TableVariant.compact} cells={columns} rows={rows}>
-
-
-                    <TableHeader />
-                    <TableBody>
-
-
-                    </TableBody>
-
-
-                </Table> */}
+                </table>                
             </div>
 
         </PageSection>
