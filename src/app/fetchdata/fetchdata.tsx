@@ -36,7 +36,7 @@ const columns = [
 
 let rows = [] as any;
 const Fetchdata: React.FunctionComponent<{}> = () => {
-    const url = "https://bc2f9a92-a71f-4ad8-b93b-63ad65e50fa0.mock.pstmn.io/cluster_data";
+    const url = "https://3903aa74-2b7e-4ea9-85f1-04f11f67a2ad.mock.pstmn.io/list_projects";
 
     // store the api data in people array and searchResults
     React.useEffect(() => {
