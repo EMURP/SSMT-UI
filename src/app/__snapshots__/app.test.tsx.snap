@@ -7,14 +7,3 @@ exports[`App tests should render default App component 1`] = `
   </AppLayout>
 </BrowserRouter>
 `;
-
-exports[`App tests should render the dashboard page 1`] = `
-<Component>
-  <Component
-    headingLevel="h1"
-    size="lg"
-  >
-    Dashboard Page Title
-  </Component>
-</Component>
-`;
