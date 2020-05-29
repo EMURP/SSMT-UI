@@ -56,7 +56,8 @@ const routes: IAppRoute[] = [
     exact: true,
     label: 'Dashboard',
     path: '/',
-    title: 'PatternFly Seed | Main Dashboard'
+    //title: 'PatternFly Seed | Main Dashboard'
+    title: 'OPS Dashboard Page'
   },
   {
     component: Openshift,
@@ -64,7 +65,7 @@ const routes: IAppRoute[] = [
     isAsync: true,
     label: 'Openshift',
     path: '/openshift',
-    title: 'PatternFly Seed | Openshift Page'
+    title: 'Openshift Page'
   },
   {
     component: Openstack,
@@ -72,7 +73,7 @@ const routes: IAppRoute[] = [
     isAsync: true,
     label: 'Openstack',
     path: '/openstack',
-    title: 'PatternFly Seed | Openstack Page'
+    title: 'Openstack Page'
   },
   {
     component: Support,
@@ -80,7 +81,7 @@ const routes: IAppRoute[] = [
     isAsync: true,
     label: 'Support',
     path: '/support',
-    title: 'PatternFly Seed | Support Page'
+    title: 'Support Page'
   }
 ];
 
