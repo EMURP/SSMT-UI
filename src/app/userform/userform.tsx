@@ -24,7 +24,7 @@ import {
 } from '@patternfly/react-table';
 import { useRowSelect } from 'react-table';
 
-class SimpleForm extends React.Component {
+class DateForm_displaydata extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,6 +39,7 @@ class SimpleForm extends React.Component {
                 'Pod usage cpu core seconds'
             ],
             rows: [],
+            cluster_data: [],
             isUpdated: false
         };
 
@@ -54,64 +55,44 @@ class SimpleForm extends React.Component {
 
         };
 
+        // on submit calls the api  by appending start and end date and store the api data in cluster_data , 
+        //if length of rows is greater than the api response then reset rows then push
+        // values into the rows
+
         this.submit = () => {
 
             console.log(this.state.value1);
             console.log(this.state.value2);
-            // const cell =["openshift-monitoring",
-            // "crc-w6th5-master-0",
-            // "2020-05-20T00:09:00Z",
-            // "2020-05-30T23:59:59Z",
-            // "alertmanager-main-0",
-            // 73.01483999999998]
-
-            // this.state.rows.push(cell);
-
-            const api_url = 'https://3903aa74-2b7e-4ea9-85f1-04f11f67a2ad.mock.pstmn.io/list_project/' + this.state.value1 + '/' + this.state.value2
-
+            const api_url = 'https://3903aa74-2b7e-4ea9-85f1-04f11f67a2ad.mock.pstmn.io/list_project/' + 
+            this.state.value1 + '/' + this.state.value2;
             axios.get(api_url).then(res => {
-
-                res.data.map(item => {
-
-                    const cell1 = item.namespace;
-                    const cell2 = item.node;
-                    const cell3 = item.period_start;
-                    const cell4 = item.period_end;
-                    const cell5 = item.pod;
-                    const cell6 = item.pod_usage_cpu_core_seconds;
-
-
-                    const cell = [] as any
-                    //cell.push(item.namespace,)
-                   // this.state.rows.push({ cells: [item.namespace, item.node, item.period_start, item.period_end, item.pod, item.pod_usage_cpu_core_seconds] });
-                    this.state.rows.push(cell1,cell2,cell3,cell4,cell5,cell6);
-
-                })
-            })
-
-            this.setState({ isUpdated: true })
+                this.setState({ cluster_data: res.data });
+                console.log(this.state.cluster_data.length);
+                if (this.state.rows.length > this.state.cluster_data.length) {
+                    this.setState({ rows: [] });
+                }
+                
+                this.state.rows = this.state.cluster_data.map(item => {
+                    
+                    return [
+                        item.namespace,
+                        item.node,
+                        item.period_start,
+                        item.period_end,
+                        item.pod,
+                        item.pod_usage_cpu_core_seconds
+                    ];
+                });
+            });
+            
+            console.log(this.state.rows);
+            
         }
     }
 
     render() {
-        const { value1, value2, columns, rows, isUpdated } = this.state;
-        let datatable;
-
-        if (isUpdated) {
-            const { columns, rows } = this.state;
-            console.log(rows);
-            datatable = <Table caption="Row Click Handler Table" cells={columns} rows={rows}>
-                <TableHeader />
-                <TableBody />
-            </Table>
-        } else {
-            datatable = <Table caption="No data for table" cells={columns} rows={rows}>
-                <TableHeader />
-                <TableBody />
-            </Table>
-        }
-
-
+        const { value1, value2, columns, rows } = this.state;
+        
         return (
             <React.Fragment>
 
@@ -141,19 +122,19 @@ class SimpleForm extends React.Component {
                             value={value2}
                             onChange={this.handleTextInputChange2}
                         />
-                    </FormGroup>
-
-
+                    </FormGroup>          
                     <ActionGroup >
                         <Button variant="primary" onClick={this.submit}>Submit form</Button>
-                        {/* <Button variant="secondary">Cancel</Button> */}
-                    </ActionGroup>
+                        </ActionGroup>
                 </Form>
-                {datatable}
+                <Table caption="Row Click Handler Table" cells={columns} rows={rows}>
+                    <TableHeader />
+                    <TableBody />
+                </Table>
             </React.Fragment>
         );
     }
 }
 
-export { SimpleForm };
+export { DateForm_displaydata };
 
