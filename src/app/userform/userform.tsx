@@ -22,8 +22,7 @@ import {
     TableHeader,
     TableBody,
 } from '@patternfly/react-table';
-
-
+import { useRowSelect } from 'react-table';
 
 class SimpleForm extends React.Component {
     constructor(props) {
@@ -32,26 +31,15 @@ class SimpleForm extends React.Component {
             value1: '',
             value2: '',
             columns: [
-                { title: 'Repositories' },
-                'Branches',
-                { title: 'Pull requests' },
-                'Workspaces'
+                'Namespace',
+                'Node',
+                'Period End',
+                'Period Start',
+                'Pod',
+                'Pod usage cpu core seconds'
             ],
-            
-            data_table: '',
-            rows: [
-                {
-                    cells: ['Repositories one', 'Branches one', 'Pull requests one', 'Workspaces one']
-                },
-                {
-                    cells: ['Repositories two', 'Branches two', 'Pull requests two', 'Workspaces two']
-                },
-                {
-                    cells: ['Repositories three', 'Branches three', 'Pull requests three', 'Workspaces three']
-                }
-            ]
-            
-            
+            rows: [],
+            isUpdated: false
         };
 
 
@@ -65,45 +53,63 @@ class SimpleForm extends React.Component {
             console.log(value2);
 
         };
-        // this.handleTextInputChange3 = value3 => {
-        //   this.setState({ value3 });
-        // };
+
         this.submit = () => {
 
-            
-
-
-            //const [data, setData] = React.useState([]);
             console.log(this.state.value1);
             console.log(this.state.value2);
+            // const cell =["openshift-monitoring",
+            // "crc-w6th5-master-0",
+            // "2020-05-20T00:09:00Z",
+            // "2020-05-30T23:59:59Z",
+            // "alertmanager-main-0",
+            // 73.01483999999998]
 
+            // this.state.rows.push(cell);
 
             const api_url = 'https://3903aa74-2b7e-4ea9-85f1-04f11f67a2ad.mock.pstmn.io/list_project/' + this.state.value1 + '/' + this.state.value2
-            // url = api_url;
-            // console.log(url);
-            // console.log(api_url);
-            // this.setState({url:url});
-            //console.log(this.state.url);
 
             axios.get(api_url).then(res => {
-                //setData(res.data)
-                console.log(res.data)
 
+                res.data.map(item => {
+
+                    const cell1 = item.namespace;
+                    const cell2 = item.node;
+                    const cell3 = item.period_start;
+                    const cell4 = item.period_end;
+                    const cell5 = item.pod;
+                    const cell6 = item.pod_usage_cpu_core_seconds;
+
+
+                    const cell = [] as any
+                    //cell.push(item.namespace,)
+                   // this.state.rows.push({ cells: [item.namespace, item.node, item.period_start, item.period_end, item.pod, item.pod_usage_cpu_core_seconds] });
+                    this.state.rows.push(cell1,cell2,cell3,cell4,cell5,cell6);
+
+                })
             })
 
-        //     this.state.data_table = (
-        //     <Table caption="Row Click Handler Table" cells={this.state.columns} rows={this.state.rows}>
-        //     <TableHeader />
-        //     <TableBody />
-        //   </Table>)
-
+            this.setState({ isUpdated: true })
         }
-
-
     }
 
     render() {
-        const { value1, value2, columns, rows , url,data_table} = this.state;
+        const { value1, value2, columns, rows, isUpdated } = this.state;
+        let datatable;
+
+        if (isUpdated) {
+            const { columns, rows } = this.state;
+            console.log(rows);
+            datatable = <Table caption="Row Click Handler Table" cells={columns} rows={rows}>
+                <TableHeader />
+                <TableBody />
+            </Table>
+        } else {
+            datatable = <Table caption="No data for table" cells={columns} rows={rows}>
+                <TableHeader />
+                <TableBody />
+            </Table>
+        }
 
 
         return (
@@ -139,18 +145,12 @@ class SimpleForm extends React.Component {
 
 
                     <ActionGroup >
-                        <Button variant="primary"  value={url} onClick={this.submit}>Submit form</Button>
+                        <Button variant="primary" onClick={this.submit}>Submit form</Button>
                         {/* <Button variant="secondary">Cancel</Button> */}
                     </ActionGroup>
                 </Form>
-                
-                
-                
-
+                {datatable}
             </React.Fragment>
-
-
-
         );
     }
 }
