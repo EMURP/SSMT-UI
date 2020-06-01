@@ -1,13 +1,6 @@
 import React from "react";
-// import ReactDOM from "react-dom";
 import axios from "axios";
 import "@patternfly/react-core/dist/styles/base.css";
-import {
-    Table,
-    TableHeader,
-    TableBody,
-    TableVariant
-} from '@patternfly/react-table';
 import '../app.css';
 import { PageSection } from '@patternfly/react-core';
 import { any } from 'prop-types';
@@ -50,26 +43,12 @@ const Fetchdata: React.FunctionComponent<{}> = () => {
         axios.get(url).then(res => {
             cluster_data = res.data;
 
-            rows = cluster_data.map(item => {
-
-                const cell1 = item.namespace;
-                const cell2 = item.node;
-                const cell3 = item.period_end;
-                const cell4 = item.period_start;
-                const cell5 = item.pod;
-                const cell6 = item.pod_usage_cpu_core_seconds;
-                const arr = [] as any;
-                arr.push(cell1, cell2, cell3, cell4, cell5, cell6);
-                return (arr)
-
-            }
-
-            )
+            
             setSearchResults(cluster_data);
-
+            
         });
     }, []);
-
+    
     const [searchTerm, setSearchTerm] = React.useState("");
     const [searchResults, setSearchResults] = React.useState([]);
 
@@ -83,30 +62,67 @@ const Fetchdata: React.FunctionComponent<{}> = () => {
         const results = cluster_data.filter(
             cluster_item =>
 
-                cluster_item.namespace.toLowerCase().includes(searchTerm)
-
+                cluster_item.namespace.toLowerCase().includes(searchTerm) ||
+                cluster_item.node.toLowerCase().includes(searchTerm) ||
+                //person.period__end.toDateString().toLowerCase().includes(searchTerm) ||
+                // person.period__start.toLowerCase().includes(searchTerm) ||
+                cluster_item.pod.toLowerCase().includes(searchTerm)
+            //person.pod_usage_cpu_core_seconds.toLowerCase().includes(searchTerm)
         );
-
+        
         setSearchResults(results);
-        console.log(results);
-
+        
+        
     }, [searchTerm]);
 
     // render Table UI
     return (
+        <PageSection>
+
+            <div className="App">
+                <input
+                    type="text"
+                    placeholder="Search"
+                    value={searchTerm}
+                    onChange={handleChange}
+                />
+
+                <table id="cluster_info">
+
+                    <thead>
+                        <tr>
+                            <th>Namespace</th>
+                            <th>Node</th>
+                            <th>Period_End</th>
+                            <th>Period_Start</th>
+                            <th>Pod</th>
+                            <th>Pod_Usage_Cpu_Core_seconds</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {searchResults.map((cluster_info: { namespace: React.ReactNode; node: React.ReactNode; period_end: React.ReactNode; period_start: React.ReactNode; pod: React.ReactNode; pod_usage_cpu_core_seconds: React.ReactNode; }) => {
+                            return (
+                                <React.Fragment>
+                                    <tr>
+                                        <td>{cluster_info.namespace}</td>
+                                        <td>{cluster_info.node}</td>
+                                        <td>{cluster_info.period_end}</td>
+                                        <td>{cluster_info.period_start}</td>
+                                        <td>{cluster_info.pod}</td>
+                                        <td>{cluster_info.pod_usage_cpu_core_seconds}</td>
+                                    </tr>
+                                </React.Fragment>
+
+                            )
 
 
-        <Table aria-label="Compact Table" variant={TableVariant.compact} cells={columns} rows={rows}>
+                        })}
+                    </tbody>
+                </table>                
+            </div>
 
-
-            <TableHeader />
-            <TableBody>
-
-
-            </TableBody>
-
-
-        </Table>
+        </PageSection>
 
     );
 }
