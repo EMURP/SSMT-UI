@@ -9,8 +9,6 @@ import {
     TableVariant
 } from '@patternfly/react-table';
 import '../app.css';
-import { PageSection } from '@patternfly/react-core';
-import { any } from 'prop-types';
 
 let cluster_data = [] as any;
 
@@ -19,31 +17,14 @@ const columns = [
     {
         title: "namespace"
 
-    }, {
-        title: 'node'
-
-    }, {
-        title: 'period_end'
-
-    },
-    {
-        title: 'period_start'
-
-    },
-    {
-        title: 'pod'
-
-    },
-    {
-        title: 'pod_usage_cpu_core_seconds'
-
-    },
+    }
 
 ]
 
 let rows = [] as any;
 const Fetchdata: React.FunctionComponent<{}> = () => {
     const url = "https://3903aa74-2b7e-4ea9-85f1-04f11f67a2ad.mock.pstmn.io/list_projects";
+    console.log(url);
 
     // store the api data in people array and searchResults
     React.useEffect(() => {
@@ -53,13 +34,13 @@ const Fetchdata: React.FunctionComponent<{}> = () => {
             rows = cluster_data.map(item => {
 
                 const cell1 = item.namespace;
-                const cell2 = item.node;
-                const cell3 = item.period_end;
-                const cell4 = item.period_start;
-                const cell5 = item.pod;
-                const cell6 = item.pod_usage_cpu_core_seconds;
+                // const cell2 = item.node;
+                // const cell3 = item.period_end;
+                // const cell4 = item.period_start;
+                // const cell5 = item.pod;
+                // const cell6 = item.pod_usage_cpu_core_seconds;
                 const arr = [] as any;
-                arr.push(cell1, cell2, cell3, cell4, cell5, cell6);
+                arr.push(cell1);
                 return (arr)
 
             }
@@ -97,15 +78,9 @@ const Fetchdata: React.FunctionComponent<{}> = () => {
 
 
         <Table aria-label="Compact Table" variant={TableVariant.compact} cells={columns} rows={rows}>
-
-
             <TableHeader />
             <TableBody>
-
-
             </TableBody>
-
-
         </Table>
 
     );
