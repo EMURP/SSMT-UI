@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { PageSection, Title } from '@patternfly/react-core';
 import { Card, CardBody } from '@patternfly/react-core';
 // import {SimpleInputGroups} from '@app/DateComponent/DateComponent.tsx';
-import { FlatDT } from '@app/Flatpickr/FlatDT';
+
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
 
 import { DropdownComponent } from '../Dropdown/DropdownComponent';

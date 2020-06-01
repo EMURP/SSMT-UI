@@ -24,6 +24,7 @@ type myState = {
     startDate: Date;
     endDate: Date;
     submitToggle: boolean;
+    conditionalRender: number;
 };
 
 
@@ -53,12 +54,19 @@ class ProjectDataFilterForm extends  React.Component<myProps, myState> {
           startDate: convertDateToUTC(new Date(Date.UTC(0, 0, 0, 0, 0, 0)),0),
           endDate: convertDateToUTC(new Date(),0),
           submitToggle: false,
+          conditionalRender:0,
       }
     }
 
+    // shouldComponentUpdate(nextProps: myProps, nextState: myState){
+    //   return this.state.conditionalRender!==nextState.conditionalRender;
+    // }
+
     changeToggle=() =>{
-      const value=this.state.submitToggle
-      this.setState({...this.state, submitToggle:!value })
+      const conditionalRender: number= this.state.conditionalRender;
+      if(this.state.startDate !== convertDateToUTC(new Date(Date.UTC(0, 0, 0, 0, 0, 0)),0)){
+        this.setState({...this.state, submitToggle:true, conditionalRender:conditionalRender+1 },()=>console.log(this.state))
+      }
     }
 
     setStartHrs = (hrs: number) => {
@@ -122,17 +130,18 @@ class ProjectDataFilterForm extends  React.Component<myProps, myState> {
          {this.state.endHrs}
          
           </div>
-          
+
 
           <div>
-            <Button isBlock onClick={()=>this.changeToggle()}>Search</Button>
+            <Button isBlock onClick={()=>this.changeToggle()} disabled={this.state.startDate !== convertDateToUTC(new Date(Date.UTC(0, 0, 0, 0, 0, 0)),0)}>Search</Button>
           </div>
         </div>
 
-        <div>
+        {<div>
           <h2>Data from Fetch Data </h2>
-          <Fetchdata startDate={this.state.startDate} endDate={this.state.endDate}/>
-        </div>
+
+        <Fetchdata searching={this.state.submitToggle}startDate={this.state.startDate} endDate={this.state.endDate}/>
+        </div> }
 
         </div>
         );
