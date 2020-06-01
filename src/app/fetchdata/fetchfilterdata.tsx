@@ -1,5 +1,4 @@
 import React from "react";
-// import ReactDOM from "react-dom";
 import axios from "axios";
 import "@patternfly/react-core/dist/styles/base.css";
 import {
@@ -9,8 +8,6 @@ import {
     TableVariant
 } from '@patternfly/react-table';
 import '../app.css';
-import { PageSection } from '@patternfly/react-core';
-import { any } from 'prop-types';
 
 let cluster_data = [] as any;
 
@@ -42,34 +39,40 @@ const columns = [
 ]
 
 let rows = [] as any;
-const Fetchdata: React.FunctionComponent<{}> = () => {
-    const url = "https://3903aa74-2b7e-4ea9-85f1-04f11f67a2ad.mock.pstmn.io/list_projects";
+const FetchFilterdata: React.FunctionComponent<{}> = (props) => {
+    const url = "https://3903aa74-2b7e-4ea9-85f1-04f11f67a2ad.mock.pstmn.io/list_projects/2020-05-15/2020-05-28";
 
     // store the api data in people array and searchResults
     React.useEffect(() => {
+
+        //Todo when date form component is created
+
+        //console.log(props.startDate);
+        //console.log(props.endDate);
+        // const url = "https://3903aa74-2b7e-4ea9-85f1-04f11f67a2ad.mock.pstmn.io/list_projects"+"/"+props.startDate+"/"+props.endDate;
         axios.get(url).then(res => {
             cluster_data = res.data;
 
             rows = cluster_data.map(item => {
 
                 const cell1 = item.namespace;
-                const cell2 = item.node;
-                const cell3 = item.period_end;
-                const cell4 = item.period_start;
-                const cell5 = item.pod;
-                const cell6 = item.pod_usage_cpu_core_seconds;
+                // const cell2 = item.node;
+                // const cell3 = item.period_end;
+                // const cell4 = item.period_start;
+                // const cell5 = item.pod;
+                // const cell6 = item.pod_usage_cpu_core_seconds;
                 const arr = [] as any;
-                arr.push(cell1, cell2, cell3, cell4, cell5, cell6);
+                arr.push(cell1);
+                
+
                 return (arr)
 
-            }
-
-            )
+            })
             setSearchResults(cluster_data);
-
+            
         });
     }, []);
-
+    
     const [searchTerm, setSearchTerm] = React.useState("");
     const [searchResults, setSearchResults] = React.useState([]);
 
@@ -84,31 +87,23 @@ const Fetchdata: React.FunctionComponent<{}> = () => {
             cluster_item =>
 
                 cluster_item.namespace.toLowerCase().includes(searchTerm)
-
+               
         );
-
+        
         setSearchResults(results);
         console.log(results);
-
+        
     }, [searchTerm]);
 
     // render Table UI
     return (
 
-
         <Table aria-label="Compact Table" variant={TableVariant.compact} cells={columns} rows={rows}>
-
-
             <TableHeader />
             <TableBody>
-
-
             </TableBody>
-
-
         </Table>
-
     );
 }
 
-export { Fetchdata };
+export { FetchFilterdata };
