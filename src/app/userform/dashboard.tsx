@@ -15,7 +15,6 @@ import {
     Button,
     Radio
 } from '@patternfly/react-core';
-import { Displaydata } from './dataTable';
 import { Fetchdata } from '@app/fetchdata/fetchdata';
 import { FetchFilterdata } from '@app/fetchdata/fetchfilterdata';
 

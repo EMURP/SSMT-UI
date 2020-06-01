@@ -1,22 +1,6 @@
 import React, { useState } from 'react';
 import { PageSection, Title } from '@patternfly/react-core';
 import { Card, CardBody } from '@patternfly/react-core';
-// import {SimpleInputGroups} from '@app/DateComponent/DateComponent.tsx';
-//import { FlatDT } from '@app/Flatpickr/FlatDT';
-import { SimpleInputGroups } from '@app/fetchdata/DateComponent';
-
-import { DropdownComponent } from '@app/fetchdata/DropdownComponent';
-
-import { SimpleTable } from '../myTable/SimpleTable';
-
-import { TimesIcon, PlusCircleIcon } from '@patternfly/react-icons';
-
-import { Button, InputGroup, TextInput, Dropdown, DropdownToggle, DropdownItem } from '@patternfly/react-core';
-import { Fetchdata } from '@app/fetchdata/fetchdata';
-import { ProjectDataFilterForm } from '@app/fetchdata/ProjectFilterForm';
-
-// import  {ProjectInfoTableComponent}  from '../ProjectInfo/ProjectInfoTableComponent';
-
 const horizontalFlex = {
   display: 'flex',
   flexDirection: 'row'
@@ -71,9 +55,7 @@ class Dashboard extends React.Component<myProps, myState> {
               <CardBody> Total Projects: 12</CardBody>
             </Card>
           </div>
-        </div>
-
-        <ProjectDataFilterForm />
+        </div>        
       </PageSection>
     );
   }
