@@ -20,16 +20,7 @@ import { FetchFilterdata } from '@app/fetchdata/fetchfilterdata';
 
 
 class HorizontalForm extends React.Component<{},{value1:string,value2:string,value3:string,value4:string,startDate?:string,endDate?:string,display_component:string}>{
-    //state: Records_date
-
-    // handleTextInputChange1: (value1: any) => void;
-    // handleTextInputChange2: (value2: any) => void;
-    // handleTextInputChange3: (value3: any) => void;
-    // handleTextInputChange4: (value: string, event: FormEvent<HTMLInputElement>) => void;
-    // onSubmit: (event: any) => void;
-    //handleEdit: any;
-
-    constructor(props) {
+        constructor(props) {
         super(props);
         this.state = {
             value1: '',
@@ -48,15 +39,6 @@ class HorizontalForm extends React.Component<{},{value1:string,value2:string,val
 
     }
 
-    // onSubmit = () => {
-
-    //     this.setState({display_component:true})
-    //     //this.state.display_component = true;
-    //     console.log(this.state.display_component);
-
-
-    //     //this.setState({ value4});
-    // };
     handleTextInputChange1 = (value1: any) => {
         this.setState({ value1 });
     };
@@ -77,7 +59,6 @@ class HorizontalForm extends React.Component<{},{value1:string,value2:string,val
 
     render() {
         const { value1, value2, value3, value4} = this.state;
-        //const { display } = this.state.display_component;
         let dis_component: {} | null | undefined;
         if (this.state.display_component === 'filter_data') {
             dis_component=<FetchFilterdata  startDate={value1 + value3} endDate={value2 + value4} />
@@ -86,7 +67,6 @@ class HorizontalForm extends React.Component<{},{value1:string,value2:string,val
            dis_component= <Fetchdata />
 
         }
-
 
         return (
             <React.Fragment>
@@ -144,15 +124,10 @@ class HorizontalForm extends React.Component<{},{value1:string,value2:string,val
                             Submit form
                             </Button>
                     </ActionGroup>
-
-
-
                 </Form>
                 {
                     dis_component
-                }
-
-                
+                }                
             </React.Fragment>
         );
     }
