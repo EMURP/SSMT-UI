@@ -53,7 +53,6 @@ const Fetchdata: React.FunctionComponent<{}> = () => {
             rows = cluster_data.map(item => {
 
                 const cell1 = item.namespace;
-                //console.log(cell1);
                 const cell2 = item.node;
                 const cell3 = item.period_end;
                 const cell4 = item.period_start;
@@ -61,25 +60,16 @@ const Fetchdata: React.FunctionComponent<{}> = () => {
                 const cell6 = item.pod_usage_cpu_core_seconds;
                 const arr = [] as any;
                 arr.push(cell1, cell2, cell3, cell4, cell5, cell6);
-                //console.log(arr);
-
-                return (
-
-                    arr
-                )
+                return (arr)
 
             }
 
             )
             setSearchResults(cluster_data);
-            //console.log(data_row);
-            //rows.push(data_row);
-            //console.log(rows);
 
-            //rows = res.data;
         });
     }, []);
-    //console.log(people);
+
     const [searchTerm, setSearchTerm] = React.useState("");
     const [searchResults, setSearchResults] = React.useState([]);
 
@@ -93,35 +83,31 @@ const Fetchdata: React.FunctionComponent<{}> = () => {
         const results = cluster_data.filter(
             cluster_item =>
 
-                cluster_item.namespace.toLowerCase().includes(searchTerm) ||
-                cluster_item.node.toLowerCase().includes(searchTerm) ||
-                //person.period__end.toDateString().toLowerCase().includes(searchTerm) ||
-                // person.period__start.toLowerCase().includes(searchTerm) ||
-                cluster_item.pod.toLowerCase().includes(searchTerm)
-            //person.pod_usage_cpu_core_seconds.toLowerCase().includes(searchTerm)
+                cluster_item.namespace.toLowerCase().includes(searchTerm)
+
         );
-        //rows = results;
+
         setSearchResults(results);
         console.log(results);
-        //rows = results;
+
     }, [searchTerm]);
 
     // render Table UI
     return (
 
 
-                <Table aria-label="Compact Table" variant={TableVariant.compact} cells={columns} rows={rows}>
+        <Table aria-label="Compact Table" variant={TableVariant.compact} cells={columns} rows={rows}>
 
 
-                    <TableHeader />
-                    <TableBody>
+            <TableHeader />
+            <TableBody>
 
 
-                    </TableBody>
+            </TableBody>
 
 
-                </Table>
-           
+        </Table>
+
     );
 }
 
