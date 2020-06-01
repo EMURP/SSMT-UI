@@ -12,10 +12,7 @@ const Openstack: React.FunctionComponent<{}> = () => (
 
   <PageSection>
     <Title headingLevel="h1" size="lg">Openshift Cluster Data</Title>
-
-    
-
-    <FetchFilterdata/>    
+      <Fetchdata/>    
   </PageSection>
 )
 
