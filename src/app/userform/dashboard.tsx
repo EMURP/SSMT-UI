@@ -19,7 +19,7 @@ import { Fetchdata } from '@app/fetchdata/fetchdata';
 import { FetchFilterdata } from '@app/fetchdata/fetchfilterdata';
 
 
-class HorizontalForm extends React.Component<{},{value1:string,value2:string,value3:string,value4:string,startDate?:string,endDate?:string,display_component:string}>{
+class SampleDashboard extends React.Component<{},{value1:string,value2:string,value3:string,value4:string,startDate?:string,endDate?:string,display_component:string}>{
         constructor(props) {
         super(props);
         this.state = {
@@ -133,4 +133,4 @@ class HorizontalForm extends React.Component<{},{value1:string,value2:string,val
     }
 }
 
-export { HorizontalForm };
+export { SampleDashboard };
