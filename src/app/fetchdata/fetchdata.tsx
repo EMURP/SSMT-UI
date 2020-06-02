@@ -15,7 +15,7 @@ let cluster_data = [] as any;
 const columns = [
 
     {
-        title: "namespace"
+        title: "Namespace"
 
     }
 
@@ -84,7 +84,7 @@ const Fetchdata: React.FunctionComponent<{}> = () => {
     return (
 
 
-        <Table aria-label="Compact Table" variant={TableVariant.compact} cells={columns} rows={rows}>
+        <Table aria-label="Compact Table" variant={TableVariant.compact} cells={columns} rows={rows} caption = "List of projects">
             <TableHeader />
             <TableBody>
             </TableBody>

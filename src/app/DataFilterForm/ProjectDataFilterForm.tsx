@@ -2,7 +2,7 @@ import React from 'react';
 
 //import  { useState } from 'react';
 
-import { Card, CardBody } from '@patternfly/react-core';
+import { Card, CardBody, GridItem } from '@patternfly/react-core';
 
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
 
@@ -14,7 +14,8 @@ import { Button } from '@patternfly/react-core';
 
 //import {InputGroup, TextInput, Dropdown, DropdownToggle, DropdownItem} from '@patternfly/react-core';
 
-import { Fetchdata } from '@app/fetchdata/Fetchdatatemp';
+import { Fetchdata } from '@app/fetchdata/fetchdata';
+import { FetchFilterdata } from '@app/fetchdata/fetchfilterdata';
 
 
 type myProps = {};
@@ -25,6 +26,7 @@ type myState = {
     endDate: Date;
     submitToggle: boolean;
     conditionalRender: number;
+    display_component: string;
 };
 
 
@@ -55,7 +57,12 @@ class ProjectDataFilterForm extends  React.Component<myProps, myState> {
           endDate: convertDateToUTC(new Date(),0),
           submitToggle: false,
           conditionalRender:0,
+          display_component: 'fetch_data'
       }
+      this.handleDisplay = this.handleDisplay.bind(this);
+    }
+    handleDisplay() {
+      this.setState({display_component: 'filter_data'});
     }
 
     // shouldComponentUpdate(nextProps: myProps, nextState: myState){
@@ -87,6 +94,17 @@ class ProjectDataFilterForm extends  React.Component<myProps, myState> {
 
 
     render() {
+
+      let dis_component: {} | null | undefined;
+        if (this.state.display_component === 'filter_data') {
+            dis_component=
+
+            <FetchFilterdata  startDate={this.state.startDate} endDate={this.state.endDate}/>
+
+        } else {
+           dis_component= <Fetchdata />
+
+        }
 
         return(
             <div>
@@ -133,15 +151,13 @@ class ProjectDataFilterForm extends  React.Component<myProps, myState> {
 
 
           <div>
-            <Button isBlock onClick={()=>this.changeToggle()} disabled={this.state.startDate !== convertDateToUTC(new Date(Date.UTC(0, 0, 0, 0, 0, 0)),0)}>Search</Button>
+            <Button isBlock onClick={this.handleDisplay} disabled={this.state.startDate !== convertDateToUTC(new Date(Date.UTC(0, 0, 0, 0, 0, 0)),0)}>Search</Button>
           </div>
         </div>
+        
+        {dis_component}
 
-        {<div>
-          <h2>Data from Fetch Data </h2>
-
-        <Fetchdata renderCount={this.state.conditionalRender} searching={this.state.submitToggle}startDate={this.state.startDate} endDate={this.state.endDate}/>
-        </div> }
+       
 
         </div>
         );
