@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withInfo } from '@storybook/addon-info';
-import { Dashboard } from '@app/Openstack/Openstack';
+import { Openstack } from '@app/Openstack/Openstack';
 
 const stories = storiesOf('Components', module);
 stories.addDecorator(withInfo);

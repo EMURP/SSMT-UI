@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PageSection, Title } from '@patternfly/react-core';
 import { Card, CardBody } from '@patternfly/react-core';
+
+import { ProjectDataFilterForm } from '@app/DataFilterForm/ProjectDataFilterForm';
+
+// import  {ProjectInfoTableComponent}  from '../ProjectInfo/ProjectInfoTableComponent';
+
 const horizontalFlex = {
   display: 'flex',
   flexDirection: 'row'
@@ -9,6 +14,7 @@ const horizontalFlex = {
 const padding = {
   marginRight: '30px'
 } as React.CSSProperties;
+
 
 type myProps = {};
 type myState = {
@@ -55,7 +61,9 @@ class Dashboard extends React.Component<myProps, myState> {
               <CardBody> Total Projects: 12</CardBody>
             </Card>
           </div>
-        </div>        
+        </div>
+
+        <ProjectDataFilterForm />
       </PageSection>
     );
   }
