@@ -16,40 +16,23 @@ const columns = [
     {
         title: "namespace"
 
-    }, {
-        title: 'node'
-
-    }, {
-        title: 'period_end'
-
-    },
-    {
-        title: 'period_start'
-
-    },
-    {
-        title: 'pod'
-
-    },
-    {
-        title: 'pod_usage_cpu_core_seconds'
-
-    },
+    }
 
 ]
 
 let rows = [] as any;
-const FetchFilterdata: React.FunctionComponent<{}> = (props) => {
-    const url = "https://3903aa74-2b7e-4ea9-85f1-04f11f67a2ad.mock.pstmn.io/list_projects/2020-05-15/2020-05-28";
+const FetchFilterdata: React.FunctionComponent<{startDate,endDate}> = (props) => {
+    const url = "https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/list_projects/2020-05-18T00:00:00Z/2020-05-30T00:00:00Z";
 
     // store the api data in people array and searchResults
     React.useEffect(() => {
 
         //Todo when date form component is created
 
-        //console.log(props.startDate);
-        //console.log(props.endDate);
-        // const url = "https://3903aa74-2b7e-4ea9-85f1-04f11f67a2ad.mock.pstmn.io/list_projects"+"/"+props.startDate+"/"+props.endDate;
+        // console.log(props.startDate);
+        // console.log(props.endDate);
+        // const api_url = "https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/list_projects"+"/"+props.startDate+"/"+props.endDate;
+        // console.log(api_url);
         axios.get(url).then(res => {
             cluster_data = res.data;
 
@@ -70,7 +53,14 @@ const FetchFilterdata: React.FunctionComponent<{}> = (props) => {
             })
             setSearchResults(cluster_data);
             
-        });
+        }).catch(err =>{ if(err.response){
+            console.log(err.response +"--"+err.message)
+        }
+        else{
+            console.log(err.message)
+
+        }
+    })
     }, []);
     
     const [searchTerm, setSearchTerm] = React.useState("");
