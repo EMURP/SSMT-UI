@@ -48,7 +48,14 @@ const Fetchdata: React.FunctionComponent<{}> = () => {
             )
             setSearchResults(cluster_data);
 
-        });
+        }).catch(err =>{ if(err.response){
+            console.log(err.response +"--"+err.message)
+        }
+        else{
+            console.log(err.message)
+
+        }
+    });
     }, []);
 
     const [searchTerm, setSearchTerm] = React.useState("");
