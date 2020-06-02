@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { PageSection, Title }  from '@patternfly/react-core';
 import {SimpleTable} from '@app/myTable/SimpleTable'
 import { ChartPie, ChartThemeColor } from '@patternfly/react-charts';
@@ -8,7 +8,8 @@ import { ChartPie, ChartThemeColor } from '@patternfly/react-charts';
 
 import { Card,  CardBody } from '@patternfly/react-core';
 import {  } from '@patternfly/react-table';
-import { Fetchdata } from '@app/fetchdata/fetchdata';
+
+import { Fetchdata } from '@app/fetchdata/Fetchdatatemp';
 
 const horizontalFlex= {
   display: "flex",

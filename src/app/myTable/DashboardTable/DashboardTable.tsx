@@ -34,43 +34,58 @@ class DashboardTable extends React.Component<myProps, myState> {
     const rowData: Array<row> = [];
 
     myProps.tableData.forEach(dataRow => {
-    //   if (
-    //     (dataRow['periodStart'].getTime() >= this.props.startDate.getTime()) 
-    //     &&
-    //     (dataRow['periodEnd'].getTime() <= this.props.endDate.getTime())
-    //   ) {
-        rowData.push({
-          cells: [
-            dataRow['namespace'],
-            dataRow['node'],
-              dataRow['periodStart'].toISOString(),
-              dataRow['periodEnd'].toISOString(),
-            dataRow['pod'],
-            dataRow['podUsageCpuCoreSeconds'],
-          ]
-        });
-    //   }
+      rowData.push({
+        cells: [
+          dataRow['namespace'],
+          dataRow['node'],
+          dataRow['periodStart'].toISOString(),
+          dataRow['periodEnd'].toISOString(),
+          dataRow['pod'],
+          dataRow['podUsageCpuCoreSeconds']
+        ]
+      });
     });
 
     this.state = {
       columns: [
         myProps.columnTitle['namespace'],
         myProps.columnTitle['node'],
-           myProps.columnTitle['periodStart'],
-            myProps.columnTitle['periodEnd'],
+        myProps.columnTitle['periodStart'],
+        myProps.columnTitle['periodEnd'],
         myProps.columnTitle['pod'],
-        myProps.columnTitle['podUsageCpuCoreSeconds'],
+        myProps.columnTitle['podUsageCpuCoreSeconds']
       ],
       rows: rowData
     };
   }
 
+  UNSAFE_componentWillReceiveProps(nextProps: myProps) {
+    const rowData: Array<row> = [];
+
+    nextProps.tableData.forEach(dataRow => {
+      rowData.push({
+        cells: [
+          dataRow['namespace'],
+          dataRow['node'],
+          dataRow['periodStart'].toISOString(),
+          dataRow['periodEnd'].toISOString(),
+          dataRow['pod'],
+          dataRow['podUsageCpuCoreSeconds']
+        ]
+      });
+    });
+    this.setState({ ...this.state, rows: rowData });
+  }
+
   render() {
     return (
-      <Table aria-label="Simple Table" cells={this.state.columns} rows={this.state.rows}>
-        <TableHeader />
-        <TableBody />
-      </Table>
+      <div>
+        <Table key={'dataTable'} aria-label="Simple Table" cells={this.state.columns} rows={this.state.rows} > 
+        {/* rowWrapper={} */}
+          <TableHeader />
+          <TableBody />
+        </Table>
+      </div>
     );
   }
 }

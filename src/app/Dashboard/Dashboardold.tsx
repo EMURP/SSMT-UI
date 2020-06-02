@@ -1,8 +1,8 @@
-import React,{useState} from "react";
+import React from 'react';
+
 import { PageSection, Title } from '@patternfly/react-core';
 import { Card,  CardBody } from '@patternfly/react-core';
-// import {SimpleInputGroups} from '@app/DateComponent/DateComponent.tsx';
-import {FlatDT} from '@app/Flatpickr/FlatDT'
+
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
 
 import {DropdownComponent} from '../Dropdown/DropdownComponent';
@@ -20,7 +20,8 @@ import {
   DropdownToggle,
   DropdownItem
 } from '@patternfly/react-core';
-import { Fetchdata } from '@app/fetchdata/fetchdata';
+
+import { Fetchdata } from '@app/fetchdata/Fetchdatatemp';
 
 
 // import  {ProjectInfoTableComponent}  from '../ProjectInfo/ProjectInfoTableComponent';

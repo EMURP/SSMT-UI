@@ -14,7 +14,7 @@ import { Button } from '@patternfly/react-core';
 
 //import {InputGroup, TextInput, Dropdown, DropdownToggle, DropdownItem} from '@patternfly/react-core';
 
-import { Fetchdata } from '@app/fetchdata/fetchdata';
+import { Fetchdata } from '@app/fetchdata/Fetchdatatemp';
 
 
 type myProps = {};
@@ -65,7 +65,7 @@ class ProjectDataFilterForm extends  React.Component<myProps, myState> {
     changeToggle=() =>{
       const conditionalRender: number= this.state.conditionalRender;
       if(this.state.startDate !== convertDateToUTC(new Date(Date.UTC(0, 0, 0, 0, 0, 0)),0)){
-        this.setState({...this.state, submitToggle:true, conditionalRender:conditionalRender+1 },()=>console.log(this.state))
+        this.setState({...this.state, submitToggle:true, conditionalRender:conditionalRender+1 })
       }
     }
 
@@ -101,7 +101,7 @@ class ProjectDataFilterForm extends  React.Component<myProps, myState> {
               <CardBody> Start Date: </CardBody>
             </Card>
 
-            <SimpleInputGroups changeDate={this.setStartDate}/>
+            <SimpleInputGroups changeDate={this.setStartDate} dateType="startDate" key="startDate"/>
             {this.state.startDate.toISOString()}
         
             <Card>
@@ -119,7 +119,7 @@ class ProjectDataFilterForm extends  React.Component<myProps, myState> {
               <CardBody> End Date: </CardBody>
             </Card>
 
-            <SimpleInputGroups changeDate={this.setEndDate}/>
+            <SimpleInputGroups changeDate={this.setEndDate} dateType="endDate" key="endDate"/>
             {this.state.endDate.toISOString()}
 
             <Card>
@@ -140,7 +140,7 @@ class ProjectDataFilterForm extends  React.Component<myProps, myState> {
         {<div>
           <h2>Data from Fetch Data </h2>
 
-        <Fetchdata searching={this.state.submitToggle}startDate={this.state.startDate} endDate={this.state.endDate}/>
+        <Fetchdata renderCount={this.state.conditionalRender} searching={this.state.submitToggle}startDate={this.state.startDate} endDate={this.state.endDate}/>
         </div> }
 
         </div>

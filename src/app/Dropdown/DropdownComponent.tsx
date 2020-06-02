@@ -41,7 +41,7 @@ class DropdownComponent extends React.Component<myProps,myState>{
 
   createDropDowns(key: string, nums: Array<number>, onChange: Function, def: number ) {
     return(
-      <select key={key} onChange={e=>onChange(e)} value={def} >
+      <select key={key} onChange={e=>onChange(e)} value={def} aria-label="Hrs">
         {key} 
         {nums.map((num)=>{ 
           return(<option key={key+num} value={num}>{num}</option>)

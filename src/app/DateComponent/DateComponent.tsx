@@ -4,6 +4,7 @@ import { InputGroup, InputGroupText, TextInput } from '@patternfly/react-core';
 
 type myProps={
   changeDate: Function;
+  dateType: string;
   // currentDate: string;
 }
 
@@ -20,11 +21,10 @@ class SimpleInputGroups extends React.Component<myProps> {
             <CalendarAltIcon />
           </InputGroupText>
           <TextInput
-            name="textInput9"
-            id="textInput9"
+            name="textInput"
+            id={this.props.dateType}
             type="date"
-            aria-label="Date input example"
-            // value={this.props.currentDate}
+            aria-label="Input Date"
             onChangeCapture={event => this.props.changeDate(event.currentTarget.value)}
           />
         </InputGroup>
