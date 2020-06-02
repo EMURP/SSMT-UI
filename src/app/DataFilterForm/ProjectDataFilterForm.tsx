@@ -97,10 +97,9 @@ class ProjectDataFilterForm extends  React.Component<myProps, myState> {
 
       let dis_component: {} | null | undefined;
         if (this.state.display_component === 'filter_data') {
-            dis_component=
-
-            <FetchFilterdata  startDate={this.state.startDate} endDate={this.state.endDate}/>
-
+            
+            dis_component=<FetchFilterdata  startDate={this.state.startDate} endDate={this.state.endDate}/>
+            
         } else {
            dis_component= <Fetchdata />
 
