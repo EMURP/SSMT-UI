@@ -1,19 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PageSection, Title } from '@patternfly/react-core';
 import { Card, CardBody } from '@patternfly/react-core';
 
-// import {SimpleInputGroups} from '@app/DateComponent/DateComponent.tsx';
-
-import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
-
-import { DropdownComponent } from '../Dropdown/DropdownComponent';
-
-import { SimpleTable } from '../myTable/SimpleTable';
-
-import { TimesIcon, PlusCircleIcon } from '@patternfly/react-icons';
-
-import { Button, InputGroup, TextInput, Dropdown, DropdownToggle, DropdownItem } from '@patternfly/react-core';
-import { Fetchdata } from '@app/fetchdata/fetchdata';
 import { ProjectDataFilterForm } from '@app/DataFilterForm/ProjectDataFilterForm';
 
 // import  {ProjectInfoTableComponent}  from '../ProjectInfo/ProjectInfoTableComponent';
