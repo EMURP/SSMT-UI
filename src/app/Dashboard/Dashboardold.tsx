@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 
 import { PageSection, Title } from '@patternfly/react-core';
 import { Card,  CardBody } from '@patternfly/react-core';
@@ -7,7 +7,7 @@ import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
 
 import {DropdownComponent} from '../Dropdown/DropdownComponent';
 
-import {SimpleTable} from '../myTable/SimpleTable'
+import {SimpleTable} from '../myTable/SimpleTable';
 
 
 import { TimesIcon, PlusCircleIcon } from '@patternfly/react-icons';

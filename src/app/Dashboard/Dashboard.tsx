@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PageSection, Title } from '@patternfly/react-core';
 import { Card, CardBody } from '@patternfly/react-core';
-<<<<<<< HEAD
+
 // import {SimpleInputGroups} from '@app/DateComponent/DateComponent.tsx';
 
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
@@ -27,17 +27,7 @@ const padding = {
   marginRight: '30px'
 } as React.CSSProperties;
 
-=======
-const horizontalFlex = {
-  display: 'flex',
-  flexDirection: 'row'
-} as React.CSSProperties;
 
-const padding = {
-  marginRight: '30px'
-} as React.CSSProperties;
-
->>>>>>> f9e7744e16778c5999de3be184c4d7eef72228ae
 type myProps = {};
 type myState = {
     startHrs: number;
@@ -83,19 +73,11 @@ class Dashboard extends React.Component<myProps, myState> {
               <CardBody> Total Projects: 12</CardBody>
             </Card>
           </div>
-<<<<<<< HEAD
         </div>
 
         <ProjectDataFilterForm />
-=======
-        </div>        
->>>>>>> f9e7744e16778c5999de3be184c4d7eef72228ae
       </PageSection>
     );
   }
 }
-<<<<<<< HEAD
 export { Dashboard };
-=======
-export { Dashboard };
->>>>>>> f9e7744e16778c5999de3be184c4d7eef72228ae

@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { PageSection, Title }  from '@patternfly/react-core';
-import { Fetchdata } from '@app/fetchdata/fetchdata';
+
 // import { ChartPie, ChartThemeColor } from '@patternfly/react-charts';
 
 import {SimpleTable} from '@app/myTable/SimpleTable'
@@ -11,8 +11,7 @@ import { ChartPie, ChartThemeColor } from '@patternfly/react-charts';
 
 import { Card,  CardBody } from '@patternfly/react-core';
 import {  } from '@patternfly/react-table';
-
-import { Fetchdata } from '@app/fetchdata/Fetchdatatemp';
+import { Fetchdata } from '@app/fetchdata/fetchdata';
 
 const horizontalFlex= {
   display: "flex",
@@ -111,13 +110,6 @@ const Openshift: React.FunctionComponent<{}> = () => (
   </div>
 
 
-<<<<<<< HEAD
-  <div>
-  <Fetchdata/>
-  </div> 
-
-=======
->>>>>>> f9e7744e16778c5999de3be184c4d7eef72228ae
 
   </PageSection>
 )
