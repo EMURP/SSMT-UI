@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Card, CardBody, Grid, GridItem, Form, ActionGroup } from '@patternfly/react-core';
+import { Grid, GridItem, Form, ActionGroup } from '@patternfly/react-core';
 
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
 
@@ -20,16 +20,6 @@ type myState = {
   submitToggle: boolean;
   conditionalRender: number;
 };
-
-
-const horizontalFlex = {
-  display: 'flex',
-  flexDirection: 'row'
-} as React.CSSProperties;
-
-const padding = {
-  marginRight: '30px'
-} as React.CSSProperties;
 
 
 const convertDateToUTC = (date: Date, hrs: number) => {
@@ -53,9 +43,9 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
     }
   }
 
-  // shouldComponentUpdate(nextProps: myProps, nextState: myState){
-  //   return this.state.conditionalRender!==nextState.conditionalRender;
-  // }
+  shouldComponentUpdate(nextProps: myProps, nextState: myState){
+    return this.state.conditionalRender!==nextState.conditionalRender;
+  }
 
   changeToggle = () => {
     const conditionalRender: number = this.state.conditionalRender;
