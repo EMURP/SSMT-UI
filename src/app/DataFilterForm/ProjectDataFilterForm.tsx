@@ -1,22 +1,14 @@
 import React from 'react';
 
-//import  { useState } from 'react';
-
-import { Card, CardBody, GridItem, Form, ActionGroup, Grid } from '@patternfly/react-core';
+import { Card, CardBody, Grid, GridItem, Form, ActionGroup } from '@patternfly/react-core';
 
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
 
 import { DropdownComponent } from '../Dropdown/DropdownComponent';
 
-//import { SimpleTable } from '../myTable/SimpleTable';
-
 import { Button } from '@patternfly/react-core';
 
-//import {InputGroup, TextInput, Dropdown, DropdownToggle, DropdownItem} from '@patternfly/react-core';
-
-import { Fetchdata } from '@app/fetchdata/fetchdata';
-import { FetchFilterdata } from '@app/fetchdata/fetchfilterdata';
-import { NewDropDown } from '@app/Dropdown/newdropdown';
+import { Fetchdata } from '@app/fetchdata/displayclusterdata';
 
 
 type myProps = {};
@@ -27,7 +19,6 @@ type myState = {
   endDate: Date;
   submitToggle: boolean;
   conditionalRender: number;
-  display_component: string;
 };
 
 
@@ -59,12 +50,7 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
       endDate: convertDateToUTC(new Date(), 0),
       submitToggle: false,
       conditionalRender: 0,
-      display_component: 'fetch_data'
     }
-    this.handleDisplay = this.handleDisplay.bind(this);
-  }
-  handleDisplay() {
-    this.setState({ display_component: 'filter_data' });
   }
 
   // shouldComponentUpdate(nextProps: myProps, nextState: myState){
@@ -97,50 +83,46 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
 
   render() {
 
-    let dis_component: {} | null | undefined;
-    if (this.state.display_component === 'filter_data') {
-
-      dis_component = <FetchFilterdata startDate={this.state.startDate} endDate={this.state.endDate} />
-
-    } else {
-      dis_component = <Fetchdata />
-
-    }
-
     return (
 
+
       <React.Fragment>
-        <Grid>
-          <GridItem span={4} rowSpan={8}>
-
-            <Form>
+        <Form>
+          <Grid>
+            <GridItem span={2}>
               <SimpleInputGroups changeDate={this.setStartDate} dateType="StartDate" key="StartDate" />
+            </GridItem>
+            <GridItem span={2}>
+              <SimpleInputGroups changeDate={this.setEndDate} dateType="EndDate" key="EndDate" />
+            </GridItem>
+          </Grid>
+          <Grid>
+            <GridItem span={2}>
               <DropdownComponent key={"startHrs"} setHrs={this.setStartHrs} Hrs={this.state.startHrs} />
-              <SimpleInputGroups changeDate={this.setEndDate} dateType="EndDate" key="EndDate" />              
+            </GridItem>
+            <GridItem span={2}>
               <DropdownComponent key={"endHrs"} setHrs={this.setEndHrs} Hrs={this.state.endHrs} />
-              <ActionGroup>
-
-                <Button variant="primary" isBlock onClick={this.handleDisplay}
+            </GridItem>
+          </Grid>
+          <Grid>
+            <ActionGroup>
+              <GridItem span={1}>
+                <Button
+                  isBlock
+                  onClick={() => this.changeToggle()}
                   disabled={this.state.startDate !== convertDateToUTC(new Date(Date.UTC(0, 0, 0, 0, 0, 0)), 0)}>
                   Search
-              </Button>
-                
-              </ActionGroup>
-
-
-
-            </Form>
-            {dis_component}
-
-          </GridItem>
-
-        </Grid>
-
-
-
+                </Button>
+              </GridItem>
+            </ActionGroup>
+          </Grid>
+          <Grid>
+            <GridItem span={4} rowSpan={8}>
+              <Fetchdata renderCount={this.state.conditionalRender} searching={this.state.submitToggle} startDate={this.state.startDate} endDate={this.state.endDate} />
+            </GridItem>
+          </Grid>
+        </Form>
       </React.Fragment>
-
-
     );
 
   }
@@ -148,4 +130,3 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
 
 }
 export { ProjectDataFilterForm };
-

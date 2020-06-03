@@ -2,7 +2,7 @@ import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
 //import './fonts.css';
 
-import { Table, TableHeader, TableBody } from '@patternfly/react-table';
+import { Table, TableHeader, TableBody, TableVariant } from '@patternfly/react-table';
 
 // const textFormatting = {
 //   transforms: [textCenter],
@@ -37,11 +37,11 @@ class DashboardTable extends React.Component<myProps, myState> {
       rowData.push({
         cells: [
           dataRow['namespace'],
-          dataRow['node'],
+          // dataRow['node'],
           dataRow['periodStart'].toISOString(),
           dataRow['periodEnd'].toISOString(),
-          dataRow['pod'],
-          dataRow['podUsageCpuCoreSeconds']
+          // dataRow['pod'],
+          // dataRow['podUsageCpuCoreSeconds']
         ]
       });
     });
@@ -49,11 +49,11 @@ class DashboardTable extends React.Component<myProps, myState> {
     this.state = {
       columns: [
         myProps.columnTitle['namespace'],
-        myProps.columnTitle['node'],
+        // myProps.columnTitle['node'],
         myProps.columnTitle['periodStart'],
         myProps.columnTitle['periodEnd'],
-        myProps.columnTitle['pod'],
-        myProps.columnTitle['podUsageCpuCoreSeconds']
+        // myProps.columnTitle['pod'],
+        // myProps.columnTitle['podUsageCpuCoreSeconds']
       ],
       rows: rowData
     };
@@ -66,11 +66,11 @@ class DashboardTable extends React.Component<myProps, myState> {
       rowData.push({
         cells: [
           dataRow['namespace'],
-          dataRow['node'],
+          // dataRow['node'],
           dataRow['periodStart'].toISOString(),
           dataRow['periodEnd'].toISOString(),
-          dataRow['pod'],
-          dataRow['podUsageCpuCoreSeconds']
+          // dataRow['pod'],
+          // dataRow['podUsageCpuCoreSeconds']
         ]
       });
     });
@@ -80,7 +80,7 @@ class DashboardTable extends React.Component<myProps, myState> {
   render() {
     return (
       <div>
-        <Table key={'dataTable'} aria-label="Simple Table" cells={this.state.columns} rows={this.state.rows} > 
+        <Table key={'dataTable'} aria-label="Compact Table" variant={TableVariant.compact} cells={this.state.columns} rows={this.state.rows} caption = "List of projects"> 
         {/* rowWrapper={} */}
           <TableHeader />
           <TableBody />
