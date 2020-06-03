@@ -1,16 +1,14 @@
-# Patternfly Seed
+# SSMT-UI
 
-Patternfly Seed is an open source build scaffolding utility for web apps. The primary purpose of this project is to give developers a jump start when creating new projects that will use patternfly. A secondary purpose of this project is to serve as a reference for how to configure various aspects of an application that uses patternfly, webpack, react, typescript, etc.
 
-Out of the box you'll get an app layout with chrome (header/sidebar), routing, build pipeline, test suite, and some code quality tools. Basically, all the essentials.
 
 <img width="1058" alt="Out of box dashboard view of patternfly seed" src="https://user-images.githubusercontent.com/5942899/62715686-fa954980-b9ce-11e9-9fc2-217b7a4d1d81.png">
 
 ## Quick-start
 ```bash
-git clone https://github.com/patternfly/patternfly-react-seed # clone the project
-cd patternfly-react-seed # navigate into the project directory
-npm install # install patternfly-react-seed dependencies
+git clone https://github.com/EMURP/SSMT-UI.git # clone the project
+cd SSMT-UI # navigate into the project directory
+npm install # install project dependencies
 npm run start:dev # start the development server
 ```
 ## Development Scripts
