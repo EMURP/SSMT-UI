@@ -27,10 +27,19 @@ const FetchFilterdata: React.FunctionComponent<{startDate,endDate}> = (props) =>
     React.useEffect(() => {
 
         //Todo when date form component is created
+
+         // mock server url
+         // const url = "https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/list_projects"+
+         //"/"+props.startDate.toISOString().split('.')[0]+"Z"+"/"+props.endDate.toISOString().split('.')[0]+"Z";
+         // console.log(url);
+
+        console.log(props.startDate.toISOString().split('.')[0]+"Z")
+        console.log(props.endDate.toISOString().split('.')[0]+"Z")
         
 
        
-        const api_url = "https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/list_projects"+"/"+props.startDate.toISOString().split('.')[0]+"Z"+"/"+props.endDate.toISOString().split('.')[0]+"Z";
+        const api_url = "https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/list_projects"+"/"+
+        props.startDate.toISOString().split('.')[0]+"Z"+"/"+props.endDate.toISOString().split('.')[0]+"Z";
         
         axios.get(api_url).then(res => {
             cluster_data = res.data;

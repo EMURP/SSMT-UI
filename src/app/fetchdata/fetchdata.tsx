@@ -23,6 +23,9 @@ const columns = [
 
 let rows = [] as any;
 const Fetchdata: React.FunctionComponent<{}> = () => {
+     // mock server url
+     // const url = "https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/list_projects";
+     // console.log(url);
     const url = "https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/list_projects";
     console.log(url);
 
