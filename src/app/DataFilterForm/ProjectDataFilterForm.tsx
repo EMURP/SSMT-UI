@@ -25,6 +25,7 @@ type myState = {
     endDate: Date;
     submitToggle: boolean;
     conditionalRender: number;
+    changingDate: boolean;
 };
 
 
@@ -40,7 +41,11 @@ const horizontalFlex = {
 
 const convertDateToUTC = (date: Date, hrs: number )=> { 
     return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
-     hrs, date.getUTCMinutes(), date.getUTCSeconds()); }
+     hrs, 0, 0); }
+
+// const convertDateToUTC = (date: Date, hrs: number )=> { 
+//       return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
+//        hrs, 0, 0); }
  
 class ProjectDataFilterForm extends  React.Component<myProps, myState> {
 
@@ -49,13 +54,20 @@ class ProjectDataFilterForm extends  React.Component<myProps, myState> {
       super(myProps);
 
       this.state={
-          startHrs: 0,
-          endHrs: 0,
-          startDate: convertDateToUTC(new Date(Date.UTC(0, 0, 0, 0, 0, 0)),0),
-          endDate: convertDateToUTC(new Date(),0),
+          startHrs: new Date().getHours()-1,
+          endHrs: new Date().getHours(),
+
+          // this.state={
+          //   startHrs: new Date().getHours()-1,
+          //   endHrs: new Date().getHours(),
+          startDate: convertDateToUTC(new Date(),new Date().getHours()),
+          endDate: convertDateToUTC(new Date(),new Date().getHours()+1),
           submitToggle: false,
           conditionalRender:0,
+          changingDate: true,
       }
+
+      console.log(this.state)
     }
 
     // shouldComponentUpdate(nextProps: myProps, nextState: myState){
@@ -65,24 +77,24 @@ class ProjectDataFilterForm extends  React.Component<myProps, myState> {
     changeToggle=() =>{
       const conditionalRender: number= this.state.conditionalRender;
       if(this.state.startDate !== convertDateToUTC(new Date(Date.UTC(0, 0, 0, 0, 0, 0)),0)){
-        this.setState({...this.state, submitToggle:true, conditionalRender:conditionalRender+1 })
+        this.setState({...this.state, changingDate:false ,submitToggle:true, conditionalRender:conditionalRender+1 })
       }
     }
 
     setStartHrs = (hrs: number) => {
-        this.setState({...this.state, startHrs:hrs,startDate:convertDateToUTC(new Date(this.state.startDate),hrs)});
+        this.setState({...this.state, changingDate:true, startHrs:hrs,startDate:convertDateToUTC(new Date(this.state.startDate),hrs)});
     }
 
     setEndHrs = (hrs: number) => {
-      this.setState({...this.state, endHrs:hrs,endDate:convertDateToUTC(new Date(this.state.endDate),hrs)})
+      this.setState({...this.state,  changingDate:true,  endHrs:hrs,endDate:convertDateToUTC(new Date(this.state.endDate),hrs)})
     }
 
     setStartDate = (date: Date) => {
-      this.setState({...this.state, startDate:convertDateToUTC(new Date(date),this.state.startHrs)})
+      this.setState({...this.state,  changingDate:true, startDate:convertDateToUTC(new Date(date),this.state.startHrs)})
   }
 
   setEndDate = (date: Date) => {
-    this.setState({...this.state, endDate:convertDateToUTC(new Date(date),this.state.startHrs)})
+    this.setState({...this.state, changingDate:true ,endDate:convertDateToUTC(new Date(date),this.state.startHrs)})
   }
 
 
@@ -140,7 +152,9 @@ class ProjectDataFilterForm extends  React.Component<myProps, myState> {
         {<div>
           <h2>Data from Fetch Data </h2>
 
-        <Fetchdata renderCount={this.state.conditionalRender} searching={this.state.submitToggle}startDate={this.state.startDate} endDate={this.state.endDate}/>
+        <Fetchdata key={"Data"} changingDate={this.state.changingDate} renderCount={this.state.conditionalRender} searching={this.state.submitToggle}startDate={this.state.startDate} endDate={this.state.endDate}/>
+
+        
         </div> }
 
         </div>

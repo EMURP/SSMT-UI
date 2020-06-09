@@ -60,28 +60,28 @@ class DashboardTable extends React.Component<myProps, myState> {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps: myProps) {
-    const rowData: Array<row> = [];
-
-    nextProps.tableData.forEach(dataRow => {
-      rowData.push({
-        cells: [
-          dataRow['namespace'],
-          dataRow['node'],
-          dataRow['periodStart'].toISOString(),
-          dataRow['periodEnd'].toISOString(),
-          dataRow['pod'],
-          dataRow['podUsageCpuCoreSeconds']
-        ]
+    if (this.props.startDate !== nextProps.startDate || this.props.endDate !== nextProps.endDate) {
+      const rowData: Array<row> = [];
+      nextProps.tableData.forEach(dataRow => {
+        rowData.push({
+          cells: [
+            dataRow['namespace'],
+            dataRow['node'],
+            dataRow['periodStart'].toISOString(),
+            dataRow['periodEnd'].toISOString(),
+            dataRow['pod'],
+            dataRow['podUsageCpuCoreSeconds']
+          ]
+        });
       });
-    });
-    this.setState({ ...this.state, rows: rowData });
+      this.setState({ ...this.state, rows: rowData });
+    }
   }
 
   render() {
     return (
       <div>
-        <Table key={'dataTable'} aria-label="Simple Table" cells={this.state.columns} rows={this.state.rows} > 
-        {/* rowWrapper={} */}
+        <Table key={'dataTable'} aria-label="Simple Table" cells={this.state.columns} rows={this.state.rows}>
           <TableHeader />
           <TableBody />
         </Table>

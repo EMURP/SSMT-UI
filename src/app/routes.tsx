@@ -9,6 +9,7 @@ import { Openshift } from '@app/Openshift/Openshift';
 import { Openstack } from '@app/Openstack/Openstack';
 import { useDocumentTitle } from '@app/utils/useDocumentTitle';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
+import { GridLayoutTrial } from './GridLayoutDemo/GridLayoutTrial';
 
 let routeFocusTimer: number;
 
@@ -81,6 +82,14 @@ const routes: IAppRoute[] = [
     label: 'Support',
     path: '/support',
     title: 'OCP Metering | Support Page'
+  },
+  {
+    component: GridLayoutTrial,
+    exact: true,
+    isAsync: true,
+    label: 'GridLayoutTrial',
+    path: '/GridLayoutDemo',
+    title: 'OCP Metering | GridLayoutTrial'
   }
 ];
 
