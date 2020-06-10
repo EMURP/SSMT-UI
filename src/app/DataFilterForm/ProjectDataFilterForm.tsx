@@ -14,7 +14,8 @@ import { Button } from '@patternfly/react-core';
 
 //import {InputGroup, TextInput, Dropdown, DropdownToggle, DropdownItem} from '@patternfly/react-core';
 
-import { Fetchdata } from '@app/Fetchdata/DisplayClusterData';
+
+import  {Fetchdata} from '@app/Fetchdata/DisplayClusterData';
 
 type myProps = {};
 type myState = {
@@ -48,12 +49,15 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
     startDate.setHours((new Date().getHours()) - 1 )
     startDate.setMinutes(0);
     startDate.setSeconds(0);
+
     const endDate = new Date();
     endDate.setHours(new Date().getHours())
     endDate.setMinutes(0);
     endDate.setSeconds(0);
-    console.log(startDate);
-    console.log(endDate);
+
+    // console.log(startDate);
+    // console.log(endDate);
+
     this.state = {
       startHrs: ((new Date().getHours() - 1 +24) % 24), // javascript Modulo function is buggy
       endHrs: (new Date().getHours() % 24),
@@ -103,7 +107,7 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
     date=new Date(date)
     date.setHours(this.state.startHrs)
     date.setDate(date.getDate()+1)
-    console.log(date)
+    // console.log(date)
     this.setState({ ...this.state, changingDate: true, startDate: new Date(date) });
   };
 
@@ -111,7 +115,7 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
     date=new Date(date)
     date.setHours(this.state.endHrs)
     date.setDate(date.getDate()+1)
-    console.log(date)
+    // console.log(date)
     this.setState({ ...this.state, changingDate: true, endDate: new Date(date) });
   };
 
