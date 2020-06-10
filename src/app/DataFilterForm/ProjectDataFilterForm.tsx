@@ -14,7 +14,7 @@ import { Button } from '@patternfly/react-core';
 
 //import {InputGroup, TextInput, Dropdown, DropdownToggle, DropdownItem} from '@patternfly/react-core';
 
-import { Fetchdata } from '@app/fetchdata/Fetchdatatemp';
+import { Fetchdata } from '@app/Fetchdata/DisplayClusterData';
 
 type myProps = {};
 type myState = {

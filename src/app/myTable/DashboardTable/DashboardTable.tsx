@@ -37,11 +37,11 @@ class DashboardTable extends React.Component<myProps, myState> {
       rowData.push({
         cells: [
           dataRow['namespace'],
-          dataRow['node'],
-          dataRow['periodStart'].toISOString(),
-          dataRow['periodEnd'].toISOString(),
-          dataRow['pod'],
-          dataRow['podUsageCpuCoreSeconds']
+          // dataRow['node'],
+          dataRow['periodStart'], //to iso string ()
+          dataRow['periodEnd'], // to iso string () 
+          // dataRow['pod'],
+          // dataRow['podUsageCpuCoreSeconds']
         ]
       });
     });
@@ -49,11 +49,11 @@ class DashboardTable extends React.Component<myProps, myState> {
     this.state = {
       columns: [
         myProps.columnTitle['namespace'],
-        myProps.columnTitle['node'],
+        //myProps.columnTitle['node'],
         myProps.columnTitle['periodStart'],
         myProps.columnTitle['periodEnd'],
-        myProps.columnTitle['pod'],
-        myProps.columnTitle['podUsageCpuCoreSeconds']
+        //myProps.columnTitle['pod'],
+        //myProps.columnTitle['podUsageCpuCoreSeconds']
       ],
       rows: rowData
     };
@@ -66,11 +66,11 @@ class DashboardTable extends React.Component<myProps, myState> {
         rowData.push({
           cells: [
             dataRow['namespace'],
-            dataRow['node'],
-            dataRow['periodStart'].toISOString(),
-            dataRow['periodEnd'].toISOString(),
-            dataRow['pod'],
-            dataRow['podUsageCpuCoreSeconds']
+           // dataRow['node'],
+            dataRow['periodStart'], //to iso string ()
+            dataRow['periodEnd'], // to iso string ()
+            //dataRow['pod'],
+            //dataRow['podUsageCpuCoreSeconds']
           ]
         });
       });

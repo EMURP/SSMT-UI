@@ -88,8 +88,8 @@ class Fetchdata extends React.Component<myProps, myState> {
           tableData.push({
             namespace: clusterInfo['namespace'],
             node: clusterInfo['node'],
-            periodEnd: parseISOString(clusterInfo['period_end']),
-            periodStart: parseISOString(clusterInfo['period_start']),
+            periodEnd: clusterInfo['period_end'], // parse to iso string 
+            periodStart: clusterInfo['period_start'], // parse to iso string 
             pod: clusterInfo['pod'],
             podUsageCpuCoreSeconds: clusterInfo['pod_usage_cpu_core_seconds']
           });

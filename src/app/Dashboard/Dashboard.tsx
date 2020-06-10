@@ -45,7 +45,7 @@ class Dashboard extends React.Component<myProps, myState> {
         <Title headingLevel="h1" size="lg">
           Dashboard Page Title
         </Title>
-        <div style={horizontalFlex}>
+        {/* <div style={horizontalFlex}>
           <div style={padding}>
             <Card>
               <CardBody>Total Node: 37</CardBody>
@@ -61,7 +61,7 @@ class Dashboard extends React.Component<myProps, myState> {
               <CardBody> Total Projects: 12</CardBody>
             </Card>
           </div>
-        </div>
+        </div> */}
 
         <ProjectDataFilterForm />
       </PageSection>
