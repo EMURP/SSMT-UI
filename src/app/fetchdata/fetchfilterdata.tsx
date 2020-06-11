@@ -14,7 +14,7 @@ let cluster_data = [] as any;
 const columns = [
 
     {
-        title: "namespace"
+        title: "Namespace"
 
     }
 
@@ -22,18 +22,26 @@ const columns = [
 
 let rows = [] as any;
 const FetchFilterdata: React.FunctionComponent<{startDate,endDate}> = (props) => {
-    const url = "https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/list_projects/2020-05-18T00:00:00Z/2020-05-30T00:00:00Z";
-
+    
     // store the api data in people array and searchResults
     React.useEffect(() => {
 
         //Todo when date form component is created
 
-        // console.log(props.startDate);
-        // console.log(props.endDate);
-        // const api_url = "https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/list_projects"+"/"+props.startDate+"/"+props.endDate;
-        // console.log(api_url);
-        axios.get(url).then(res => {
+         // mock server url
+         // const url = "https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/list_projects"+
+         //"/"+props.startDate.toISOString().split('.')[0]+"Z"+"/"+props.endDate.toISOString().split('.')[0]+"Z";
+         // console.log(url);
+
+        console.log(props.startDate.toISOString().split('.')[0]+"Z")
+        console.log(props.endDate.toISOString().split('.')[0]+"Z")
+        
+
+       
+        const api_url = "https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/list_projects"+"/"+
+        props.startDate.toISOString().split('.')[0]+"Z"+"/"+props.endDate.toISOString().split('.')[0]+"Z";
+        
+        axios.get(api_url).then(res => {
             cluster_data = res.data;
 
             rows = cluster_data.map(item => {
@@ -88,7 +96,7 @@ const FetchFilterdata: React.FunctionComponent<{startDate,endDate}> = (props) =>
     // render Table UI
     return (
 
-        <Table aria-label="Compact Table" variant={TableVariant.compact} cells={columns} rows={rows}>
+        <Table aria-label="Compact Table" variant={TableVariant.compact} cells={columns} rows={rows} caption = "List of projects">
             <TableHeader />
             <TableBody>
             </TableBody>

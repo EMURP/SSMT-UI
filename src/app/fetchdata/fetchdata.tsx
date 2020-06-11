@@ -15,7 +15,7 @@ let cluster_data = [] as any;
 const columns = [
 
     {
-        title: "namespace"
+        title: "Namespace"
 
     }
 
@@ -23,6 +23,9 @@ const columns = [
 
 let rows = [] as any;
 const Fetchdata: React.FunctionComponent<{}> = () => {
+     // mock server url
+     // const url = "https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/list_projects";
+     // console.log(url);
     const url = "https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/list_projects";
     console.log(url);
 
@@ -84,7 +87,7 @@ const Fetchdata: React.FunctionComponent<{}> = () => {
     return (
 
 
-        <Table aria-label="Compact Table" variant={TableVariant.compact} cells={columns} rows={rows}>
+        <Table aria-label="Compact Table" variant={TableVariant.compact} cells={columns} rows={rows} caption = "List of projects">
             <TableHeader />
             <TableBody>
             </TableBody>

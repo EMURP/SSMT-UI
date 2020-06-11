@@ -1,14 +1,9 @@
 import React from 'react';
-
-import { Grid, GridItem, Form, ActionGroup } from '@patternfly/react-core';
-
+import { Grid, GridItem, Form, ActionGroup, CardBody } from '@patternfly/react-core';
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
-
 import { DropdownComponent } from '../Dropdown/DropdownComponent';
-
 import { Button } from '@patternfly/react-core';
-
-import { Fetchdata } from '@app/fetchdata/displayclusterdata';
+import { ProjectListTable } from '@app/project_page/project_list_with_table';
 
 
 type myProps = {};
@@ -27,7 +22,7 @@ const convertDateToUTC = (date: Date, hrs: number) => {
     hrs, date.getUTCMinutes(), date.getUTCSeconds());
 }
 
-class ProjectDataFilterForm extends React.Component<myProps, myState> {
+class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
 
   constructor(myProps) {
 
@@ -75,6 +70,8 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
 
     return (
 
+      
+
 
       <React.Fragment>
         <Form>
@@ -108,7 +105,7 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
           </Grid>
           <Grid>
             <GridItem span={4} rowSpan={8}>
-              <Fetchdata renderCount={this.state.conditionalRender} searching={this.state.submitToggle} startDate={this.state.startDate} endDate={this.state.endDate} />
+              <ProjectListTable renderCount={this.state.conditionalRender} searching={this.state.submitToggle} startDate={this.state.startDate} endDate={this.state.endDate} />
             </GridItem>
           </Grid>
         </Form>
@@ -119,4 +116,4 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
 
 
 }
-export { ProjectDataFilterForm };
+export { DemoProjectDataFilterForm };

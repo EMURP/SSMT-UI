@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route, RouteComponentProps, Switch } from 'react-router-dom';
+import { Route, RouteComponentProps, Switch, Link } from 'react-router-dom';
 import { Alert, PageSection } from '@patternfly/react-core';
 import { DynamicImport } from '@app/DynamicImport';
 import { accessibleRouteChangeHandler } from '@app/utils/utils';
@@ -9,6 +9,9 @@ import { Openshift } from '@app/Openshift/Openshift';
 import { Openstack } from '@app/Openstack/Openstack';
 import { useDocumentTitle } from '@app/utils/useDocumentTitle';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
+import { ProjectListTable } from '@app/project_page/project_list_with_table';
+
+import { ProjectDetail } from '@app/project_page/project_detail';
 
 let routeFocusTimer: number;
 
@@ -50,6 +53,7 @@ export interface IAppRoute {
   isAsync?: boolean;
 }
 
+
 const routes: IAppRoute[] = [
   {
     component: Dashboard,
@@ -73,7 +77,7 @@ const routes: IAppRoute[] = [
     label: 'Openstack',
     path: '/openstack',
     title: 'OCP Metering | Openstack Page'
-  },
+  },  
   {
     component: Support,
     exact: true,
@@ -127,7 +131,8 @@ const AppRoutes = () => (
           title={title}
           isAsync={isAsync}
         />
-      ))}
+      ))}   
+      <Route exact path="/projectlist/:projectId" component={ProjectDetail} />   
       <PageNotFound title="404 Page Not Found" />
     </Switch>
   </LastLocationProvider>

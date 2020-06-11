@@ -41,12 +41,17 @@ class DropdownComponent extends React.Component<myProps,myState>{
 
   createDropDowns(key: string, nums: Array<number>, onChange: Function, def: number ) {
     return(
+      <React.Fragment>
+        <label>Select Time</label>
       <select key={key} onChange={e=>onChange(e)} value={def} aria-label="Hrs">
-        {key} 
+         
         {nums.map((num)=>{ 
           return(<option key={key+num} value={num}>{num}</option>)
         } )}
       </select>
+
+      </React.Fragment>
+      
     )
     
   }
@@ -55,6 +60,7 @@ class DropdownComponent extends React.Component<myProps,myState>{
     const hrs: Array<number> = this.createRange(0,23);
     
     return (
+      
       <div>
         {this.createDropDowns("Hrs",hrs,this.Hrs,this.props.Hrs)}
       </div>

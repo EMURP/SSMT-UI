@@ -1,6 +1,6 @@
 import React from 'react';
 import { CalendarAltIcon } from '@patternfly/react-icons';
-import { InputGroup, InputGroupText, TextInput } from '@patternfly/react-core';
+import { InputGroup, InputGroupText, TextInput, FormGroup } from '@patternfly/react-core';
 
 type myProps={
   changeDate: Function;
@@ -16,10 +16,13 @@ class SimpleInputGroups extends React.Component<myProps> {
   render() {
     return (
       <React.Fragment>
+        <FormGroup label={this.props.dateType}
+          isRequired
+          fieldId={this.props.dateType}
+          // helperText={this.props.dateType}
+          >
         <InputGroup>
-          <InputGroupText component="label" htmlFor="textInput9">
-            <CalendarAltIcon />
-          </InputGroupText>
+          
           <TextInput
             name="textInput"
             id={this.props.dateType}
@@ -27,7 +30,14 @@ class SimpleInputGroups extends React.Component<myProps> {
             aria-label="Input Date"
             onChangeCapture={event => this.props.changeDate(event.currentTarget.value)}
           />
+          <InputGroupText component="label" htmlFor="textInput9">
+            <CalendarAltIcon />
+          </InputGroupText>
+          
         </InputGroup>
+
+        </FormGroup>
+       
       </React.Fragment>
     );
   }

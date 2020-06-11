@@ -60,17 +60,7 @@ class SimpleTable extends React.Component<myProps,myState> {
      
     };
 }
-                                                                            // {
-                                                                            // cells: [
-                                                                            //     {
-                                                                            //     title: <div>one - 2</div>,
-                                                                            //     props: { title: 'hover title', colSpan: 3 }
-                                                                            //     },
-                                                                            //     'four - 2',
-                                                                            //     'five - 2'
-                                                                            // ]
-                                                                            // },
-        
+       
  
   render() {
     // const { columns, rows } = this.state;
