@@ -1,13 +1,7 @@
 import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
-//import './fonts.css';
-
-import { Table, TableHeader, TableBody, TableVariant } from '@patternfly/react-table';
-
-// const textFormatting = {
-//   transforms: [textCenter],
-//   cellTransforms: [textCenter]
-// } as React.CSSProperties;
+import { Table, TableHeader, TableBody, TableVariant,TableText } from '@patternfly/react-table';
+import { Link } from 'react-router-dom';
 
 type myProps = {
   columnTitle: object;
@@ -36,10 +30,13 @@ class DashboardTable extends React.Component<myProps, myState> {
     myProps.tableData.forEach(dataRow => {
       rowData.push({
         cells: [
-          dataRow['namespace'],
+          <TableText><Link to={`/projectlist/${ dataRow['namespace']}`}>{ dataRow['namespace']}</Link></TableText>,
+          
+          // dataRow['namespace'],
+          dataRow['activation_time']
           // dataRow['node'],
-          dataRow['periodStart'].toISOString(),
-          dataRow['periodEnd'].toISOString(),
+          // dataRow['periodStart'].toISOString(),
+          // dataRow['periodEnd'].toISOString(),
           // dataRow['pod'],
           // dataRow['podUsageCpuCoreSeconds']
         ]
@@ -49,9 +46,10 @@ class DashboardTable extends React.Component<myProps, myState> {
     this.state = {
       columns: [
         myProps.columnTitle['namespace'],
+        myProps.columnTitle['activation_time']
         // myProps.columnTitle['node'],
-        myProps.columnTitle['periodStart'],
-        myProps.columnTitle['periodEnd'],
+        // myProps.columnTitle['periodStart'],
+        // myProps.columnTitle['periodEnd'],
         // myProps.columnTitle['pod'],
         // myProps.columnTitle['podUsageCpuCoreSeconds']
       ],
@@ -65,10 +63,12 @@ class DashboardTable extends React.Component<myProps, myState> {
     nextProps.tableData.forEach(dataRow => {
       rowData.push({
         cells: [
-          dataRow['namespace'],
+          <TableText><Link to={`/projectlist/${ dataRow['namespace']}`}>{ dataRow['namespace']}</Link></TableText>,
+          // dataRow['namespace'],
+          dataRow['activation_time']
           // dataRow['node'],
-          dataRow['periodStart'].toISOString(),
-          dataRow['periodEnd'].toISOString(),
+          // dataRow['periodStart'].toISOString(),
+          // dataRow['periodEnd'].toISOString(),
           // dataRow['pod'],
           // dataRow['podUsageCpuCoreSeconds']
         ]
