@@ -1,16 +1,13 @@
 import React from 'react';
 
-//import  { useState } from 'react';
-
-import { Card, CardBody } from '@patternfly/react-core';
+import { Grid, GridItem, Form, ActionGroup, Card, CardBody } from '@patternfly/react-core';
 
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
 
 import { DropdownComponent } from '../Dropdown/DropdownComponent';
 
-//import { SimpleTable } from '../myTable/SimpleTable';
-
 import { Button } from '@patternfly/react-core';
+
 
 //import {InputGroup, TextInput, Dropdown, DropdownToggle, DropdownItem} from '@patternfly/react-core';
 
@@ -29,14 +26,14 @@ type myState = {
   changingDate: boolean;
 };
 
-const horizontalFlex = {
-  display: 'flex',
-  flexDirection: 'row'
-} as React.CSSProperties;
+// const horizontalFlex = {
+//   display: 'flex',
+//   flexDirection: 'row'
+// } as React.CSSProperties;
 
-const padding = {
-  marginRight: '30px'
-} as React.CSSProperties;
+// const padding = {
+//   marginRight: '30px'
+// } as React.CSSProperties;
 
 const convertDateToUTC = (date: Date) => {
   return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), 0, 0,0));
@@ -71,6 +68,12 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
 
   }
 
+  changeToggle = () => {
+    const conditionalRender: number = this.state.conditionalRender;
+    if (this.state.startDate !== convertDateToUTC(new Date(Date.UTC(0, 0, 0, 0, 0, 0)), 0)) {
+      this.setState({ ...this.state, submitToggle: true, conditionalRender: conditionalRender + 1 })
+    }
+  }
 
   changeToggle = () => {
     const conditionalRender: number = this.state.conditionalRender;

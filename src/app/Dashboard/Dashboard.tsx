@@ -1,19 +1,10 @@
 import React from 'react';
-import { PageSection, Title } from '@patternfly/react-core';
-import { Card, CardBody } from '@patternfly/react-core';
+import { PageSection, Title, Stack, StackItem } from '@patternfly/react-core';
 
-import { ProjectDataFilterForm } from '@app/DataFilterForm/ProjectDataFilterForm';
+//import { ProjectDataFilterForm } from '@app/DataFilterForm/ProjectDataFilterForm';
+import { DemoProjectDataFilterForm } from '@app/project_page/demoProjectfilterform';
 
 // import  {ProjectInfoTableComponent}  from '../ProjectInfo/ProjectInfoTableComponent';
-
-const horizontalFlex = {
-  display: 'flex',
-  flexDirection: 'row'
-} as React.CSSProperties;
-
-const padding = {
-  marginRight: '30px'
-} as React.CSSProperties;
 
 
 type myProps = {};
@@ -45,25 +36,15 @@ class Dashboard extends React.Component<myProps, myState> {
         <Title headingLevel="h1" size="lg">
           Dashboard Page Title
         </Title>
-        {/* <div style={horizontalFlex}>
-          <div style={padding}>
-            <Card>
-              <CardBody>Total Node: 37</CardBody>
-            </Card>
-          </div>
-          <div style={padding}>
-            <Card>
-              <CardBody>Total Pods: 68</CardBody>
-            </Card>
-          </div>
-          <div>
-            <Card>
-              <CardBody> Total Projects: 12</CardBody>
-            </Card>
-          </div>
-        </div> */}
 
-        <ProjectDataFilterForm />
+        <Stack>
+                   
+          {/* <StackItem> <ProjectDataFilterForm /></StackItem> */}
+          <StackItem> <DemoProjectDataFilterForm /></StackItem>
+        </Stack>
+        
+
+       
       </PageSection>
     );
   }
