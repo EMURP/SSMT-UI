@@ -48,7 +48,7 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
 
             <div>
 
-                Project Name: {name}
+                Name: {name}
 
             </div>
             <div>
@@ -58,22 +58,22 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
             </div>
             <div>
 
-                Period Start Time: {start}
+                Start Time: {start}
 
             </div>
             <div>
 
-                Period End Time: {end}
+                End Time: {end}
 
             </div>
             <div>
 
-                Pod: {pod}
+                Pod Name: {pod}
 
             </div>
             <div>
 
-                Pod_usage_cpu_core_seconds: {cpusage}
+                CPU Utilization: {cpusage}
 
             </div>
 
