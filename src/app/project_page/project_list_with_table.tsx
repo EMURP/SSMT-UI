@@ -29,7 +29,7 @@ const parseISOString = (s: string) => {
   return new Date(
     Date.UTC(
       Number.parseInt(b[0]),
-      Number.parseInt(b[1]),
+      Number.parseInt(b[1])-1,
       Number.parseInt(b[2]),
       Number.parseInt(b[3]),
       Number.parseInt(b[4]),
@@ -65,7 +65,7 @@ class ProjectListTable extends React.Component<myProps, myState> {
 
     let apiUrl=this.state.api;
     if(props.searching){
-      apiUrl = apiUrl+ startDate + '/' + endDate;
+      apiUrl = apiUrl+ '/' + startDate + '/' + endDate;
     }
     
     axios
