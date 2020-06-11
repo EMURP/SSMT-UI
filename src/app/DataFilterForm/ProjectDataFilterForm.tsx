@@ -17,6 +17,7 @@ import { Button } from '@patternfly/react-core';
 
 import  {Fetchdata} from '@app/Fetchdata/DisplayClusterData';
 
+
 type myProps = {};
 type myState = {
   startHrs: number;
@@ -132,7 +133,9 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
               <CardBody> Start Date: </CardBody>
             </Card>
 
-            <SimpleInputGroups changeDate={this.setStartDate} dateType="startDate" key="startDate" />
+            <SimpleInputGroups changeDate={this.setStartDate} dateType="startDate" key="startDate"   />
+           
+            
             {convertDateToUTC(this.state.startDate).toISOString()}
 
             <Card>
@@ -148,7 +151,7 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
               <CardBody> End Date: </CardBody>
             </Card>
 
-            <SimpleInputGroups changeDate={this.setEndDate} dateType="endDate" key="endDate" />
+            <SimpleInputGroups changeDate={this.setEndDate} dateType="endDate" key="endDate"  />
             {convertDateToUTC(this.state.endDate).toISOString()}
             <Card>
               <CardBody> End Time: </CardBody>
@@ -168,9 +171,6 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
           </div>
         </div>
 
-        {
-          <div>
-            <h2>Data from Fetch Data </h2>
 
             <Fetchdata
               key={'Data'}
@@ -180,9 +180,8 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
               startDate={convertDateToUTC(this.state.startDate)}
               endDate={convertDateToUTC(this.state.endDate)}
             />
-          </div>
-        }
-      </div>
+          
+            </div>
     );
   }
 }

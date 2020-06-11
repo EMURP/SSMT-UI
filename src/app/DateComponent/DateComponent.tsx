@@ -5,13 +5,17 @@ import { InputGroup, InputGroupText, TextInput } from '@patternfly/react-core';
 type myProps={
   changeDate: Function;
   dateType: string;
-  // currentDate: string;
+    // currentDate: string;
 }
+
 
 class SimpleInputGroups extends React.Component<myProps> {
   constructor(myProps) {
     super(myProps);
+        
   }
+
+  
 
   render() {
     return (
