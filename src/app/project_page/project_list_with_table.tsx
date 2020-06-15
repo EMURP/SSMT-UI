@@ -61,7 +61,7 @@ class ProjectListTable extends React.Component<myProps, myState> {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    console.log("HEYYYY")
+    // console.log("HEYYYY")
     if (nextProps.changingDate === false) {
       this.callAPI(nextProps);
     }
@@ -73,7 +73,7 @@ class ProjectListTable extends React.Component<myProps, myState> {
 
     let apiUrl = this.state.api;
     apiUrl = apiUrl + '/' + startDate + '/' + endDate;
-    console.log(apiUrl);
+    // console.log(apiUrl);
 
     axios
       .get(apiUrl)

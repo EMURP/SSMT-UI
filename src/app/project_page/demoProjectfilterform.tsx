@@ -60,7 +60,7 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(nextState);
+    //console.log(nextState);
     return JSON.stringify(this.state) !== JSON.stringify(nextState);
   }
 
@@ -72,7 +72,7 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
     if (onSubmit) {
       apiUrl = apiUrl + '/' + startDate + '/' + endDate;
     }
-    console.log(apiUrl);
+    //console.log(apiUrl);
 
     axios
       .get(apiUrl)
@@ -143,7 +143,7 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
       activationTime: 'Project Active period'
     };
 
-    console.log(this.state.clusterData);
+    //console.log(this.state.clusterData);
 
     return (
       <div>

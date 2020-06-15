@@ -13,7 +13,7 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
     const [cpusage, setCpusage] = React.useState("")
 
     let { projectId } = useParams();
-    console.log(projectId)
+    //console.log(projectId)
     React.useEffect(() => {
         axios.get("https://6e905fc6-3dba-44d9-b37b-91bedb726dcf.mock.pstmn.io/projectlist/" + projectId).then(res => {
             cluster_data = res.data;
@@ -31,10 +31,10 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
 
         }).catch(err => {
             if (err.response) {
-                console.log(err.response + "--" + err.message)
+                //console.log(err.response + "--" + err.message)
             }
             else {
-                console.log(err.message)
+               // console.log(err.message)
 
             }
         });
