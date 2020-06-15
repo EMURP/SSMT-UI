@@ -56,20 +56,22 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
       isLoaded: false
     };
 
-    this.callAPI();
+    this.callAPI(false);
   }
 
-  shouldComponentUpdate(nextProps,nextState){
-    console.log(nextState)
-    return JSON.stringify(this.state)!== JSON.stringify(nextState) 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(nextState);
+    return JSON.stringify(this.state) !== JSON.stringify(nextState);
   }
 
-  callAPI() {
+  callAPI(onSubmit) {
     const startDate = new Date(convertDateToUTC(this.state.startDate)).toISOString().split('.')[0] + 'Z';
     const endDate = new Date(convertDateToUTC(this.state.endDate)).toISOString().split('.')[0] + 'Z';
 
     let apiUrl = this.state.api;
-    apiUrl = apiUrl + '/' + startDate + '/' + endDate;
+    if (onSubmit) {
+      apiUrl = apiUrl + '/' + startDate + '/' + endDate;
+    }
     console.log(apiUrl);
 
     axios
@@ -90,7 +92,7 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
   }
 
   changeToggle = () => {
-    this.callAPI();
+    this.callAPI(true);
     // const conditionalRender: number = this.state.conditionalRender;
     // this.setState({
     //   ...this.state,
@@ -135,9 +137,7 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
     this.setState({ ...this.state, changingDate: true, endDate: new Date(date) });
   };
 
-
   renderTable = () => {
-
     const columnTitle = {
       namespace: 'Namespace',
       activationTime: 'Project Active period'
@@ -147,7 +147,7 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
 
     return (
       <div>
-        {this.state.clusterData!== null && (
+        {this.state.clusterData !== null && (
           <DashboardTable
             key={'DataTable'}
             startDate={this.state.startDate}
@@ -198,7 +198,7 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
               endDate={new Date(convertDateToUTC(this.state.endDate))}
             /> */}
               {this.state.isLoaded && this.renderTable()}
-              {!this.state.isLoaded && this.state.err!== null && <div>{this.state.err.toString()}</div>}
+              {!this.state.isLoaded && this.state.err !== null && <div>{this.state.err.toString()}</div>}
             </GridItem>
           </Grid>
         </Form>

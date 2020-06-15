@@ -2,6 +2,7 @@ import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
 import { Table, TableHeader, TableBody, TableVariant, TableText } from '@patternfly/react-table';
 import { Link } from 'react-router-dom';
+import { Card } from '@patternfly/react-core';
 
 type myProps = {
   columnTitle: object;
@@ -75,7 +76,7 @@ class DashboardTable extends React.Component<myProps, myState> {
           cells: [
             <TableText key={`/projectlist/${dataRow['namespace']}`}>
               <Link to={`/projectlist/${dataRow['namespace']}`} key={`/projectlist/${dataRow['namespace']}`}>
-                {dataRow['namespace']}
+              {dataRow['namespace']} 
               </Link>
             </TableText>,
             // dataRow['namespace'],
