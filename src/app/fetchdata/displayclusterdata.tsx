@@ -70,7 +70,7 @@ class Fetchdata extends React.Component<myProps, myState> {
     if(props.searching){
       apiUrl = apiUrl+ startDate + '/' + endDate;
     }
-    
+
     axios
       .get(apiUrl)
       .then(res => {

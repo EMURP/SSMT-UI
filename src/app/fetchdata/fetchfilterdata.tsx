@@ -22,7 +22,7 @@ const columns = [
 
 let rows = [] as any;
 const FetchFilterdata: React.FunctionComponent<{startDate,endDate}> = (props) => {
-    
+
     // store the api data in people array and searchResults
     React.useEffect(() => {
 
@@ -35,12 +35,12 @@ const FetchFilterdata: React.FunctionComponent<{startDate,endDate}> = (props) =>
 
         console.log(props.startDate.toISOString().split('.')[0]+"Z")
         console.log(props.endDate.toISOString().split('.')[0]+"Z")
-        
 
-       
+
+
         const api_url = "https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/list_projects"+"/"+
         props.startDate.toISOString().split('.')[0]+"Z"+"/"+props.endDate.toISOString().split('.')[0]+"Z";
-        
+
         axios.get(api_url).then(res => {
             cluster_data = res.data;
 
@@ -54,13 +54,13 @@ const FetchFilterdata: React.FunctionComponent<{startDate,endDate}> = (props) =>
                 // const cell6 = item.pod_usage_cpu_core_seconds;
                 const arr = [] as any;
                 arr.push(cell1);
-                
+
 
                 return (arr)
 
             })
             setSearchResults(cluster_data);
-            
+
         }).catch(err =>{ if(err.response){
             console.log(err.response +"--"+err.message)
         }
@@ -70,7 +70,7 @@ const FetchFilterdata: React.FunctionComponent<{startDate,endDate}> = (props) =>
         }
     })
     }, []);
-    
+
     const [searchTerm, setSearchTerm] = React.useState("");
     const [searchResults, setSearchResults] = React.useState([]);
 
@@ -85,12 +85,12 @@ const FetchFilterdata: React.FunctionComponent<{startDate,endDate}> = (props) =>
             cluster_item =>
 
                 cluster_item.namespace.toLowerCase().includes(searchTerm)
-               
+
         );
-        
+
         setSearchResults(results);
         console.log(results);
-        
+
     }, [searchTerm]);
 
     // render Table UI
