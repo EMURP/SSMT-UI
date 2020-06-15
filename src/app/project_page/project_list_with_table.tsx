@@ -1,26 +1,34 @@
-
 import React from 'react';
 import axios from 'axios';
 import { DashboardTable } from '@app/myTable/DashboardTable/DashboardTable';
 import { Link } from 'react-router-dom';
 
-
 type myProps = {
   startDate: Date;
   endDate: Date;
-  searching: boolean;
   renderCount: number;
+  changingDate: boolean;
 };
 type myState = {
   isLoaded: boolean;
-  clusterData: Array<Object>;
+  clusterData: Array<dataObject>;
   api: string;
   err: string;
 };
 
+// Previous Data Object
+// type dataObject = {
+//   namespace: string;
+//   node: string;
+//   pod: string;
+//   podUsageCpuCoreSeconds: string;
+//   periodEnd: Date;
+//   periodStart: Date;
+// };
+
 type dataObject = {
   namespace: Element;
-  activation_time : number
+  activationTime: number;
 };
 
 // To convert the date from the string format TODO:Fix
@@ -29,7 +37,7 @@ const parseISOString = (s: string) => {
   return new Date(
     Date.UTC(
       Number.parseInt(b[0]),
-      Number.parseInt(b[1])-1,
+      Number.parseInt(b[1]) - 1,
       Number.parseInt(b[2]),
       Number.parseInt(b[3]),
       Number.parseInt(b[4]),
@@ -45,59 +53,55 @@ class ProjectListTable extends React.Component<myProps, myState> {
     this.state = {
       isLoaded: false,
       clusterData: [],
-      api: "https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/project_list_with_activation_time",
-      err: "",
+      api: 'https://6e905fc6-3dba-44d9-b37b-91bedb726dcf.mock.pstmn.io/project_list_with_activation_time',
+      err: ''
     };
 
     this.callAPI(this.props);
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps){
-    this.callAPI(nextProps);
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    console.log("HEYYYY")
+    if (nextProps.changingDate === false) {
+      this.callAPI(nextProps);
+    }
   }
 
   callAPI(props) {
-    const startDate = props.startDate.toISOString().split('.')[0]+"Z";
-    const endDate = props.endDate.toISOString().split('.')[0]+"Z";
-    console.log(startDate );
+    const startDate = props.startDate.toISOString().split('.')[0] + 'Z';
+    const endDate = props.endDate.toISOString().split('.')[0] + 'Z';
 
+    let apiUrl = this.state.api;
+    apiUrl = apiUrl + '/' + startDate + '/' + endDate;
+    console.log(apiUrl);
 
-
-    let apiUrl=this.state.api;
-    if(props.searching){
-      apiUrl = apiUrl+ '/' + startDate + '/' + endDate;
-    }
-    
     axios
       .get(apiUrl)
       .then(res => {
-
         const tableData: Array<dataObject> = [];
         res.data.forEach(clusterInfo => {
           tableData.push({
             namespace: clusterInfo['namespace'],
-            activation_time: clusterInfo['activation_time']
-           });
+            activationTime: clusterInfo['activation_time']
+          });
         });
         this.setState({ ...this.state, isLoaded: true, clusterData: tableData });
       })
       .catch(err => {
-        this.setState({ ...this.state, isLoaded: false, err:err });
+        this.setState({ ...this.state, isLoaded: false, err: err });
       });
   }
 
   renderTable = () => {
     const columnTitle = {
       namespace: 'Namespace',
-
-      activation_time: 'Project Active period'
-     
+      activationTime: 'Project Active period'
     };
 
     return (
       <div>
         {this.state.clusterData.length !== 0 && (
-          <DashboardTable key={"DataTable"}
+          <DashboardTable
             startDate={this.props.startDate}
             endDate={this.props.endDate}
             columnTitle={columnTitle}
@@ -109,12 +113,13 @@ class ProjectListTable extends React.Component<myProps, myState> {
   };
 
   render() {
-    return(
+    return (
       <div>
-      {this.state.isLoaded && this.renderTable()}
-      {!this.state.isLoaded && <div>{this.state.err.toString()}</div>}
+        {this.renderTable()}
+        {/* {this.state.isLoaded && this.renderTable()} */}
+        {/* {!this.state.isLoaded && <div>{this.state.err.toString()}</div>} */}
       </div>
-      );
+    );
   }
 }
 

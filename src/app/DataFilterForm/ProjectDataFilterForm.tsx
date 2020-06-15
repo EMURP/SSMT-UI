@@ -36,7 +36,8 @@ type myState = {
 // } as React.CSSProperties;
 
 const convertDateToUTC = (date: Date) => {
-  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), 0, 0,0));
+  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), 
+  date.getUTCDate(), date.getUTCHours(), 0, 0,0));
 };
 
 class ProjectDataFilterForm extends React.Component<myProps, myState> {
@@ -53,8 +54,8 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
     endDate.setMinutes(0);
     endDate.setSeconds(0);
 
-    // console.log(startDate);
-    // console.log(endDate);
+    console.log(startDate);
+    console.log(endDate);
 
     this.state = {
       startHrs: ((new Date().getHours() - 1 +24) % 24), // javascript Modulo function is buggy
@@ -66,13 +67,6 @@ class ProjectDataFilterForm extends React.Component<myProps, myState> {
       changingDate: true
     };
 
-  }
-
-  changeToggle = () => {
-    const conditionalRender: number = this.state.conditionalRender;
-    if (this.state.startDate !== convertDateToUTC(new Date(Date.UTC(0, 0, 0, 0, 0, 0)), 0)) {
-      this.setState({ ...this.state, submitToggle: true, conditionalRender: conditionalRender + 1 })
-    }
   }
 
   changeToggle = () => {

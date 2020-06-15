@@ -5,7 +5,7 @@ import { InputGroup, InputGroupText, TextInput, FormGroup } from '@patternfly/re
 type myProps={
   changeDate: Function;
   dateType: string;
-    // currentDate: string;
+  // currentDate: Date;
 }
 
 
@@ -33,6 +33,7 @@ class SimpleInputGroups extends React.Component<myProps> {
             type="date"
             aria-label="Input Date"
             onChangeCapture={event => this.props.changeDate(event.currentTarget.value)}
+            // dateTime={this.props.currentDate.toDateString()}
           />
           <InputGroupText component="label" htmlFor="textInput9">
             <CalendarAltIcon />

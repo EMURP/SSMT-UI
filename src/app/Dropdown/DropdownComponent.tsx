@@ -13,7 +13,6 @@ import {
 type myProps = {
   setHrs: Function;
   Hrs: number;
-  //range: Array<number>;
 }
 
 type myState = {

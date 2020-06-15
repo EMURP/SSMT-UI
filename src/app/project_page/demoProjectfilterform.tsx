@@ -1,10 +1,11 @@
 import React from 'react';
 import { Grid, GridItem, Form, ActionGroup } from '@patternfly/react-core';
+import axios from 'axios';
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
 import { DropdownComponent } from '../Dropdown/DropdownComponent';
 import { Button } from '@patternfly/react-core';
 import { ProjectListTable } from '@app/project_page/project_list_with_table';
-
+import { DashboardTable } from '@app/myTable/DashboardTable/DashboardTable';
 
 type myProps = {};
 type myState = {
@@ -12,74 +13,106 @@ type myState = {
   endHrs: number;
   startDate: Date;
   endDate: Date;
-  submitToggle: boolean;
   conditionalRender: number;
   changingDate: boolean;
+  api: string;
+  clusterData: Array<dataObject> | null;
+  err: string | null;
+  isLoaded: boolean;
+};
+export type dataObject = {
+  namespace: Element;
+  activationTime: number;
 };
 
-
-
-
-const convertDateToUTC = (date: Date, hrs: number) => {
-  return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(),
-    hrs, date.getUTCMinutes(), date.getUTCSeconds());
-}
+const convertDateToUTC = (date: Date) => {
+  return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), 0, 0, 0);
+};
 
 class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
-
   constructor(myProps) {
-
     super(myProps);
 
     const startDate = new Date();
-    startDate.setHours((new Date().getHours()) - 1 )
+    startDate.setHours(new Date().getHours() - 1);
     startDate.setMinutes(0);
     startDate.setSeconds(0);
 
     const endDate = new Date();
-    endDate.setHours(new Date().getHours())
+    endDate.setHours(new Date().getHours());
     endDate.setMinutes(0);
     endDate.setSeconds(0);
 
-    // console.log(startDate);
-    // console.log(endDate);
-
     this.state = {
-      startHrs: ((new Date().getHours() - 1 +24) % 24), // javascript Modulo function is buggy
-      endHrs: (new Date().getHours() % 24),
+      startHrs: (new Date().getHours() - 1 + 24) % 24, // javascript Modulo function is buggy
+      endHrs: new Date().getHours() % 24,
       startDate: new Date(startDate),
       endDate: new Date(endDate),
-      submitToggle: false,
       conditionalRender: 0,
-      changingDate: true
+      changingDate: true,
+      api: 'https://6e905fc6-3dba-44d9-b37b-91bedb726dcf.mock.pstmn.io/project_list_with_activation_time',
+      clusterData: null,
+      err: null,
+      isLoaded: false
     };
 
+    this.callAPI();
   }
-  
-  changeToggle = () => {
-    const conditionalRender: number = this.state.conditionalRender;
-      this.setState({
-        ...this.state,
-        changingDate: false,
-        submitToggle: true,
-        conditionalRender: conditionalRender + 1
+
+  shouldComponentUpdate(nextProps,nextState){
+    console.log(nextState)
+    return JSON.stringify(this.state)!== JSON.stringify(nextState) 
+  }
+
+  callAPI() {
+    const startDate = new Date(convertDateToUTC(this.state.startDate)).toISOString().split('.')[0] + 'Z';
+    const endDate = new Date(convertDateToUTC(this.state.endDate)).toISOString().split('.')[0] + 'Z';
+
+    let apiUrl = this.state.api;
+    apiUrl = apiUrl + '/' + startDate + '/' + endDate;
+    console.log(apiUrl);
+
+    axios
+      .get(apiUrl)
+      .then(res => {
+        const tableData: Array<dataObject> = [];
+        res.data.forEach(clusterInfo => {
+          tableData.push({
+            namespace: clusterInfo['namespace'],
+            activationTime: clusterInfo['activation_time']
+          });
+        });
+        this.setState({ ...this.state, isLoaded: true, clusterData: tableData });
+      })
+      .catch(err => {
+        this.setState({ ...this.state, isLoaded: false, err: err });
       });
+  }
+
+  changeToggle = () => {
+    this.callAPI();
+    // const conditionalRender: number = this.state.conditionalRender;
+    // this.setState({
+    //   ...this.state,
+    //   changingDate: false,
+    //   conditionalRender: conditionalRender + 1
+    // });
   };
 
   setStartHrs = (hrs: number) => {
-    const date=new Date(this.state.startDate)
-    date.setHours(hrs)
+    const date = new Date(this.state.startDate);
+    date.setHours(hrs);
     this.setState({
       ...this.state,
       changingDate: true,
       startHrs: hrs % 24,
-      startDate: new Date(date),
+      startDate: new Date(date)
     });
   };
 
   setEndHrs = (hrs: number) => {
-    const date=new Date(this.state.endDate)
-    date.setHours(hrs)
+    const date = new Date(this.state.endDate);
+    date.setHours(hrs);
     this.setState({
       ...this.state,
       changingDate: true,
@@ -89,69 +122,88 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
   };
 
   setStartDate = (date: Date) => {
-    date=new Date(date)
-    date.setHours(this.state.startHrs)
-    date.setDate(date.getDate()+1)
-    // console.log(date)
+    date = new Date(date);
+    date.setHours(this.state.startHrs);
+    date.setDate(date.getDate() + 1);
     this.setState({ ...this.state, changingDate: true, startDate: new Date(date) });
   };
 
   setEndDate = (date: Date) => {
-    date=new Date(date)
-    date.setHours(this.state.endHrs)
-    date.setDate(date.getDate()+1)
-    // console.log(date)
+    date = new Date(date);
+    date.setHours(this.state.endHrs);
+    date.setDate(date.getDate() + 1);
     this.setState({ ...this.state, changingDate: true, endDate: new Date(date) });
   };
 
-  
 
+  renderTable = () => {
 
-  render() {
+    const columnTitle = {
+      namespace: 'Namespace',
+      activationTime: 'Project Active period'
+    };
+
+    console.log(this.state.clusterData);
 
     return (
+      <div>
+        {this.state.clusterData!== null && (
+          <DashboardTable
+            key={'DataTable'}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            columnTitle={columnTitle}
+            tableData={this.state.clusterData}
+          />
+        )}
+      </div>
+    );
+  };
 
+  render() {
+    return (
       <React.Fragment>
         <Form>
           <Grid>
             <GridItem span={2}>
               <SimpleInputGroups changeDate={this.setStartDate} dateType="StartDate" key="StartDate" />
+              {/* {convertDateToUTC(this.state.startDate).toISOString()} */}
             </GridItem>
             <GridItem span={2}>
               <SimpleInputGroups changeDate={this.setEndDate} dateType="EndDate" key="EndDate" />
+              {/* {convertDateToUTC(this.state.endDate).toISOString()} */}
             </GridItem>
           </Grid>
           <Grid>
             <GridItem span={2}>
-              <DropdownComponent key={"startHrs"} setHrs={this.setStartHrs} Hrs={this.state.startHrs} />
+              <DropdownComponent key={'startHrs'} setHrs={this.setStartHrs} Hrs={this.state.startHrs} />
             </GridItem>
             <GridItem span={2}>
-              <DropdownComponent key={"endHrs"} setHrs={this.setEndHrs} Hrs={this.state.endHrs} />
+              <DropdownComponent key={'endHrs'} setHrs={this.setEndHrs} Hrs={this.state.endHrs} />
             </GridItem>
           </Grid>
           <Grid>
             <ActionGroup>
               <GridItem span={1}>
-                <Button
-                  isBlock
-                  onClick={() => this.changeToggle()}
-                  disabled={this.state.startDate !== convertDateToUTC(new Date(Date.UTC(0, 0, 0, 0, 0, 0)), 0)}>
-                  Search
-                </Button>
+                <Button onClick={() => this.changeToggle()}>Search</Button>
               </GridItem>
             </ActionGroup>
           </Grid>
           <Grid>
             <GridItem span={4} rowSpan={8}>
-              <ProjectListTable renderCount={this.state.conditionalRender} searching={this.state.submitToggle} startDate={this.state.startDate} endDate={this.state.endDate} />
+              {/* <ProjectListTable
+              changingDate={this.state.changingDate}
+              renderCount={this.state.conditionalRender}
+              startDate={new Date(convertDateToUTC(this.state.startDate))}
+              endDate={new Date(convertDateToUTC(this.state.endDate))}
+            /> */}
+              {this.state.isLoaded && this.renderTable()}
+              {!this.state.isLoaded && this.state.err!== null && <div>{this.state.err.toString()}</div>}
             </GridItem>
           </Grid>
         </Form>
       </React.Fragment>
     );
-
   }
-
-
 }
 export { DemoProjectDataFilterForm };

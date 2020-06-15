@@ -17,6 +17,7 @@ type myState = {
   err: string;
 };
 
+//Previous Data Object
 type dataObject = {
   namespace: string;
   node: string;
@@ -25,6 +26,8 @@ type dataObject = {
   periodEnd: Date;
   periodStart: Date;
 };
+
+
 
 // To convert the date from the string format TODO:Fix
 const parseISOString = (s: string) => {
@@ -78,7 +81,7 @@ class Fetchdata extends React.Component<myProps, myState> {
     apiUrl = apiUrl + startDate + '/' + endDate;
     // }
 
-    //console.log(apiUrl);
+    console.log(apiUrl);
 
     axios
       .get(apiUrl)
