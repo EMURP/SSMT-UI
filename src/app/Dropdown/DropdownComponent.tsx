@@ -27,6 +27,7 @@ class DropdownComponent extends React.Component<myProps,myState>{
   }
 
   createRange(start: number ,end: number ){
+    //end=new Date().getHours();
     const nums: Array<number>=[]
     while(start <= end){
       nums.push(start);

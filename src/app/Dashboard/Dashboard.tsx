@@ -1,20 +1,10 @@
 import React from 'react';
 import { PageSection, Title, Stack, StackItem } from '@patternfly/react-core';
-import { Card, CardBody } from '@patternfly/react-core';
 
-import { ProjectDataFilterForm } from '@app/DataFilterForm/ProjectDataFilterForm';
+//import { ProjectDataFilterForm } from '@app/DataFilterForm/ProjectDataFilterForm';
 import { DemoProjectDataFilterForm } from '@app/project_page/demoProjectfilterform';
 
 // import  {ProjectInfoTableComponent}  from '../ProjectInfo/ProjectInfoTableComponent';
-
-const horizontalFlex = {
-  display: 'flex',
-  flexDirection: 'row'
-} as React.CSSProperties;
-
-const padding = {
-  marginRight: '30px'
-} as React.CSSProperties;
 
 
 type myProps = {};

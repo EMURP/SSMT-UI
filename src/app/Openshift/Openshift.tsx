@@ -11,7 +11,7 @@ import { ChartPie, ChartThemeColor } from '@patternfly/react-charts';
 
 import { Card,  CardBody } from '@patternfly/react-core';
 import {  } from '@patternfly/react-table';
-import { Fetchdata } from '@app/fetchdata/fetchdata';
+
 
 const horizontalFlex= {
   display: "flex",

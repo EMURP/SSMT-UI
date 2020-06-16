@@ -6,12 +6,13 @@ import { accessibleRouteChangeHandler } from '@app/utils/utils';
 import { Dashboard } from '@app/Dashboard/Dashboard';
 import { NotFound } from '@app/NotFound/NotFound';
 import { Openshift } from '@app/Openshift/Openshift';
-import { Openstack } from '@app/Openstack/Openstack';
+
 import { useDocumentTitle } from '@app/utils/useDocumentTitle';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
 import { ProjectListTable } from '@app/project_page/project_list_with_table';
 
 import { ProjectDetail } from '@app/project_page/project_detail';
+
 
 let routeFocusTimer: number;
 
@@ -70,14 +71,7 @@ const routes: IAppRoute[] = [
     path: '/openshift',
     title: 'OCP Metering | Openshift Page'
   },
-  {
-    component: Openstack,
-    exact: true,
-    isAsync: true,
-    label: 'Openstack',
-    path: '/openstack',
-    title: 'OCP Metering | Openstack Page'
-  },  
+  
   {
     component: Support,
     exact: true,
@@ -85,7 +79,8 @@ const routes: IAppRoute[] = [
     label: 'Support',
     path: '/support',
     title: 'OCP Metering | Support Page'
-  }
+  },
+  
 ];
 
 // a custom hook for sending focus to the primary content container
