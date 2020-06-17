@@ -2,6 +2,8 @@ import * as React from 'react';
 import { PageSection, Title } from '@patternfly/react-core';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Table, TableHeader, TableBody, TableVariant, TableText } from '@patternfly/react-table';
+import { DashboardTable } from '@app/myTable/DashboardTable/DashboardTable';
 
 let cluster_data = [] as any;
 const ProjectDetail: React.FunctionComponent<{}> = () => {
@@ -34,49 +36,40 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
                 //console.log(err.response + "--" + err.message)
             }
             else {
-               // console.log(err.message)
+                // console.log(err.message)
 
             }
         });
     }, []);
 
+    const columns = [
+        'Name',
+        'Node',
+        'Start Time',
+        'End Time',
+        'Pod Name',
+        'CPU Utilization'
+    ]
+    const rows = [
+        {
+          cells: [name, node, start, end, pod, cpusage]
+        }
+    ]
 
     return (
 
         <PageSection>
             <Title headingLevel="h1" size="lg">Projectpage</Title>
-
-            <div>
-
-                Name: {name}
-
-            </div>
-            <div>
-
-                Node: {node}
-
-            </div>
-            <div>
-
-                Start Time: {start}
-
-            </div>
-            <div>
-
-                End Time: {end}
-
-            </div>
-            <div>
-
-                Pod Name: {pod}
-
-            </div>
-            <div>
-
-                CPU Utilization: {cpusage}
-
-            </div>
-
+            <Table
+                key={'dataTable'}
+                aria-label="Compact Table"
+                variant={TableVariant.compact}
+                cells={columns}
+                rows={rows}
+            >
+                <TableHeader />
+                <TableBody />
+            </Table>
         </PageSection>
 
 
