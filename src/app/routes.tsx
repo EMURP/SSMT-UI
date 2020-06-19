@@ -9,9 +9,11 @@ import { Openshift } from '@app/Openshift/Openshift';
 
 import { useDocumentTitle } from '@app/utils/useDocumentTitle';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
-import { ProjectListTable } from '@app/project_page/project_list_with_table';
 
-import { ProjectDetail } from '@app/project_page/project_detail';
+
+import { ProjectDetail } from '@app/ProjectPage/ProjectDetail';
+
+
 
 
 let routeFocusTimer: number;
@@ -80,6 +82,7 @@ const routes: IAppRoute[] = [
     path: '/support',
     title: 'OCP Metering | Support Page'
   },
+  
   
 ];
 
