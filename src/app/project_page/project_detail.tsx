@@ -28,7 +28,6 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
                 setEnd(item.period_end)
                 setPod(item.pod)
                 setCpusage(item.pod_usage_cpu_core_seconds)
-
             })
 
         }).catch(err => {
@@ -42,22 +41,18 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
         });
     }, []);
 
-    const columns = [
-        'Name',
-        'Node',
-        'Start Time',
-        'End Time',
-        'Pod Name',
-        'CPU Utilization'
-    ]
-    const rows = [
-        {
-          cells: [name, node, start, end, pod, cpusage]
-        }
-    ]
+    const columns = ['', '']
+    const values = [['Name', name], ['Node', node], ['Start Time', start],
+        ['End Time', end], ['Pod Time', pod], ['CPU Utilization', cpusage]]
+
+    const rows = 
+        values.map( avalue => (
+            {cells: avalue}
+        ))
+
 
     return (
-
+        
         <PageSection>
             <Title headingLevel="h1" size="lg">Projectpage</Title>
             <Table
