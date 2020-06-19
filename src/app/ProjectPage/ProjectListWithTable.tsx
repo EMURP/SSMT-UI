@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { DashboardTable } from '@app/myTable/DashboardTable/DashboardTable';
 import { Link } from 'react-router-dom';
+import SearchToolBar from '@app/SearchToolbar/SearchToolBar';
 
 type myProps = {
   startDate: Date;
@@ -27,7 +28,7 @@ type myState = {
 // };
 
 type dataObject = {
-  namespace: Element;
+  namespace: string;
   activationTime: number;
 };
 
@@ -46,7 +47,7 @@ const parseISOString = (s: string) => {
   );
 };
 
-class ProjectListTable extends React.Component<myProps, myState> {
+class ProjectListWithTable extends React.Component<myProps, myState> {
   constructor(myProps) {
     super(myProps);
 
@@ -101,12 +102,13 @@ class ProjectListTable extends React.Component<myProps, myState> {
     return (
       <div>
         {this.state.clusterData.length !== 0 && (
-          <DashboardTable
-            startDate={this.props.startDate}
-            endDate={this.props.endDate}
-            columnTitle={columnTitle}
-            tableData={this.state.clusterData}
-          />
+          // <DashboardTable
+          //   startDate={this.props.startDate}
+          //   endDate={this.props.endDate}
+          //   columnTitle={columnTitle}
+          //   tableData={this.state.clusterData}
+          // />
+          <SearchToolBar data={this.state.clusterData} columnTitle={columnTitle}/>
         )}
       </div>
     );
@@ -123,4 +125,4 @@ class ProjectListTable extends React.Component<myProps, myState> {
   }
 }
 
-export { ProjectListTable };
+export { ProjectListWithTable };
