@@ -55,8 +55,17 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
       err: null,
       isLoaded: false
     };
-
     this.callAPI(false);
+  }
+
+  componentDidMount() {
+    this.setState({
+      ...this.state,
+      changingDate: true,
+      startDate: new Date(),
+      endDate: new Date()
+    });
+    this.callAPI(true);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -136,6 +145,12 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
     date.setDate(date.getDate() + 1);
     this.setState({ ...this.state, changingDate: true, endDate: new Date(date) });
   };
+
+  setDefaultDate = () => {
+    // console.log("On load ayy")
+    // this.setState({ ...this.state, changingDate: true, startDate: new Date(), endDate: new Date()});
+    // this.changeToggle;
+  }
 
   renderTable = () => {
     const columnTitle = {
