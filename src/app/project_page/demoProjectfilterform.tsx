@@ -146,12 +146,6 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
     this.setState({ ...this.state, changingDate: true, endDate: new Date(date) });
   };
 
-  setDefaultDate = () => {
-    // console.log("On load ayy")
-    // this.setState({ ...this.state, changingDate: true, startDate: new Date(), endDate: new Date()});
-    // this.changeToggle;
-  }
-
   renderTable = () => {
     const columnTitle = {
       namespace: 'Namespace',
