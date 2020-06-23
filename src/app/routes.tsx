@@ -11,7 +11,7 @@ import { useDocumentTitle } from '@app/utils/useDocumentTitle';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
 
 
-import { ProjectDetail } from '@app/ProjectPage/ProjectDetail';
+import { ProjectDetail } from '@app/project_page/project_detail';
 
 
 

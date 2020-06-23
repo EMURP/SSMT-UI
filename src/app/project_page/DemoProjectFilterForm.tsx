@@ -4,10 +4,7 @@ import axios from 'axios';
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
 import { DropdownComponent } from '../Dropdown/DropdownComponent';
 import { Button } from '@patternfly/react-core';
-//import { ProjectListTable } from '@app/project_page/project_list_with_table';
 
-//import {SearchProjectListWithTable} from '@app/project_page/SearchProjectListWithTable';
-// import { SearchDashboardTable } from '@app/myTable/SearchDashboardTable';
 import SearchToolBar from '@app/SearchToolbar/SearchToolBar';
 
 type myProps = {};
