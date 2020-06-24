@@ -14,10 +14,10 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
     const [pod, setPod] = React.useState("")
     const [cpusage, setCpusage] = React.useState("")
 
-    let { projectId } = useParams();
+    const { projectId } = useParams();
     //console.log(projectId)
     React.useEffect(() => {
-        axios.get("https://6e905fc6-3dba-44d9-b37b-91bedb726dcf.mock.pstmn.io/projectlist/" + projectId).then(res => {
+        axios.get("https://7303ef19-853c-4092-a338-05502ff1eecd.mock.pstmn.io/projectlist/ " + projectId).then(res => {
             cluster_data = res.data;
 
             cluster_data.map((item: { namespace: any; }) => {

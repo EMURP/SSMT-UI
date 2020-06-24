@@ -41,16 +41,11 @@ class Dashboard extends React.Component<myProps, myState> {
 
         <Stack>
                    
-          {/* <StackItem> <ProjectDataFilterForm /></StackItem> */}
-          <StackItem> <DemoProjectFilterForm /></StackItem>
+           <StackItem> <DemoProjectFilterForm /></StackItem>
         </Stack>
 
-        {/* <Stack>
-          <StackItem> <SimpleForm/> </StackItem>
-        </Stack> */}
-        
-
-       
+            
+      
       </PageSection>
     );
   }
