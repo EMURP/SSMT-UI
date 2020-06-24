@@ -72,7 +72,7 @@ class LoginPage extends React.Component<myProps, myState> {
 
             <ActionGroup>
               <Button variant="primary" onClick={() => this.handleSubmit()}>
-                Submit form
+                Login
               </Button>
               {/* <Button variant="link">Cancel</Button> */}
             </ActionGroup>
