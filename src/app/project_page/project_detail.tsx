@@ -42,11 +42,12 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
     }, []);
 
     const columns = ['', '']
-    const values = [['Name', name], ['Node', node], ['Start Time', start],['End Time', end], ['Pod Time', pod], ['CPU Utilization', cpusage]]
+    const values = [['Name', name], ['Node', node], ['Start Time', start],
+    ['End Time', end], ['Pod Time', pod], ['CPU Utilization', cpusage]]
 
-    const rows = 
-        values.map( avalue => (
-            {cells: avalue}
+    const rows =
+        values.map(avalue => (
+            { cells: avalue }
         ))
 
 
