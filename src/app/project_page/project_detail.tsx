@@ -17,7 +17,7 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
     let { projectId } = useParams();
     //console.log(projectId)
     React.useEffect(() => {
-        axios.get("https://7303ef19-853c-4092-a338-05502ff1eecd.mock.pstmn.io/projectlist/" + projectId).then(res => {
+        axios.get("https://6e905fc6-3dba-44d9-b37b-91bedb726dcf.mock.pstmn.io/projectlist/" + projectId).then(res => {
             cluster_data = res.data;
 
             cluster_data.map((item: { namespace: any; }) => {
@@ -43,16 +43,16 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
 
     const columns = ['', '']
     const values = [['Name', name], ['Node', node], ['Start Time', start],
-        ['End Time', end], ['Pod Time', pod], ['CPU Utilization', cpusage]]
+    ['End Time', end], ['Pod Time', pod], ['CPU Utilization', cpusage]]
 
-    const rows = 
-        values.map( avalue => (
-            {cells: avalue}
+    const rows =
+        values.map(avalue => (
+            { cells: avalue }
         ))
 
 
     return (
-        
+
         <PageSection>
             <Title headingLevel="h1" size="lg">Projectpage</Title>
             <Table

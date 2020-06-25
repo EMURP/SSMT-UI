@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageSection, Title, Stack, StackItem } from '@patternfly/react-core';
-import { DemoProjectFilterForm } from '@app/project_page/DemoProjectFilterForm';
+import { DemoProjectFilterForm } from '@app/project_page/demoProjectfilterform';
 // import { SimpleForm } from '@app/LoginPage/LoginPage';
 
 //import { ProjectDataFilterForm } from '@app/DataFilterForm/ProjectDataFilterForm';
