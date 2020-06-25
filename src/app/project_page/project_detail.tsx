@@ -14,7 +14,7 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
     const [pod, setPod] = React.useState("")
     const [cpusage, setCpusage] = React.useState("")
 
-    const { projectId } = useParams();
+    let { projectId } = useParams();
     //console.log(projectId)
     React.useEffect(() => {
         axios.get("https://6e905fc6-3dba-44d9-b37b-91bedb726dcf.mock.pstmn.io/projectlist/" + projectId).then(res => {
@@ -52,7 +52,7 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
 
 
     return (
-        
+
         <PageSection>
             <Title headingLevel="h1" size="lg">Projectpage</Title>
             <Table
