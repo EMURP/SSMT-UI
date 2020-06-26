@@ -3,25 +3,17 @@ import {
   Form,
   FormGroup,
   TextInput,
-  TextArea,
-  FormSelect,
-  Checkbox,
-  Popover,
   ActionGroup,
   Button,
-  Radio
 } from '@patternfly/react-core';
+import { Role } from '..';
 type myState = {
   userName: string;
   password: string;
   submit: boolean;
+  error?: string;
 };
 // export const enum Role{
-const enum Role {
-  ADMIN,
-  USER,
-  NONE
-}
 type myProps = {
   setRole: Function;
 };
@@ -37,11 +29,11 @@ class LoginPage extends React.Component<myProps, myState> {
   }
 
   handleUserNameChange(userNameInput: string) {
-    this.setState({ userName: userNameInput }, () => console.log({ ...this.state }));
+    this.setState({ userName: userNameInput })
   }
 
   handlePasswordChange(passwordInput: string) {
-    this.setState({ password: passwordInput }, () => console.log(this.state));
+    this.setState({ password: passwordInput })
   }
 
   render() {
@@ -77,6 +69,7 @@ class LoginPage extends React.Component<myProps, myState> {
               {/* <Button variant="link">Cancel</Button> */}
             </ActionGroup>
           </Form>
+          {this.state.error}
       </div>
     );
   }
@@ -88,9 +81,10 @@ class LoginPage extends React.Component<myProps, myState> {
     if (userName === 'admin' && password === 'admin') {
       role = Role.ADMIN;
     } else if (userName === 'developer' && password === 'developer') {
-      role = Role.USER;
+      role = Role.DEVELOPER;
     } else {
       role = Role.NONE;
+      this.setState({...this.state, error:"Invalid Username/Password"})
     }
     this.props.setRole(role);
   }

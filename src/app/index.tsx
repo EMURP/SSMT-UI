@@ -12,9 +12,11 @@ type myState = {
 
 export const enum Role {
   ADMIN,
-  USER,
+  DEVELOPER,
   NONE
 }
+
+export const RoleMap = ["Admin","Developer"]
 type myProps = {};
 
 class App extends React.Component<myProps, myState> {
@@ -26,8 +28,13 @@ class App extends React.Component<myProps, myState> {
   }
 
   handleRoleChange = (role: Role) => {
-    this.setState({ role: role }, () => console.log({ ...this.state }));
+    this.setState({ role: role });
   }
+
+  logout = ()=> {
+    this.setState({ role: Role.NONE });
+  }
+
 
   render() {
     return (
@@ -35,7 +42,7 @@ class App extends React.Component<myProps, myState> {
         {this.state.role=== Role.NONE && <LoginPage setRole={this.handleRoleChange}/>}
         {this.state.role !== Role.NONE && (
           <Router>
-            <AppLayout>
+            <AppLayout role={this.state.role} logout={this.logout}>
               <AppRoutes />
             </AppLayout>
           </Router>
