@@ -15,15 +15,26 @@ class SimpleInputGroups extends React.Component<myProps> {
         
   }
 
-  
+  formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
 
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+  
   render() {
     return (
       <React.Fragment>
         <FormGroup label={this.props.dateType}
           isRequired
           fieldId={this.props.dateType}
-          // helperText={this.props.dateType}
           >
         <InputGroup>
           
@@ -33,7 +44,7 @@ class SimpleInputGroups extends React.Component<myProps> {
             type="date"
             aria-label="Input Date"
             onChangeCapture={event => this.props.changeDate(event.currentTarget.value)}
-            // dateTime={this.props.currentDate.toDateString()}
+            value={this.formatDate(new Date())}
           />
           <InputGroupText component="label" htmlFor="textInput9">
             <CalendarAltIcon />

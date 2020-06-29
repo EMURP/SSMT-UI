@@ -58,16 +58,6 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
     this.callAPI(false);
   }
 
-  componentDidMount() {
-    this.setState({
-      ...this.state,
-      changingDate: true,
-      startDate: new Date(),
-      endDate: new Date()
-    });
-    this.callAPI(true);
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
     //console.log(nextState);
     return JSON.stringify(this.state) !== JSON.stringify(nextState);
