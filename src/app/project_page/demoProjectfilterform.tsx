@@ -50,7 +50,7 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
       endDate: new Date(endDate),
       conditionalRender: 0,
       changingDate: true,
-      api: 'https://6e905fc6-3dba-44d9-b37b-91bedb726dcf.mock.pstmn.io/project_list_with_activation_time',
+      api: 'https://0.0.0.0/project_list_with_activation_time',
       clusterData: null,
       err: null,
       isLoaded: false

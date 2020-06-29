@@ -1,8 +1,10 @@
 import React from 'react';
 import { Grid, GridItem, Form, ActionGroup } from '@patternfly/react-core';
+import axios from 'axios';
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
 import { Button } from '@patternfly/react-core';
 import ReportsList from './ReportsList';
+import { DashboardTable } from '@app/myTable/DashboardTable/DashboardTable';
 
 type myProps = {};
 type myState = {
@@ -11,14 +13,18 @@ type myState = {
     conditionalRender: number;
     changingDate: boolean;
     api: string;
-    reportsData: Array<object> | null;
+    clusterData: Array<dataObject> | null;
     err: string | null;
     isLoaded: boolean;
 };
-// export type dataObject = {
-//     reportName: Element;
-//     reportDate: Date;
-// };
+export type dataObject = {
+    namespace: Element;
+    activationTime: number;
+};
+
+const convertDateToUTC = (date: Date) => {
+    return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), 0, 0, 0);
+};
 
 class ReportsDataFilterForm extends React.Component<myProps, myState> {
     constructor(myProps) {
@@ -27,37 +33,41 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         const startDate = new Date();
         const endDate = new Date();
         const sampleReportsData = [
-            {apiVersion: 'metering.openshift.io/v1',
-             kind: 'Report',
-             metadata: {name: 'pod-cpu-request-hourly'},
-             spec: {query: 'pod-cpu-request',
+            {
+                apiVersion: 'metering.openshift.io/v1',
+                kind: 'Report',
+                metadata: { name: 'pod-cpu-request-hourly' },
+                spec: {
+                    query: 'pod-cpu-request',
                     reportingStart: '2019-07-01T00:00:00Z',
-                    schedule: 
+                    schedule:
+                    {
+                        period: 'hourly',
+                        hourly:
                         {
-                            period: 'hourly',
-                            hourly: 
-                                {
-                                    minute: 0,
-                                    second: 0
-                                }
+                            minute: 0,
+                            second: 0
                         }
-             }
+                    }
+                }
             },
-            {apiVersion: 'metering.openshift.io/v2',
-             kind: 'Report',
-             metadata: {name: 'pod-cpu-request-hourly'},
-             spec: {query: 'pod-cpu-request',
+            {
+                apiVersion: 'metering.openshift.io/v2',
+                kind: 'Report',
+                metadata: { name: 'pod-cpu-request-hourly' },
+                spec: {
+                    query: 'pod-cpu-request',
                     reportingStart: '2020-07-01T00:00:00Z',
-                    schedule: 
+                    schedule:
+                    {
+                        period: 'hourly',
+                        hourly:
                         {
-                            period: 'hourly',
-                            hourly: 
-                                {
-                                    minute: 0,
-                                    second: 0
-                                }
+                            minute: 0,
+                            second: 0
                         }
-             }
+                    }
+                }
             }
         ];
 
@@ -66,8 +76,8 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
             endDate: new Date(),
             conditionalRender: 0,
             changingDate: true,
-            api: 'https://',
-            reportsData: sampleReportsData,//null,
+            api: 'https://0.0.0.0/project_list_with_activation_time',
+            clusterData: null,
             err: null,
             isLoaded: false
         };
@@ -75,12 +85,41 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         this.callAPI(false);
     }
 
-    callAPI(onSubmit) {
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return JSON.stringify(this.state) !== JSON.stringify(nextState);
+    }
+
+
+    callAPI(onSubmit) {
+        const startDate = new Date(convertDateToUTC(this.state.startDate)).toISOString().split('.')[0] + 'Z';
+        const endDate = new Date(convertDateToUTC(this.state.endDate)).toISOString().split('.')[0] + 'Z';
+
+        let apiUrl = this.state.api;
+        if (onSubmit) {
+            apiUrl = apiUrl + '/' + startDate + '/' + endDate;
+        }
+        //console.log(apiUrl);
+
+        axios
+            .get(apiUrl)
+            .then(res => {
+                const tableData: Array<dataObject> = [];
+                res.data.forEach(clusterInfo => {
+                    tableData.push({
+                        namespace: clusterInfo['namespace'],
+                        activationTime: clusterInfo['activation_time']
+                    });
+                });
+                this.setState({ ...this.state, isLoaded: true, clusterData: tableData });
+            })
+            .catch(err => {
+                this.setState({ ...this.state, isLoaded: false, err: err });
+            });
     }
 
     changeToggle() {
-
+        this.callAPI(true);
     }
 
 
@@ -98,31 +137,29 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         this.setState({ ...this.state, changingDate: true, endDate: new Date(date) });
     };
 
-    renderReportsList() {
+    renderTable = () => {
         const columnTitle = {
-            reportName: 'Report Name',
-            reportDate: 'Date'
+            namespace: 'Report Name',
+            activationTime: 'Report Date'
         };
-        //console.log(this.state.reportsData);
+
+        console.log(JSON.stringify(this.state.clusterData));
+
         return (
             <div>
-                {this.state.reportsData !== null && (
+                {this.state.clusterData !== null && (
                     <ReportsList
+                        key={'DataTable'}
+                        startDate={this.state.startDate}
+                        endDate={this.state.endDate}
                         columnTitle={columnTitle}
-                        reportsData={this.state.reportsData}
+                        tableData={this.state.clusterData}
                     />
                 )}
             </div>
         );
-    }
+    };
 
-    /*
-    Reports Filter Form
-    -Filter by date range 
-    --Start Date 
-    --End Date
-    -list daily reports 
-    */
     render() {
         return (
             <React.Fragment>
@@ -145,7 +182,7 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                     </Grid>
                     <Grid>
                         <GridItem span={4} rowSpan={8}>
-                            {this.state.isLoaded && this.renderReportsList()}
+                            {this.state.isLoaded && this.renderTable()}
                             {!this.state.isLoaded && this.state.err !== null && <div>{this.state.err.toString()}</div>}
                         </GridItem>
                     </Grid>
