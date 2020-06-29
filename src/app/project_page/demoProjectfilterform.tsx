@@ -71,7 +71,6 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
     if (onSubmit) {
       apiUrl = apiUrl + '/' + startDate + '/' + endDate;
     }
-    //console.log(apiUrl);
 
     axios
       .get(apiUrl)
@@ -165,11 +164,11 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
         <Form>
           <Grid>
             <GridItem span={2}>
-              <SimpleInputGroups changeDate={this.setStartDate} dateType="StartDate" key="StartDate" />
+              <SimpleInputGroups currentDate={new Date()} changeDate={this.setStartDate} dateType="StartDate" key="StartDate" />
               {/* {convertDateToUTC(this.state.startDate).toISOString()} */}
             </GridItem>
             <GridItem span={2}>
-              <SimpleInputGroups changeDate={this.setEndDate} dateType="EndDate" key="EndDate" />
+              <SimpleInputGroups currentDate={new Date()} changeDate={this.setEndDate} dateType="EndDate" key="EndDate" />
               {/* {convertDateToUTC(this.state.endDate).toISOString()} */}
             </GridItem>
           </Grid>

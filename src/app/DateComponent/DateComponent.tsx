@@ -5,14 +5,19 @@ import { InputGroup, InputGroupText, TextInput, FormGroup } from '@patternfly/re
 type myProps={
   changeDate: Function;
   dateType: string;
-  // currentDate: Date;
 }
 
+type myState = {
+  currentDate: Date;
+}
 
-class SimpleInputGroups extends React.Component<myProps> {
+class SimpleInputGroups extends React.Component<myProps, myState> {
   constructor(myProps) {
     super(myProps);
         
+    this.state = {
+      currentDate: new Date()
+    };
   }
 
   formatDate(date) {
@@ -27,6 +32,10 @@ class SimpleInputGroups extends React.Component<myProps> {
         day = '0' + day;
 
     return [year, month, day].join('-');
+}
+
+updateDateValue(newDate) {
+  this.setState({currentDate : newDate});
 }
   
   render() {
@@ -43,9 +52,10 @@ class SimpleInputGroups extends React.Component<myProps> {
             id={this.props.dateType}
             type="date"
             aria-label="Input Date"
-            onChangeCapture={event => this.props.changeDate(event.currentTarget.value)}
-            value={this.formatDate(new Date())}
+            onChangeCapture={event => {this.props.changeDate(event.currentTarget.value); this.updateDateValue(event.currentTarget.value)}}
+            value={this.formatDate(this.state.currentDate)}
           />
+          
           <InputGroupText component="label" htmlFor="textInput9">
             <CalendarAltIcon />
           </InputGroupText>
