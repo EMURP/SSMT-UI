@@ -1,21 +1,11 @@
-import ReactDOM from 'react-dom';
-import "@patternfly/react-core/dist/styles/base.css";
-
 import React from 'react';
+
+import { Checkbox } from '@patternfly/react-core';
 import {
   Table,
   TableHeader,
-  TableBody,
-  sortable,
-  SortByDirection,
-  headerCol,
-  TableVariant,
-  expandable,
-  cellWidth
+  TableBody
 } from '@patternfly/react-table';
-import {
-    Checkbox
-} from '@patternfly/react-core';
 
 type myProps={
   columnTitle: object;
@@ -114,9 +104,5 @@ class SelectableTable extends React.Component<myProps,myState>{
     );
   }
 }
-
-
-// const rootElement = document.getElementById("root");
-// ReactDOM.render(<SelectableTable />, rootElement);
 
 export { SelectableTable };

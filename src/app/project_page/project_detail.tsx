@@ -2,11 +2,10 @@ import * as React from 'react';
 import { PageSection, Title } from '@patternfly/react-core';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Table, TableHeader, TableBody, TableVariant, TableText } from '@patternfly/react-table';
+import { Table, TableHeader, TableBody, TableVariant } from '@patternfly/react-table';
 import { DashboardTable } from '@app/myTable/DashboardTable/DashboardTable';
 
-let cluster_data = [] as any;
-const ProjectDetail: React.FunctionComponent<{}> = () => {
+const ProjectDetail: React.FunctionComponent = () => {
     const [name, setName] = React.useState("")
     const [node, setNode] = React.useState("")
     const [start, setStart] = React.useState("")
@@ -14,14 +13,13 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
     const [pod, setPod] = React.useState("")
     const [cpusage, setCpusage] = React.useState("")
 
-    let { projectId } = useParams();
-    //console.log(projectId)
+    const { projectId } = useParams();
+    
     React.useEffect(() => {
         axios.get("https://7303ef19-853c-4092-a338-05502ff1eecd.mock.pstmn.io/projectlist/" + projectId).then(res => {
-            cluster_data = res.data;
+            const clusterData: any[] = res.data;
 
-            cluster_data.map((item: { namespace: any; }) => {
-                console.log(typeof (item.namespace))
+            clusterData.forEach((item: any) => {
                 setName(item.namespace)
                 setNode(item.node)
                 setStart(item.period_start)
@@ -36,7 +34,6 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
             }
             else {
                 // console.log(err.message)
-
             }
         });
     }, []);
@@ -45,14 +42,12 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
     const values = [['Name', name], ['Node', node], ['Start Time', start],
     ['End Time', end], ['Pod Time', pod], ['CPU Utilization', cpusage]]
 
-    const rows =
-        values.map(avalue => (
-            { cells: avalue }
-        ))
+    const rows = values.map(avalue => (
+        { cells: avalue }
+    ))
 
 
     return (
-
         <PageSection>
             <Title headingLevel="h1" size="lg">Projectpage</Title>
             <Table
@@ -66,9 +61,6 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
                 <TableBody />
             </Table>
         </PageSection>
-
-
-
     )
 }
 
