@@ -32,7 +32,7 @@ class SimpleInputGroups extends React.Component<myProps> {
             id={this.props.dateType}
             type="date"
             aria-label="Input Date"
-            onChangeCapture={event => this.props.changeDate(event.currentTarget.value)}
+            onChange={value => this.props.changeDate(value)}
             // dateTime={this.props.currentDate.toDateString()}
           />
           <InputGroupText component="label" htmlFor="textInput9">

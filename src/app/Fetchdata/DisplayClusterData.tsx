@@ -55,6 +55,9 @@ class Fetchdata extends React.Component<myProps, myState> {
       err: ''
     };
 
+  }
+  
+  componentDidMount() {
     this.callAPI(this.props);
   }
 

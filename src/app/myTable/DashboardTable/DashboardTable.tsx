@@ -1,6 +1,6 @@
 import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
-import { Table, TableHeader, TableBody, TableVariant, TableText } from '@patternfly/react-table';
+import { Table, TableHeader, TableBody, TableVariant, BodyCell } from '@patternfly/react-table';
 import { Link } from 'react-router-dom';
 import { Card } from '@patternfly/react-core';
 
@@ -31,11 +31,11 @@ class DashboardTable extends React.Component<myProps, myState> {
     myProps.tableData.forEach(dataRow => {
       rowData.push({
         cells: [
-          <TableText key={`/projectlist/${dataRow['namespace']}`}>
+          <BodyCell key={`/projectlist/${dataRow['namespace']}`}>
             <Link to={`/projectlist/${dataRow['namespace']}`} key={`/projectlist/${dataRow['namespace']}`}>
               {dataRow['namespace']}
             </Link>
-          </TableText>,
+          </BodyCell>,
           // dataRow['namespace'],
           dataRow['activationTime']
           // dataRow['node'],
@@ -74,11 +74,11 @@ class DashboardTable extends React.Component<myProps, myState> {
       nextProps.tableData.forEach(dataRow => {
         rowData.push({
           cells: [
-            <TableText key={`/projectlist/${dataRow['namespace']}`}>
+            <BodyCell key={`/projectlist/${dataRow['namespace']}`}>
               <Link to={`/projectlist/${dataRow['namespace']}`} key={`/projectlist/${dataRow['namespace']}`}>
               {dataRow['namespace']} 
               </Link>
-            </TableText>,
+            </BodyCell>,
             // dataRow['namespace'],
             dataRow['activationTime']
             // dataRow['node'],
