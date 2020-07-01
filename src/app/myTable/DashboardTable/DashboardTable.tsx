@@ -2,13 +2,13 @@ import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
 import { Table, TableHeader, TableBody, TableVariant, TableText } from '@patternfly/react-table';
 import { Link } from 'react-router-dom';
-import { Card } from '@patternfly/react-core';
+import { dataObject } from '@app/project_page/demoProjectfilterform';
+import {DemoProjectFilterForm} from '@app/project_page/demoProjectfilterform';
+
 
 type myProps = {
   columnTitle: object;
-  tableData: Array<object>;
-  startDate: Date;
-  endDate: Date;
+  tableData: Array<dataObject>;
 };
 
 type myState = {
@@ -63,9 +63,7 @@ class DashboardTable extends React.Component<myProps, myState> {
 
 
   shouldComponentUpdate(nextProps: myProps,nextState: myState){
-    console.log(nextProps.tableData);
-    console.log(JSON.stringify(nextProps)!== JSON.stringify(this.props))
-    return JSON.stringify(nextProps)!== JSON.stringify(this.props)
+    return JSON.stringify(nextProps.tableData)!== JSON.stringify(this.props.tableData)
   }
 
   UNSAFE_componentWillReceiveProps(nextProps: myProps) {
@@ -76,7 +74,7 @@ class DashboardTable extends React.Component<myProps, myState> {
           cells: [
             <TableText key={`/projectlist/${dataRow['namespace']}`}>
               <Link to={`/projectlist/${dataRow['namespace']}`} key={`/projectlist/${dataRow['namespace']}`}>
-              {dataRow['namespace']} 
+                {dataRow['namespace']}
               </Link>
             </TableText>,
             // dataRow['namespace'],
