@@ -4,8 +4,8 @@ import axios from 'axios';
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
 import { DropdownComponent } from '../Dropdown/DropdownComponent';
 import { Button } from '@patternfly/react-core';
-import { ProjectListTable } from '@app/project_page/project_list_with_table';
-import { DashboardTable } from '@app/myTable/DashboardTable/DashboardTable';
+
+import SearchToolBar from '@app/SearchToolbar/SearchToolBar';
 
 type myProps = {};
 type myState = {
@@ -21,7 +21,7 @@ type myState = {
   isLoaded: boolean;
 };
 export type dataObject = {
-  namespace: Element;
+  namespace: string;
   activationTime: number;
 };
 
@@ -29,7 +29,7 @@ const convertDateToUTC = (date: Date) => {
   return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), 0, 0, 0);
 };
 
-class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
+class DemoProjectFilterForm extends React.Component<myProps, myState> {
   constructor(myProps) {
     super(myProps);
 
@@ -50,7 +50,7 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
       endDate: new Date(endDate),
       conditionalRender: 0,
       changingDate: true,
-      api: 'https://6e905fc6-3dba-44d9-b37b-91bedb726dcf.mock.pstmn.io/project_list_with_activation_time',
+      api: 'https://7303ef19-853c-4092-a338-05502ff1eecd.mock.pstmn.io/project_list_with_activation_time ',
       clusterData: null,
       err: null,
       isLoaded: false
@@ -71,7 +71,7 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
     if (onSubmit) {
       apiUrl = apiUrl + '/' + startDate + '/' + endDate;
     }
-
+    
     axios
       .get(apiUrl)
       .then(res => {
@@ -141,18 +141,10 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
       activationTime: 'Project Active period'
     };
 
-    //console.log(this.state.clusterData);
-
     return (
       <div>
         {this.state.clusterData !== null && (
-          <DashboardTable
-            key={'DataTable'}
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-            columnTitle={columnTitle}
-            tableData={this.state.clusterData}
-          />
+          <SearchToolBar  data={this.state.clusterData} columnTitle={columnTitle}/>
         )}
       </div>
     );
@@ -196,7 +188,7 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
               endDate={new Date(convertDateToUTC(this.state.endDate))}
             /> */}
               {this.state.isLoaded && this.renderTable()}
-              {!this.state.isLoaded && this.state.err !== null && <div>{this.state.err.toString()}</div>}
+              {!this.state.isLoaded && this.state.err !== null && <div>{JSON.stringify(this.state.err["response"]["data"]["error"]["message"])}</div>}
             </GridItem>
           </Grid>
         </Form>
@@ -204,4 +196,4 @@ class DemoProjectDataFilterForm extends React.Component<myProps, myState> {
     );
   }
 }
-export { DemoProjectDataFilterForm };
+export { DemoProjectFilterForm };
