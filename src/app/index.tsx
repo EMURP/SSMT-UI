@@ -5,6 +5,7 @@ import { AppLayout } from '@app/AppLayout/AppLayout';
 import { AppRoutes } from '@app/routes';
 import '@app/app.css';
 
+
 const App: React.FunctionComponent = () => (
   <Router>
     <AppLayout>
@@ -13,4 +14,6 @@ const App: React.FunctionComponent = () => (
   </Router>
 );
 
-export { App };
+
+export {App};
+
