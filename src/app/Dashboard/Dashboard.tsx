@@ -2,6 +2,7 @@ import React from 'react';
 import { PageSection, Title, Stack, StackItem } from '@patternfly/react-core';
 import { DemoProjectFilterForm } from '@app/project_page/demoProjectfilterform';
 
+
 type myProps = {};
 type myState = {
     startHrs: number;
@@ -34,9 +35,11 @@ class Dashboard extends React.Component<myProps, myState> {
 
         <Stack>
                    
-          <StackItem> <DemoProjectFilterForm /></StackItem>
+           <StackItem> <DemoProjectFilterForm /></StackItem>
         </Stack>
-   
+
+            
+      
       </PageSection>
     );
   }
