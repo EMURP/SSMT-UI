@@ -50,12 +50,11 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
       endDate: new Date(endDate),
       conditionalRender: 0,
       changingDate: true,
-      api: 'https://6e905fc6-3dba-44d9-b37b-91bedb726dcf.mock.pstmn.io/project_list_with_activation_time',
+      api: 'https://7303ef19-853c-4092-a338-05502ff1eecd.mock.pstmn.io/project_list_with_activation_time ',
       clusterData: null,
       err: null,
       isLoaded: false
     };
-
     this.callAPI(false);
   }
 
@@ -72,8 +71,7 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
     if (onSubmit) {
       apiUrl = apiUrl + '/' + startDate + '/' + endDate;
     }
-    //console.log(apiUrl);
-
+    
     axios
       .get(apiUrl)
       .then(res => {
@@ -143,17 +141,9 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
       activationTime: 'Project Active period'
     };
 
-    //console.log(this.state.clusterData);
-
     return (
       <div>
         {this.state.clusterData !== null && (
-          // <SearchDashboardTable
-          //   key={'DataTable'}
-          //   startDate={this.state.startDate}
-          //   endDate={this.state.endDate}
-          //   columnTitle={columnTitle}
-          //   tableData={this.state.clusterData}/>
           <SearchToolBar  data={this.state.clusterData} columnTitle={columnTitle}/>
         )}
       </div>
@@ -166,11 +156,11 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
         <Form>
           <Grid>
             <GridItem span={2}>
-              <SimpleInputGroups changeDate={this.setStartDate} dateType="StartDate" key="StartDate" />
+              <SimpleInputGroups currentDate={new Date()} changeDate={this.setStartDate} dateType="StartDate" key="StartDate" />
               {/* {convertDateToUTC(this.state.startDate).toISOString()} */}
             </GridItem>
             <GridItem span={2}>
-              <SimpleInputGroups changeDate={this.setEndDate} dateType="EndDate" key="EndDate" />
+              <SimpleInputGroups currentDate={new Date()} changeDate={this.setEndDate} dateType="EndDate" key="EndDate" />
               {/* {convertDateToUTC(this.state.endDate).toISOString()} */}
             </GridItem>
           </Grid>
