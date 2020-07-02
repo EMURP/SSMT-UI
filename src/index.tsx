@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { App } from '@app/index';
-import { LoginPage } from '@app/LoginPage/LoginPage';
 
 if (process.env.NODE_ENV !== "production") {
   const config = {
@@ -18,4 +17,4 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 ReactDOM.render(<App />, document.getElementById("root") as HTMLElement);
-// ReactDOM.render(<LoginPage />, document.getElementById("root") as HTMLElement);
+
