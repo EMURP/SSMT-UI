@@ -2,6 +2,8 @@ import * as React from 'react';
 import { PageSection, Title } from '@patternfly/react-core';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Table, TableHeader, TableBody, TableVariant, TableText } from '@patternfly/react-table';
+import { DashboardTable } from '@app/myTable/DashboardTable/DashboardTable';
 
 let cluster_data = [] as any;
 const ProjectDetail: React.FunctionComponent<{}> = () => {
@@ -26,7 +28,6 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
                 setEnd(item.period_end)
                 setPod(item.pod)
                 setCpusage(item.pod_usage_cpu_core_seconds)
-
             })
 
         }).catch(err => {
@@ -34,49 +35,36 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
                 //console.log(err.response + "--" + err.message)
             }
             else {
-               // console.log(err.message)
+                // console.log(err.message)
 
             }
         });
     }, []);
+
+    const columns = ['', '']
+    const values = [['Name', name], ['Node', node], ['Start Time', start],
+    ['End Time', end], ['Pod Time', pod], ['CPU Utilization', cpusage]]
+
+    const rows =
+        values.map(avalue => (
+            { cells: avalue }
+        ))
 
 
     return (
 
         <PageSection>
             <Title headingLevel="h1" size="lg">Projectpage</Title>
-
-            <div>
-
-                Name: {name}
-
-            </div>
-            <div>
-
-                Node: {node}
-
-            </div>
-            <div>
-
-                Start Time: {start}
-
-            </div>
-            <div>
-
-                End Time: {end}
-
-            </div>
-            <div>
-
-                Pod Name: {pod}
-
-            </div>
-            <div>
-
-                CPU Utilization: {cpusage}
-
-            </div>
-
+            <Table
+                key={'dataTable'}
+                aria-label="Compact Table"
+                variant={TableVariant.compact}
+                cells={columns}
+                rows={rows}
+            >
+                <TableHeader />
+                <TableBody />
+            </Table>
         </PageSection>
 
 
