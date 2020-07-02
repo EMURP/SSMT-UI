@@ -1,8 +1,10 @@
 import React from 'react';
 import { PageSection, Title, Stack, StackItem } from '@patternfly/react-core';
+import { DemoProjectFilterForm } from '@app/project_page/demoProjectfilterform';
+// import { SimpleForm } from '@app/LoginPage/LoginPage';
 
 //import { ProjectDataFilterForm } from '@app/DataFilterForm/ProjectDataFilterForm';
-import { DemoProjectDataFilterForm } from '@app/project_page/demoProjectfilterform';
+
 
 // import  {ProjectInfoTableComponent}  from '../ProjectInfo/ProjectInfoTableComponent';
 
@@ -40,8 +42,12 @@ class Dashboard extends React.Component<myProps, myState> {
         <Stack>
                    
           {/* <StackItem> <ProjectDataFilterForm /></StackItem> */}
-          <StackItem> <DemoProjectDataFilterForm /></StackItem>
+          <StackItem> <DemoProjectFilterForm /></StackItem>
         </Stack>
+
+        {/* <Stack>
+          <StackItem> <SimpleForm/> </StackItem>
+        </Stack> */}
         
 
        
