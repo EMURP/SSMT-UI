@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SimpleTable tests should render default SimpleTable component 1`] = `
+<Component
+  aria-label="Simple Table"
+  cells={
+    Array [
+      Object {
+        "title": <div
+          style={
+            Object {
+              "cellTransforms": Array [
+                [Function],
+              ],
+              "transforms": Array [
+                [Function],
+              ],
+            }
+          }
+        >
+          Sr No
+        </div>,
+      },
+      Object {
+        "title": <div
+          style={
+            Object {
+              "cellTransforms": Array [
+                [Function],
+              ],
+              "transforms": Array [
+                [Function],
+              ],
+            }
+          }
+        >
+           Project Name
+        </div>,
+      },
+      Object {
+        "title": <div
+          style={
+            Object {
+              "cellTransforms": Array [
+                [Function],
+              ],
+              "transforms": Array [
+                [Function],
+              ],
+            }
+          }
+        >
+           No. of Nodes 
+        </div>,
+      },
+    ]
+  }
+  rows={
+    Array [
+      Object {
+        "cells": Array [
+          "1",
+          "AI COE",
+          "37",
+        ],
+      },
+      Object {
+        "cells": Array [
+          "2",
+          "Teckton",
+          "19",
+        ],
+      },
+      Object {
+        "cells": Array [
+          "3",
+          "Chris",
+          "64",
+        ],
+      },
+    ]
+  }
+>
+  <TableHeader />
+  <TableBody />
+</Component>
+`;

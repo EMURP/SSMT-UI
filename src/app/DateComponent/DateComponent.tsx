@@ -52,7 +52,8 @@ updateDateValue(newDate) {
             id={this.props.dateType}
             type="date"
             aria-label="Input Date"
-            onChangeCapture={event => {this.props.changeDate(event.currentTarget.value); this.updateDateValue(event.currentTarget.value)}}
+            onChange={value => this.props.changeDate(value)}
+            onChange={value => {this.props.changeDate(value); this.updateDateValue(value)}}
             value={this.formatDate(this.state.currentDate)}
           />
           
