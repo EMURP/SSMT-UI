@@ -14,7 +14,6 @@ import { routes } from '@app/routes';
 interface IAppLayout {
   children: React.ReactNode;
 }
-
 const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
   const logoProps = {
     href: '/',
