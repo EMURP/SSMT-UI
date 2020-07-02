@@ -2,7 +2,9 @@ import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
 import { Table, TableHeader, TableBody, TableVariant, TableText } from '@patternfly/react-table';
 import { Link } from 'react-router-dom';
-import {dataObject} from '@app/project_page/demoProjectfilterform';
+import { dataObject } from '@app/project_page/demoProjectfilterform';
+
+
 
 type myProps = {
   columnTitle: object;
