@@ -4,7 +4,6 @@ import { Table, TableHeader, TableBody, TableVariant, TableText } from '@pattern
 import { Link } from 'react-router-dom';
 import { dataObject } from '@app/project_page/demoProjectfilterform';
 
-
 type myProps = {
   columnTitle: object;
   tableData: Array<dataObject>;
