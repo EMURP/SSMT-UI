@@ -25,7 +25,6 @@ class App extends React.Component<myProps, myState> {
   handleRoleChange = (role: Role) => {
     this.setState({ role: role });
   }
-
   logout = ()=> {
     this.setState({ role: Role.NONE });
   }
