@@ -18,7 +18,7 @@ type myState = {
 
 type row = {
   cells: cells;
-};
+}; 
 
 type cells = Array<JSX.Element | number>;
 
