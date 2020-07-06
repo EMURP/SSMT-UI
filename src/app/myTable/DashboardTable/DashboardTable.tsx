@@ -20,7 +20,7 @@ type row = {
   cells: cells;
 };
 
-type cells = Array<string>;
+type cells = Array<JSX.Element | number>;
 
 class DashboardTable extends React.Component<myProps, myState> {
   constructor(myProps) {
