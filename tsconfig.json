@@ -28,7 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.jsx",
-    "**/*.js"
+    "**/*.js", "src/app/myTable/DashboardTable"
   ],
   "exclude": ["node_modules"]
 }

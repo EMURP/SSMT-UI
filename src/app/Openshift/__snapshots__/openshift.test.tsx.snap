@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Openshift tests should render default Openshift component 1`] = `
+<Component>
+  <Component
+    headingLevel="h1"
+    size="lg"
+  >
+    Openshift 
+  </Component>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "row",
+        "marginLeft": "30px",
+        "marginRight": "30px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "marginBottom": "30px",
+          "marginLeft": "30px",
+          "marginRight": "30px",
+        }
+      }
+    >
+      <Component>
+        <Component>
+          Node Info Table 
+        </Component>
+      </Component>
+      <SimpleTable />
+    </div>
+    <div
+      style={
+        Object {
+          "marginBottom": "30px",
+          "marginLeft": "30px",
+          "marginRight": "30px",
+        }
+      }
+    >
+      <Component>
+        <Component>
+           Pod Info Table  
+        </Component>
+      </Component>
+      <SimpleTable />
+    </div>
+  </div>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "flexDirection": "row",
+        "marginLeft": "30px",
+        "marginRight": "30px",
+      }
+    }
+  >
+    <div
+      style={
+        Object {
+          "marginBottom": "30px",
+          "marginLeft": "30px",
+          "marginRight": "30px",
+        }
+      }
+    >
+      <Component>
+        <Component>
+          Project Info Table 
+        </Component>
+      </Component>
+      <SimpleTable />
+    </div>
+    <div
+      style={
+        Object {
+          "height": "275px",
+          "marginBottom": "30px",
+          "marginLeft": "30px",
+          "marginRight": "30px",
+          "width": "300px",
+        }
+      }
+    >
+      <ChartPie
+        ariaDesc="Average number of Pods"
+        ariaTitle="Pie chart example"
+        constrainToVisibleArea={true}
+        data={
+          Array [
+            Object {
+              "x": "Running",
+              "y": 35,
+            },
+            Object {
+              "x": "Failed",
+              "y": 55,
+            },
+            Object {
+              "x": "Terminated",
+              "y": 10,
+            },
+          ]
+        }
+        height={275}
+        labels={[Function]}
+        legendData={
+          Array [
+            Object {
+              "name": "Running: 35",
+            },
+            Object {
+              "name": "Failed: 55",
+            },
+            Object {
+              "name": "Terminated: 10",
+            },
+          ]
+        }
+        legendPosition="bottom"
+        padding={
+          Object {
+            "bottom": 65,
+            "left": 20,
+            "right": 20,
+            "top": 20,
+          }
+        }
+        themeColor="multi-ordered"
+        width={400}
+      />
+    </div>
+  </div>
+</Component>
+`;

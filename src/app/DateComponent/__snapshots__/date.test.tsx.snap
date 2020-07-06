@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DateComponent tests should render DateComponent component 1`] = `
+<Fragment>
+  <Component
+    fieldId="StartDate"
+    isRequired={true}
+    label="StartDate"
+  >
+    <Component>
+      <ForwardRef
+        aria-label="Input Date"
+        id="StartDate"
+        name="textInput"
+        onChange={[Function]}
+        type="date"
+      />
+      <Component
+        component="label"
+        htmlFor="textInput9"
+      >
+        <CalendarAltIcon
+          color="currentColor"
+          noVerticalAlign={false}
+          size="sm"
+        />
+      </Component>
+    </Component>
+  </Component>
+</Fragment>
+`;

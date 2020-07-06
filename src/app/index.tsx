@@ -6,6 +6,7 @@ import { AppRoutes } from '@app/routes';
 import '@app/app.css';
 import { LoginPage } from './LoginPage/LoginPage';
 
+
 type myState = {
   role: Role;
 };
@@ -53,4 +54,6 @@ class App extends React.Component<myProps, myState> {
 
 }
 
-export { App };
+
+export {App};
+
