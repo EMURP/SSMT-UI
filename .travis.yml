@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - node
+jobs:
+  include:
+    - stage: Tests
+      name: Run All Tests
+      script:
+        - npm test
