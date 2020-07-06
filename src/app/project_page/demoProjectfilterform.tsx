@@ -156,11 +156,11 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
         <Form>
           <Grid>
             <GridItem span={2}>
-              <SimpleInputGroups currentDate={new Date()} changeDate={this.setStartDate} dateType="StartDate" key="StartDate" />
+              <SimpleInputGroups changeDate={this.setStartDate} dateType="StartDate" key="StartDate" />
               {/* {convertDateToUTC(this.state.startDate).toISOString()} */}
             </GridItem>
             <GridItem span={2}>
-              <SimpleInputGroups currentDate={new Date()} changeDate={this.setEndDate} dateType="EndDate" key="EndDate" />
+              <SimpleInputGroups changeDate={this.setEndDate} dateType="EndDate" key="EndDate" />
               {/* {convertDateToUTC(this.state.endDate).toISOString()} */}
             </GridItem>
           </Grid>
