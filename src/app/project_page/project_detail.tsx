@@ -20,7 +20,8 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
     let { projectId } = useParams();
     //console.log(projectId)
     React.useEffect(() => {
-        axios.get("https://6e905fc6-3dba-44d9-b37b-91bedb726dcf.mock.pstmn.io/projectlist/" + projectId).then(res => {
+        axios.get("https://bce15001-2baf-4479-8f5b-2a6a09ee7744.mock.pstmn.io/projectlist/" + projectId).then(res => {
+
             cluster_data = res.data;
 
             cluster_data.map((item: any) => {
