@@ -27,7 +27,7 @@ class ReportsList extends React.Component<myProps, myState> {
     super(myProps);
 
     const rowData: Array<row> = [];
-
+    console.log(myProps.tableData);
     myProps.tableData.forEach(dataRow => {
       rowData.push({
         cells: [

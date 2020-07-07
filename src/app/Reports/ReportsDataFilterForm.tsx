@@ -4,7 +4,8 @@ import axios from 'axios';
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
 import { Button, Checkbox} from '@patternfly/react-core';
 import ReportsList from './ReportsList';
-import { DashboardTable } from '@app/myTable/DashboardTable/DashboardTable';
+import sampleData from './sampleReportData.json'
+import CsvDownload from 'react-json-to-csv'
 
 type myProps = {};
 type myState = {
@@ -16,7 +17,6 @@ type myState = {
     clusterData: Array<dataObject> | null;
     err: string | null;
     isLoaded: boolean;
-    generateCSV: boolean;
     generateLineGraph: boolean;
 };
 export type dataObject = {
@@ -34,55 +34,17 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
 
         const startDate = new Date();
         const endDate = new Date();
-        const sampleReportsData = [
-            {
-                apiVersion: 'metering.openshift.io/v1',
-                kind: 'Report',
-                metadata: { name: 'pod-cpu-request-hourly' },
-                spec: {
-                    query: 'pod-cpu-request',
-                    reportingStart: '2019-07-01T00:00:00Z',
-                    schedule:
-                    {
-                        period: 'hourly',
-                        hourly:
-                        {
-                            minute: 0,
-                            second: 0
-                        }
-                    }
-                }
-            },
-            {
-                apiVersion: 'metering.openshift.io/v2',
-                kind: 'Report',
-                metadata: { name: 'pod-cpu-request-hourly' },
-                spec: {
-                    query: 'pod-cpu-request',
-                    reportingStart: '2020-07-01T00:00:00Z',
-                    schedule:
-                    {
-                        period: 'hourly',
-                        hourly:
-                        {
-                            minute: 0,
-                            second: 0
-                        }
-                    }
-                }
-            }
-        ];
 
         this.state = {
             startDate: new Date(),
             endDate: new Date(),
             conditionalRender: 0,
             changingDate: true,
-            api: 'https://0.0.0.0/project_list_with_activation_time',
+            // TODO: update api from backend once available
+            api: 'https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/project_list_with_activation_time',
             clusterData: null,
             err: null,
             isLoaded: false,
-            generateCSV: false,
             generateLineGraph: false,
         };
 
@@ -103,7 +65,6 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         if (onSubmit) {
             apiUrl = apiUrl + '/' + startDate + '/' + endDate;
         }
-        //console.log(apiUrl);
 
         axios
             .get(apiUrl)
@@ -141,14 +102,6 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         this.setState({ ...this.state, changingDate: true, endDate: new Date(date) });
     };
 
-    // change handler for CSV option checkbox.
-    // If true, report results should be exported as a CSV file. 
-    toggleCSV(checked) {
-        this.setState({
-            generateCSV: checked
-        });
-    };
-
     // change handler for line graph option checkbox
     // if true, report results should include a line graph.
     toggleLineGraph(checked) {
@@ -163,19 +116,17 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
             activationTime: 'Report Date'
         };
 
-        console.log(JSON.stringify(this.state.clusterData));
-
         return (
             <div>
-                {this.state.clusterData !== null && (
+                {/* {this.state.clusterData !== null && ( */}
                     <ReportsList
-                        key={'DataTable'}
+                        key={'ReportsList'}
                         startDate={this.state.startDate}
                         endDate={this.state.endDate}
                         columnTitle={columnTitle}
-                        tableData={this.state.clusterData}
+                        tableData={sampleData}
                     />
-                )}
+                {/* )} */}
             </div>
         );
     };
@@ -195,7 +146,7 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                     </Grid>
                     <Grid>
                         <GridItem span={2}>
-                            <Checkbox label="Export to CSV" onChange={this.toggleCSV} aria-label="toggle csv export" id="toggle-csv"/>
+                            <CsvDownload data={sampleData}>Download as CSV</CsvDownload>
                         </GridItem>
                         <GridItem span={2}>
                             <Checkbox label="Generate Line Graph" onChange={this.toggleLineGraph} aria-label="toggle line graph" id="toggle-line-graph"/>
