@@ -5,14 +5,23 @@ exports[`AppLayout tests should render AppLayout component 1`] = `
   defaultManagedSidebarIsOpen={true}
   header={
     <Unknown
+      headerTools={
+        <Unknown>
+          <a
+            className="pf-c-page__header-brand-link"
+          >
+            Admin
+          </a>
+           
+          <Unknown
+            onClick={[Function]}
+          >
+             LOGOUT 
+          </Unknown>
+        </Unknown>
+      }
       isNavOpen={true}
       logo="Mass Open Cloud"
-      logoProps={
-        Object {
-          "href": "/",
-          "target": "_blank",
-        }
-      }
       onNavToggle={[Function]}
       showNavToggle={true}
     />

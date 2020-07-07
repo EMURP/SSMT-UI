@@ -1,92 +1,91 @@
 import React from 'react';
 import {
-  Form,
-  FormGroup,
-  TextInput,
-  ActionGroup,
-  Button,
+  LoginForm,
+  LoginPage as PatternflyLoginPage,
+  ListVariant
 } from '@patternfly/react-core';
+import { ExclamationCircleIcon } from '@patternfly/react-icons';
+
 import { Role } from '..';
-type myState = {
-  userName: string;
+import mocLogo from './moc_logo.png';
+
+type LoginState = {
+  username: string;
   password: string;
   submit: boolean;
   error?: string;
 };
-// export const enum Role{
-type myProps = {
+
+type LoginProps = {
   setRole: Function;
 };
 
-class LoginPage extends React.Component<myProps, myState> {
-  constructor(props) {
+class LoginPage extends React.Component<LoginProps, LoginState> {
+  constructor(props: LoginProps) {
     super(props);
     this.state = {
-      userName: '',
+      username: '',
       password: '',
       submit: false,
     };
   }
 
-  handleUserNameChange(userNameInput: string) {
-    this.setState({ userName: userNameInput })
+  handleUsernameChange = (userNameInput: string) => {
+    this.setState({ username: userNameInput });
   }
 
-  handlePasswordChange(passwordInput: string) {
-    this.setState({ password: passwordInput })
+  handlePasswordChange = (passwordInput: string) => {
+    this.setState({ password: passwordInput });
   }
 
-  render() {
-    return (
-      <div>
-          <Form>
-            <FormGroup label="Username" isRequired fieldId="simple-form-username">
-              <TextInput
-                isRequired
-                type="text"
-                id="simple-form-username"
-                name="simple-form-username"
-                value={this.state.userName}
-                onChange={value => this.handleUserNameChange(value)}
-              />
-            </FormGroup>
-            <FormGroup label="Password" isRequired fieldId="simple-form-password">
-              <TextInput
-                isRequired
-                type="password"
-                id="simple-form-password"
-                placeholder="Password"
-                name="simple-form-password"
-                value={this.state.password}
-                onChange={value => this.handlePasswordChange(value)}
-              />
-            </FormGroup>
-
-            <ActionGroup>
-              <Button variant="primary" onClick={() => this.handleSubmit()}>
-                Login
-              </Button>
-              {/* <Button variant="link">Cancel</Button> */}
-            </ActionGroup>
-          </Form>
-          {this.state.error}
-      </div>
-    );
-  }
-  handleSubmit() {
+  handleSubmit = (event: React.MouseEvent) => {
+    event.preventDefault();
     // dynamic call
-    const userName = this.state.userName;
-    const password = this.state.password;
+    const { username, password } = this.state;
     let role: Role;
-    if (userName === 'admin' && password === 'admin') {
+    if (username === 'admin' && password === 'admin') {
       role = Role.ADMIN;
-    } else if (userName === 'developer' && password === 'developer') {
+    } else if ((username === 'developer1' && password === 'developer1') || (username === 'developer2' && password === 'developer2')) {
       role = Role.DEVELOPER;
     } else {
       role = Role.NONE;
-      this.setState({...this.state, error:"Invalid Username/Password"})
+      this.setState({ ...this.state, error: "Invalid Username/Password" })
     }
     this.props.setRole(role);
+  }
+
+  render() {
+    
+    const loginForm = (
+      <LoginForm
+        showHelperText={!!this.state.error}
+        helperText={this.state.error}
+        helperTextIcon={<ExclamationCircleIcon />}
+        usernameLabel="Username"
+        usernameValue={this.state.username}
+        onChangeUsername={this.handleUsernameChange}
+        passwordLabel="Password"
+        passwordValue={this.state.password}
+        onChangePassword={this.handlePasswordChange}
+        onLoginButtonClick={this.handleSubmit}
+      />
+    );
+
+    return (
+      <PatternflyLoginPage
+        style={{ 
+          background: 'linear-gradient(0deg, gray, transparent)',
+        }}
+        footerListVariants={ListVariant.inline}
+        brandImgSrc={mocLogo}
+        brandImgAlt="MOC logo"
+        textContent="Mass Open Cloud OCP Metering"
+        loginTitle="Log in to your account"
+        loginSubtitle="Please use your MOC credentials"
+      >
+        {loginForm}
+      </PatternflyLoginPage>
+    );
   }
 }
 
