@@ -22,11 +22,11 @@ interface IAppLayout {
   role: Role;
   logout: Function;
 }
-const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
-  const logoProps = {
-    href: '/',
-    target: '_blank'
-  };
+const AppLayout: React.FunctionComponent<IAppLayout> = ({ children, role, logout }) => {
+  // const logoProps = {
+  //   href: '/',
+  //   target: '_blank'
+  // };
   const [isNavOpen, setIsNavOpen] = React.useState(true);
   const [isMobileView, setIsMobileView] = React.useState(true);
   const [isNavOpenMobile, setIsNavOpenMobile] = React.useState(false);
