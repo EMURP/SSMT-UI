@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, GridItem, Form, ActionGroup } from '@patternfly/react-core';
 import axios from 'axios';
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
-import { Button } from '@patternfly/react-core';
+import { Button, Checkbox} from '@patternfly/react-core';
 import ReportsList from './ReportsList';
 import { DashboardTable } from '@app/myTable/DashboardTable/DashboardTable';
 
@@ -16,6 +16,8 @@ type myState = {
     clusterData: Array<dataObject> | null;
     err: string | null;
     isLoaded: boolean;
+    generateCSV: boolean;
+    generateLineGraph: boolean;
 };
 export type dataObject = {
     namespace: Element;
@@ -79,7 +81,9 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
             api: 'https://0.0.0.0/project_list_with_activation_time',
             clusterData: null,
             err: null,
-            isLoaded: false
+            isLoaded: false,
+            generateCSV: false,
+            generateLineGraph: false,
         };
 
         this.callAPI(false);
@@ -137,6 +141,22 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         this.setState({ ...this.state, changingDate: true, endDate: new Date(date) });
     };
 
+    // change handler for CSV option checkbox.
+    // If true, report results should be exported as a CSV file. 
+    toggleCSV(checked) {
+        this.setState({
+            generateCSV: checked
+        });
+    };
+
+    // change handler for line graph option checkbox
+    // if true, report results should include a line graph.
+    toggleLineGraph(checked) {
+        this.setState({
+            generateLineGraph: checked
+        }); 
+    };
+
     renderTable = () => {
         const columnTitle = {
             namespace: 'Report Name',
@@ -164,7 +184,7 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         return (
             <React.Fragment>
                 <Form>
-                    <div>Select a date range for daily reports.</div>
+                    <div>Select a date range to view available Daily, Weekly, and Monthly reports.</div>
                     <Grid>
                         <GridItem span={2}>
                             <SimpleInputGroups changeDate={this.setStartDate} dateType="StartDate" key="StartDate" />
@@ -174,9 +194,17 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                         </GridItem>
                     </Grid>
                     <Grid>
+                        <GridItem span={2}>
+                            <Checkbox label="Export to CSV" onChange={this.toggleCSV} aria-label="toggle csv export" id="toggle-csv"/>
+                        </GridItem>
+                        <GridItem span={2}>
+                            <Checkbox label="Generate Line Graph" onChange={this.toggleLineGraph} aria-label="toggle line graph" id="toggle-line-graph"/>
+                        </GridItem>
+                    </Grid>
+                    <Grid>
                         <ActionGroup>
                             <GridItem span={1}>
-                                <Button onClick={() => this.changeToggle()}>Search</Button>
+                                <Button onClick={() => this.changeToggle()}>Submit</Button>
                             </GridItem>
                         </ActionGroup>
                     </Grid>
