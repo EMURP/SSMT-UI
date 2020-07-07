@@ -5,6 +5,7 @@ import { InputGroup, InputGroupText, TextInput, FormGroup } from '@patternfly/re
 type myProps={
   changeDate: Function;
   dateType: string;
+  initialDate?: Date; // for unit testing/snapshots
 }
 
 type myState = {
@@ -16,13 +17,13 @@ class SimpleInputGroups extends React.Component<myProps, myState> {
     super(myProps);
         
     this.state = {
-      currentDate: new Date()
+      currentDate: myProps.initialDate || new Date()
     };
   }
 
   formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
+    var d = new Date(date);
+        var month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
         year = d.getFullYear();
 
