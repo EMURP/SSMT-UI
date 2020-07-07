@@ -23,7 +23,6 @@ class SimpleInputGroups extends React.Component<myProps, myState> {
 
   formatDate(date) {
     var d = new Date(date);
-    console.log(d);
         var month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
         year = d.getFullYear();

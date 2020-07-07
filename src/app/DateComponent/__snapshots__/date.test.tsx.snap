@@ -14,7 +14,7 @@ exports[`DateComponent tests should render DateComponent component 1`] = `
         name="textInput"
         onChange={[Function]}
         type="date"
-        value="1999-12-31"
+        value="2000-01-01"
       />
       <Component
         component="label"

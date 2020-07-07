@@ -6,7 +6,7 @@ describe('DateComponent tests', () => {
 
   test('should render DateComponent component', () => {
 
-    const dropdown = shallow(<DateComponent changeDate={() => { }} dateType='StartDate' initialDate={new Date('2000-01-01')}/>);
+    const dropdown = shallow(<DateComponent changeDate={() => { }} dateType='StartDate' initialDate={new Date(946750000000)}/>);
     expect(dropdown).toMatchSnapshot();
   });
 
