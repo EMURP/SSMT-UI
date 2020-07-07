@@ -22,7 +22,6 @@ interface IAppLayout {
   role: Role;
   logout: Function;
 }
-
 const AppLayout: React.FunctionComponent<IAppLayout> = ({ children, role, logout }) => {
   // const logoProps = {
   //   href: '/',
