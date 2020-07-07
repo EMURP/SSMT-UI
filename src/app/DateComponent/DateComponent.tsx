@@ -5,25 +5,45 @@ import { InputGroup, InputGroupText, TextInput, FormGroup } from '@patternfly/re
 type myProps={
   changeDate: Function;
   dateType: string;
-  // currentDate: Date;
 }
 
+type myState = {
+  currentDate: Date;
+}
 
-class SimpleInputGroups extends React.Component<myProps> {
+class SimpleInputGroups extends React.Component<myProps, myState> {
   constructor(myProps) {
     super(myProps);
         
+    this.state = {
+      currentDate: new Date()
+    };
   }
 
-  
+  formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
 
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
+updateDateValue(newDate) {
+  this.setState({currentDate : newDate});
+}
+  
   render() {
     return (
       <React.Fragment>
         <FormGroup label={this.props.dateType}
           isRequired
           fieldId={this.props.dateType}
-          // helperText={this.props.dateType}
           >
         <InputGroup>
           
@@ -32,9 +52,10 @@ class SimpleInputGroups extends React.Component<myProps> {
             id={this.props.dateType}
             type="date"
             aria-label="Input Date"
-            onChangeCapture={event => this.props.changeDate(event.currentTarget.value)}
-            // dateTime={this.props.currentDate.toDateString()}
+            onChange={value => {this.props.changeDate(value); this.updateDateValue(value)}}
+            value={this.formatDate(this.state.currentDate)}
           />
+          
           <InputGroupText component="label" htmlFor="textInput9">
             <CalendarAltIcon />
           </InputGroupText>
