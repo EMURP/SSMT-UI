@@ -5,7 +5,8 @@ import { SimpleInputGroups as DateComponent } from './DateComponent';
 describe('DateComponent tests', () => {
 
   test('should render DateComponent component', () => {
-    const dropdown = shallow(<DateComponent changeDate={() => {}} dateType='StartDate' />);
+
+    const dropdown = shallow(<DateComponent changeDate={() => { }} dateType='StartDate' initialDate={new Date(946750000000)}/>);
     expect(dropdown).toMatchSnapshot();
   });
 
@@ -16,7 +17,7 @@ describe('DateComponent tests', () => {
 
     // simulate user changing value of component
     dropdown.find('#StartDate').simulate('change', 3);
-    
+
     expect(callback.mock.calls.length).toBe(1);
     expect(callback.mock.calls[0][0]).toBe(3); // callback should be called with new value
   })

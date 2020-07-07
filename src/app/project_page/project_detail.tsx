@@ -2,7 +2,9 @@ import * as React from 'react';
 import { PageSection, Title } from '@patternfly/react-core';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+
 import { Table, TableHeader, TableBody, TableVariant } from '@patternfly/react-table';
+
 import { DashboardTable } from '@app/myTable/DashboardTable/DashboardTable';
 
 let cluster_data = [] as any;
@@ -14,7 +16,8 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
     const [pod, setPod] = React.useState("")
     const [cpusage, setCpusage] = React.useState("")
 
-    const { projectId } = useParams();
+
+    let { projectId } = useParams();
     //console.log(projectId)
     React.useEffect(() => {
         axios.get("https://bce15001-2baf-4479-8f5b-2a6a09ee7744.mock.pstmn.io/projectlist/" + projectId).then(res => {
@@ -22,7 +25,6 @@ const ProjectDetail: React.FunctionComponent<{}> = () => {
             cluster_data = res.data;
 
             cluster_data.map((item: any) => {
-                console.log(typeof (item.namespace))
                 setName(item.namespace)
                 setNode(item.node)
                 setStart(item.period_start)

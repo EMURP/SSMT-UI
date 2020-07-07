@@ -7,19 +7,26 @@ import {
   Page,
   PageHeader,
   PageSidebar,
-  SkipToContent
+  SkipToContent,
+  PageHeaderTools,
+  Button,
+  Text
 } from '@patternfly/react-core';
 import { routes } from '@app/routes';
+import { Role, RoleMap } from '@app/index';
+import styles from '@patternfly/react-styles/css/components/Page/page';
+import { css } from '@patternfly/react-styles';
 
 interface IAppLayout {
   children: React.ReactNode;
+  role: Role;
+  logout: Function;
 }
-
-const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
-  const logoProps = {
-    href: '/',
-    target: '_blank'
-  };
+const AppLayout: React.FunctionComponent<IAppLayout> = ({ children, role, logout }) => {
+  // const logoProps = {
+  //   href: '/',
+  //   target: '_blank'
+  // };
   const [isNavOpen, setIsNavOpen] = React.useState(true);
   const [isMobileView, setIsMobileView] = React.useState(true);
   const [isNavOpenMobile, setIsNavOpenMobile] = React.useState(false);
@@ -28,15 +35,24 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
   };
   const onNavToggle = () => {
     setIsNavOpen(!isNavOpen);
-  }
+  };
   const onPageResize = (props: { mobileView: boolean; windowSize: number }) => {
     setIsMobileView(props.mobileView);
   };
   const Header = (
     <PageHeader
       logo="Mass Open Cloud"
-      logoProps={logoProps}
+      // logoProps={logoProps}
       // toolbar="Toolbar"
+      headerTools={
+        <PageHeaderTools>
+          <a className={css(styles.pageHeaderBrandLink)}>
+          {RoleMap[role]}
+          </a>
+          &nbsp;
+          <Button onClick={() => logout()}> LOGOUT </Button>
+        </PageHeaderTools>
+      }
       showNavToggle
       isNavOpen={isNavOpen}
       onNavToggle={isMobileView ? onNavToggleMobile : onNavToggle}
@@ -46,35 +62,33 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({children}) => {
   const Navigation = (
     <Nav id="nav-primary-simple" theme="dark">
       <NavList id="nav-list-simple">
-        {routes.map((route, idx) => route.label && (
-            <NavItem key={`${route.label}-${idx}`} id={`${route.label}-${idx}`}>
-              <NavLink exact to={route.path} activeClassName="pf-m-current">{route.label}</NavLink>
-            </NavItem>
-          ))} 
+        {routes.map(
+          (route, idx) =>
+            route.label && (
+              <NavItem key={`${route.label}-${idx}`} id={`${route.label}-${idx}`}>
+                <NavLink exact to={route.path} activeClassName="pf-m-current">
+                  {route.label}
+                </NavLink>
+              </NavItem>
+            )
+        )}
       </NavList>
     </Nav>
   );
-  const Sidebar = (
-    <PageSidebar
-      theme="dark"
-      nav={Navigation}
-      isNavOpen={isMobileView ? isNavOpenMobile : isNavOpen} />
-  );
-  const PageSkipToContent = (
-    <SkipToContent href="#primary-app-container">
-      Skip to Content
-    </SkipToContent>
-  );
+  const Sidebar = <PageSidebar theme="dark" nav={Navigation} isNavOpen={isMobileView ? isNavOpenMobile : isNavOpen} />;
+  const PageSkipToContent = <SkipToContent href="#primary-app-container">Skip to Content</SkipToContent>;
+
   return (
     <Page
       mainContainerId="primary-app-container"
       header={Header}
       sidebar={Sidebar}
       onPageResize={onPageResize}
-      skipToContent={PageSkipToContent}>
+      skipToContent={PageSkipToContent}
+    >
       {children}
     </Page>
   );
-}
+};
 
 export { AppLayout };
