@@ -54,7 +54,7 @@ class ProjectListWithTable extends React.Component<myProps, myState> {
     this.state = {
       isLoaded: false,
       clusterData: [],
-      api: 'https://0.0.0.0/project_list_with_activation_time',
+      api: 'https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/project_list_with_activation_time',
       err: ''
     };
 

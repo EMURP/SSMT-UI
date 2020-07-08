@@ -51,7 +51,7 @@ class Fetchdata extends React.Component<myProps, myState> {
     this.state = {
       isLoaded: false,
       clusterData: [],
-      api: 'https://0.0.0.0/list_projects/',
+      api: 'https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/list_projects/',
       err: ''
     };
 
