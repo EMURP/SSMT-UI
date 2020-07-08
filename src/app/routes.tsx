@@ -10,9 +10,11 @@ import { Reports } from '@app/Reports/Reports'
 
 import { useDocumentTitle } from '@app/utils/useDocumentTitle';
 import { LastLocationProvider, useLastLocation } from 'react-router-last-location';
-import { ProjectListTable } from '@app/project_page/project_list_with_table';
+
 
 import { ProjectDetail } from '@app/project_page/project_detail';
+
+
 
 
 let routeFocusTimer: number;
