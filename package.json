@@ -6,6 +6,7 @@
   "repository": "https://github.com/patternfly/patternfly-react-seed.git",
   "license": "MIT",
   "private": true,
+  "homepage": "./",
   "scripts": {
     "prebuild": "npm run clean",
     "dr:surge": "node dr-surge.js",

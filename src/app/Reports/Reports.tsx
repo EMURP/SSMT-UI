@@ -32,7 +32,7 @@ class Reports extends React.Component<myProps, myState> {
             <PageSection>
                 <Title headingLevel="h1" size="lg">
                     Reports
-          </Title>
+                </Title>
                 <Stack>
                     <StackItem>
                         <ReportsDataFilterForm />

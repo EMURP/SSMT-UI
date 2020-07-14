@@ -37,12 +37,14 @@ class ReportsList extends React.Component<myProps, myState> {
             </Link>
           </BodyCell>,
           // dataRow['namespace'],
-          dataRow['activationTime']
-          // dataRow['node'],
+          //dataRow['activationTime'],
+          //dataRow['node'],
           // dataRow['periodStart'].toISOString(),
           // dataRow['periodEnd'].toISOString(),
           // dataRow['pod'],
-          // dataRow['podUsageCpuCoreSeconds']
+          dataRow['podUsageCpuCoreSeconds'],
+          dataRow['network'],
+          dataRow['memory']
         ]
       });
     })
@@ -50,12 +52,14 @@ class ReportsList extends React.Component<myProps, myState> {
     this.state = {
       columns: [
         myProps.columnTitle['namespace'],
-        myProps.columnTitle['activationTime']
+        // myProps.columnTitle['activationTime'],
         // myProps.columnTitle['node'],
         // myProps.columnTitle['periodStart'],
         // myProps.columnTitle['periodEnd'],
         // myProps.columnTitle['pod'],
-        // myProps.columnTitle['podUsageCpuCoreSeconds']
+        myProps.columnTitle['podUsageCpuCoreSeconds'],
+        myProps.columnTitle['network'],
+        myProps.columnTitle['memory']
       ],
       rows: rowData
     };
@@ -80,12 +84,14 @@ class ReportsList extends React.Component<myProps, myState> {
               </Link>
             </BodyCell>,
             // dataRow['namespace'],
-            dataRow['activationTime']
+            //dataRow['activationTime'],
             // dataRow['node'],
             // dataRow['periodStart'].toISOString(),
             // dataRow['periodEnd'].toISOString(),
             // dataRow['pod'],
-            // dataRow['podUsageCpuCoreSeconds']
+            dataRow['podUsageCpuCoreSeconds'],
+            dataRow['network'],
+            dataRow['memory']
           ]
         });
       });

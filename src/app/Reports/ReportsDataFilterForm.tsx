@@ -4,8 +4,10 @@ import axios from 'axios';
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
 import { Button, Checkbox} from '@patternfly/react-core';
 import ReportsList from './ReportsList';
-import sampleData from './sampleReportData.json'
-import CsvDownload from 'react-json-to-csv'
+import sampleData from './sampleReportData.json';
+import CsvDownload from 'react-json-to-csv';
+import ReportTypeDropdown from './ReportTypeDropdown';
+import ReportFrequencyDropdown from './ReportFrequencyDropdown';
 
 type myProps = {};
 type myState = {
@@ -21,7 +23,11 @@ type myState = {
 };
 export type dataObject = {
     namespace: Element;
-    activationTime: number;
+    //activationTime: number;
+    //node: Element;
+    podUsageCpuCoreSeconds: number;
+    network: Element;
+    memory: Element;
 };
 
 const convertDateToUTC = (date: Date) => {
@@ -73,7 +79,12 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                 res.data.forEach(clusterInfo => {
                     tableData.push({
                         namespace: clusterInfo['namespace'],
-                        activationTime: clusterInfo['activation_time']
+                        //activationTime: clusterInfo['activation_time'],
+                        //node: clusterInfo['node'],
+                        podUsageCpuCoreSeconds: clusterInfo['pod_usage_cpu_core_seconds'],
+                        network: clusterInfo['network'], 
+                        memory: clusterInfo['memory']
+
                     });
                 });
                 this.setState({ ...this.state, isLoaded: true, clusterData: tableData });
@@ -113,7 +124,11 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
     renderTable = () => {
         const columnTitle = {
             namespace: 'Report Name',
-            activationTime: 'Report Date'
+            //activationTime: 'Report Date',
+            //node: 'Node',
+            podUsageCpuCoreSeconds: 'Pod CPU Usage in Seconds',
+            network: 'Network Usage in X',
+            memory: 'Memory Usage in Y'
         };
 
         return (
@@ -148,8 +163,18 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                         <GridItem span={2}>
                             <CsvDownload data={sampleData}>Download as CSV</CsvDownload>
                         </GridItem>
-                        <GridItem span={2}>
+                        {/* <GridItem span={2}>
                             <Checkbox label="Generate Line Graph" onChange={this.toggleLineGraph} aria-label="toggle line graph" id="toggle-line-graph"/>
+                        </GridItem> */}
+                    </Grid>
+                    <Grid>
+                        <GridItem span={2}>
+                            <ReportTypeDropdown/>
+                        </GridItem>
+                    </Grid>
+                    <Grid>
+                        <GridItem span={2}>
+                            <ReportFrequencyDropdown/>
                         </GridItem>
                     </Grid>
                     <Grid>
