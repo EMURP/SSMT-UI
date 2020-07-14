@@ -127,8 +127,8 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
             //activationTime: 'Report Date',
             //node: 'Node',
             podUsageCpuCoreSeconds: 'Pod CPU Usage in Seconds',
-            network: 'Network Usage in X',
-            memory: 'Memory Usage in Y'
+            network: 'Network Usage in Megabits per Second',
+            memory: 'Memory Usage in Gigabytes'
         };
 
         return (
