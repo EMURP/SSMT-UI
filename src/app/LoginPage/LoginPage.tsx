@@ -2,13 +2,14 @@ import React from 'react';
 import {
   LoginForm,
   LoginPage as PatternflyLoginPage,
-  ListVariant
+  ListVariant,
+  Button
 } from '@patternfly/react-core';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
+import * as OAuth from 'oauth2-client-js';
 
 import { Role } from '..';
 import mocLogo from './moc_logo.png';
-
 type LoginState = {
   username: string;
   password: string;
@@ -28,6 +29,17 @@ class LoginPage extends React.Component<LoginProps, LoginState> {
       password: '',
       submit: false,
     };
+  }
+
+  // Detect if CILogon has authenticated, then log into app if it has.
+  componentDidMount() {
+    const query = new URL(window.location.href).search;
+    if (query.includes('code')) { // CILogon has returned with code
+      // remove query & CILogon state from URL, without reloading page
+      const urlWithoutQuery = window.location.protocol + "//" + window.location.host + window.location.pathname
+      window.history.pushState({path: urlWithoutQuery}, '' ,urlWithoutQuery); 
+      this.props.setRole(Role.ADMIN)
+    }
   }
 
   handleUsernameChange = (userNameInput: string) => {
@@ -54,6 +66,28 @@ class LoginPage extends React.Component<LoginProps, LoginState> {
     this.props.setRole(role);
   }
 
+  handleCiLogon = () => {
+    // Register provider
+    const ciLogonProvider = new OAuth.Provider({
+      id: 'cilogon',
+      authorization_url: 'https://cilogon.org/authorize'
+    })
+
+    // Create a new request
+    var request = new OAuth.Request({
+      client_id: 'cilogon:/client_id/566ba77604386302bd6e0f63cfa0efe0',  // required
+      redirect_uri: 'http://localhost:9000',
+      scope: 'openid+profile+email+org.cilogon.userinfo+edu.uiuc.ncsa.myproxy.getcert',
+      response_type: 'code'
+    });
+
+    // Give it to the provider
+    var uri = ciLogonProvider.requestToken(request);
+
+    // Redirect to CILogon authentication page
+    window.location.href = uri;
+  }
+
   render() {
     
     const loginForm = (
@@ -77,6 +111,9 @@ class LoginPage extends React.Component<LoginProps, LoginState> {
           background: 'linear-gradient(0deg, gray, transparent)',
         }}
         footerListVariants={ListVariant.inline}
+        footerListItems={[
+          <Button onClick={this.handleCiLogon} key="cilogon">Login with CILogon</Button>
+        ]}
         brandImgSrc={mocLogo}
         brandImgAlt="MOC logo"
         textContent="Mass Open Cloud OCP Metering"
