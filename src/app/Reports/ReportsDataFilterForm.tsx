@@ -34,6 +34,11 @@ const convertDateToUTC = (date: Date) => {
     return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), 0, 0, 0);
 };
 
+/*
+Form for users to specify the start date, report frequency(daily, weekly, monthly), and report type
+(standard, analytical, custom) of a metering report. Also offers an option to export metering data from the
+backend as csv. 
+*/
 class ReportsDataFilterForm extends React.Component<myProps, myState> {
     constructor(myProps) {
         super(myProps);

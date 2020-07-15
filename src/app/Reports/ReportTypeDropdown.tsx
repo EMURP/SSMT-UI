@@ -18,7 +18,10 @@ type myProps = {
 type myState = {
 }
 
-
+/*
+Dropdown component for the Reports page to specify one of three report types:
+Standard, Analytical, and Custom. 
+*/
 class ReportTypeDropdown extends React.Component<myProps,myState>{
   constructor(myProps) {
     super(myProps);

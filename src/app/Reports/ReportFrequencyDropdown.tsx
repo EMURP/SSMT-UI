@@ -18,7 +18,10 @@ type myProps = {
 type myState = {
 }
 
-
+/*
+Dropdown component for the Reports page to specify one of three report frequencies:
+Daily, Weekly, and Monthly.
+*/
 class ReportFrequencyDropdown extends React.Component<myProps,myState>{
   constructor(myProps) {
     super(myProps);

@@ -16,6 +16,9 @@ type myState = {
     endDate: Date;
 };
 
+/*
+Component which allows users to generate and view metering reports. 
+*/
 class Reports extends React.Component<myProps, myState> {
     constructor(myProps) {
         super(myProps);
