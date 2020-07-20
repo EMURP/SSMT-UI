@@ -22,14 +22,13 @@ interface IAppLayout {
   role: Role;
   logout: Function;
 }
+
 const AppLayout: React.FunctionComponent<IAppLayout> = ({ children, role, logout }) => {
-  // const logoProps = {
-  //   href: '/',
-  //   target: '_blank'
-  // };
+  
   const [isNavOpen, setIsNavOpen] = React.useState(true);
   const [isMobileView, setIsMobileView] = React.useState(true);
   const [isNavOpenMobile, setIsNavOpenMobile] = React.useState(false);
+
   const onNavToggleMobile = () => {
     setIsNavOpenMobile(!isNavOpenMobile);
   };
@@ -42,8 +41,6 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children, role, logout
   const Header = (
     <PageHeader
       logo="Mass Open Cloud"
-      // logoProps={logoProps}
-      // toolbar="Toolbar"
       headerTools={
         <PageHeaderTools>
           <a className={css(styles.pageHeaderBrandLink)}>
