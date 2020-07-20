@@ -1,17 +1,14 @@
 import React from 'react';
-import '@patternfly/react-core/dist/styles/base.css';
 import { Table, TableHeader, TableBody, TableVariant, BodyCell } from '@patternfly/react-table';
 import { Link } from 'react-router-dom';
 import { dataObject } from '@app/project_page/demoProjectfilterform';
-import {DemoProjectFilterForm} from '@app/project_page/demoProjectfilterform';
 
-
-type myProps = {
+type DashboardTableProps = {
   columnTitle: object;
   tableData: Array<dataObject>;
 };
 
-type myState = {
+type DashboardTableState = {
   columns: Array<object | string>;
   rows: Array<row>;
 };
@@ -22,8 +19,8 @@ type row = {
 
 type cells = Array<JSX.Element | number>;
 
-class DashboardTable extends React.Component<myProps, myState> {
-  constructor(myProps) {
+class DashboardTable extends React.Component<DashboardTableProps, DashboardTableState> {
+  constructor(myProps: DashboardTableProps) {
     super(myProps);
 
     const rowData: Array<row> = [];
@@ -62,32 +59,32 @@ class DashboardTable extends React.Component<myProps, myState> {
   }
 
 
-  shouldComponentUpdate(nextProps: myProps,nextState: myState){
-    return JSON.stringify(nextProps.tableData)!== JSON.stringify(this.props.tableData)
+  shouldComponentUpdate(nextProps: DashboardTableProps, nextState: DashboardTableState) {
+    return JSON.stringify(nextProps.tableData) !== JSON.stringify(this.props.tableData)
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps: myProps) {
-      const rowData: Array<row> = [];
+  UNSAFE_componentWillReceiveProps(nextProps: DashboardTableProps) {
+    const rowData: Array<row> = [];
 
-      nextProps.tableData.forEach(dataRow => {
-        rowData.push({
-          cells: [
-            <BodyCell key={`/projectlist/${dataRow['namespace']}`}>
-              <Link to={`/projectlist/${dataRow['namespace']}`} key={`/projectlist/${dataRow['namespace']}`}>
-                {dataRow['namespace']}
-              </Link>
-            </BodyCell>,
-            // dataRow['namespace'],
-            dataRow['activationTime']
-            // dataRow['node'],
-            // dataRow['periodStart'].toISOString(),
-            // dataRow['periodEnd'].toISOString(),
-            // dataRow['pod'],
-            // dataRow['podUsageCpuCoreSeconds']
-          ]
-        });
+    nextProps.tableData.forEach(dataRow => {
+      rowData.push({
+        cells: [
+          <BodyCell key={`/projectlist/${dataRow['namespace']}`}>
+            <Link to={`/projectlist/${dataRow['namespace']}`} key={`/projectlist/${dataRow['namespace']}`}>
+              {dataRow['namespace']}
+            </Link>
+          </BodyCell>,
+          // dataRow['namespace'],
+          dataRow['activationTime']
+          // dataRow['node'],
+          // dataRow['periodStart'].toISOString(),
+          // dataRow['periodEnd'].toISOString(),
+          // dataRow['pod'],
+          // dataRow['podUsageCpuCoreSeconds']
+        ]
       });
-      this.setState({ ...this.state, rows: rowData });
+    });
+    this.setState({ ...this.state, rows: rowData });
   }
 
   render() {
