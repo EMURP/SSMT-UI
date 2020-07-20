@@ -81,6 +81,7 @@
     "@patternfly/react-styles": "^4.1.1",
     "@patternfly/react-table": "^2.28.50",
     "axios": "^0.19.2",
+    "client-oauth2": "^4.3.1",
     "express": "^4.13.4",
     "jest-enzyme": "^7.1.2",
     "oauth2-client-js": "0.0.15",
