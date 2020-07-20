@@ -78,6 +78,17 @@ exports[`AppLayout tests should render AppLayout component 1`] = `
                 Support
               </NavLink>
             </Unknown>
+            <Unknown
+              id="Reports-3"
+            >
+              <NavLink
+                activeClassName="pf-m-current"
+                exact={true}
+                to="/reports"
+              >
+                Reports
+              </NavLink>
+            </Unknown>
           </NavList>
         </Nav>
       }

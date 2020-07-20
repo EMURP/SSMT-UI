@@ -87,6 +87,7 @@
     "react-datetime": "^2.16.3",
     "react-datetime-range-picker": "^2.0.5",
     "react-flatpickr": "3.10.0",
+    "react-json-to-csv": "^1.0.4",
     "react-router-dom": "^5.0.1",
     "react-router-last-location": "^2.0.1",
     "react-select": "^3.1.0",
