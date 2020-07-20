@@ -19,12 +19,13 @@ type myState = {
     clusterData: Array<dataObject> | null;
     err: string | null;
     isLoaded: boolean;
-    generateLineGraph: boolean;
+    reportType: string;
+    changingReportType: boolean;
+    reportFrequency: string;
+    changingReportFrequency: boolean;
 };
 export type dataObject = {
     namespace: Element;
-    //activationTime: number;
-    //node: Element;
     podUsageCpuCoreSeconds: number;
     network: Element;
     memory: Element;
@@ -56,7 +57,10 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
             clusterData: null,
             err: null,
             isLoaded: false,
-            generateLineGraph: false,
+            reportType: '',
+            changingReportType: false,
+            reportFrequency: '',
+            changingReportFrequency: false
         };
 
         this.callAPI(false);
@@ -118,12 +122,12 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         this.setState({ ...this.state, changingDate: true, endDate: new Date(date) });
     };
 
-    // change handler for line graph option checkbox
-    // if true, report results should include a line graph.
-    toggleLineGraph(checked) {
-        this.setState({
-            generateLineGraph: checked
-        }); 
+    setReportType = (aType: string) => {
+        this.setState({ ...this.state, changingReportType: true, reportType: aType});
+    };
+
+    setReportFrequency = (aFrequency: string) => {
+        this.setState({ ...this.state, changingReportFrequency: true, reportFrequency: aFrequency});
     };
 
     renderTable = () => {
@@ -174,12 +178,12 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                     </Grid>
                     <Grid>
                         <GridItem span={2}>
-                            <ReportTypeDropdown/>
+                            <ReportTypeDropdown setReportType={this.setReportType} ReportType={this.state.reportType} />
                         </GridItem>
                     </Grid>
                     <Grid>
                         <GridItem span={2}>
-                            <ReportFrequencyDropdown/>
+                            <ReportFrequencyDropdown setReportFrequency={this.setReportFrequency} ReportFrequency={this.state.reportFrequency}/>
                         </GridItem>
                     </Grid>
                     <Grid>

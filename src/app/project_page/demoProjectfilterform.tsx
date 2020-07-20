@@ -161,10 +161,6 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
             </GridItem>
             <GridItem span={2}>
               <SimpleInputGroups changeDate={this.setEndDate} dateType="EndDate" key="EndDate" />
-
-
-
-              {/* {convertDateToUTC(this.state.endDate).toISOString()} */}
             </GridItem>
           </Grid>
           <Grid>
