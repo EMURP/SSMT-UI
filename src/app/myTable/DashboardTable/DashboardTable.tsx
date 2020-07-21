@@ -74,13 +74,9 @@ class DashboardTable extends React.Component<DashboardTableProps, DashboardTable
               {dataRow['namespace']}
             </Link>
           </BodyCell>,
-          // dataRow['namespace'],
           dataRow['activationTime']
-          // dataRow['node'],
           // dataRow['periodStart'].toISOString(),
           // dataRow['periodEnd'].toISOString(),
-          // dataRow['pod'],
-          // dataRow['podUsageCpuCoreSeconds']
         ]
       });
     });

@@ -1,0 +1,380 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reports Page Filter Form tests should render default Reports page filter form component 1`] = `
+<Fragment>
+  <Component>
+    <div>
+      Select a date range to view available Daily, Weekly, and Monthly reports.
+    </div>
+    <Component>
+      <Component
+        span={2}
+      >
+        <SimpleInputGroups
+          changeDate={[Function]}
+          dateType="StartDate"
+          key="StartDate"
+        />
+      </Component>
+      <Component
+        span={2}
+      >
+        <SimpleInputGroups
+          changeDate={[Function]}
+          dateType="EndDate"
+          key="EndDate"
+        />
+      </Component>
+    </Component>
+    <Component>
+      <Component
+        span={2}
+      >
+        <CsvDownload
+          data={
+            Array [
+              Object {
+                "namespace": "openshift-apiserver",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 13.4556,
+              },
+              Object {
+                "namespace": "openshift-apiserver-operator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 4.30812,
+              },
+              Object {
+                "namespace": "openshift-authentication",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 5.744280000000001,
+              },
+              Object {
+                "namespace": "openshift-authentication-operator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 6.75366,
+              },
+              Object {
+                "namespace": "openshift-cluster-machine-approver",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 0.62832,
+              },
+              Object {
+                "namespace": "openshift-cluster-node-tuning-operator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 0.58542,
+              },
+              Object {
+                "namespace": "openshift-cluster-samples-operator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 1.8978000000000002,
+              },
+              Object {
+                "namespace": "openshift-cluster-version",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 6.552359999999999,
+              },
+              Object {
+                "namespace": "openshift-console",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 4.6536,
+              },
+              Object {
+                "namespace": "openshift-console-operator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 4.24476,
+              },
+              Object {
+                "namespace": "openshift-controller-manager",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 4.797960000000001,
+              },
+              Object {
+                "namespace": "openshift-controller-manager-operator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 3.3977399999999998,
+              },
+              Object {
+                "namespace": "openshift-dns",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 3.4379999999999997,
+              },
+              Object {
+                "namespace": "openshift-dns-operator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 0.73578,
+              },
+              Object {
+                "namespace": "openshift-etcd",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 109.55615999999999,
+              },
+              Object {
+                "namespace": "openshift-etcd-operator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 7.630920000000001,
+              },
+              Object {
+                "namespace": "openshift-image-registry",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 5.036760000000001,
+              },
+              Object {
+                "namespace": "openshift-ingress",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 5.1816,
+              },
+              Object {
+                "namespace": "openshift-ingress-operator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 1.2789000000000001,
+              },
+              Object {
+                "namespace": "openshift-kube-apiserver",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 212.23170000000002,
+              },
+              Object {
+                "namespace": "openshift-kube-apiserver-operator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 16.43484,
+              },
+              Object {
+                "namespace": "openshift-kube-controller-manager",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 24.83214,
+              },
+              Object {
+                "namespace": "openshift-kube-controller-manager-operator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 19.54116,
+              },
+              Object {
+                "namespace": "openshift-kube-scheduler",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 4.70988,
+              },
+              Object {
+                "namespace": "openshift-kube-scheduler-operator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 18.10404,
+              },
+              Object {
+                "namespace": "openshift-kube-storage-version-migrator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 0.15180000000000002,
+              },
+              Object {
+                "namespace": "openshift-marketplace",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 14.908500000000002,
+              },
+              Object {
+                "namespace": "openshift-metering",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 541.2507,
+              },
+              Object {
+                "namespace": "openshift-monitoring",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 157.82994,
+              },
+              Object {
+                "namespace": "openshift-multus",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 2.25462,
+              },
+              Object {
+                "namespace": "openshift-network-operator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 3.02226,
+              },
+              Object {
+                "namespace": "openshift-operator-lifecycle-manager",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 18.2211,
+              },
+              Object {
+                "namespace": "openshift-sdn",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 42.4674,
+              },
+              Object {
+                "namespace": "openshift-service-ca",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 3.27252,
+              },
+              Object {
+                "namespace": "openshift-service-ca-operator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 2.23158,
+              },
+              Object {
+                "namespace": "openshift-service-catalog-apiserver-operator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 2.6007,
+              },
+              Object {
+                "namespace": "openshift-service-catalog-controller-manager-operator",
+                "node": "crc-rtgqw-master-0",
+                "period_end": "2020-12-30T23:59:59Z",
+                "period_start": "2020-05-01T00:00:00Z",
+                "pod": "namespace_pods",
+                "pod_usage_cpu_core_seconds": 2.17476,
+              },
+            ]
+          }
+        >
+          Download as CSV
+        </CsvDownload>
+      </Component>
+    </Component>
+    <Component>
+      <Component
+        span={2}
+      >
+        <ReportTypeDropdown
+          ReportType=""
+          setReportType={[Function]}
+        />
+      </Component>
+    </Component>
+    <Component>
+      <Component
+        span={2}
+      >
+        <ReportFrequencyDropdown
+          ReportFrequency=""
+          setReportFrequency={[Function]}
+        />
+      </Component>
+    </Component>
+    <Component>
+      <Component>
+        <Component
+          span={1}
+        >
+          <Component
+            onClick={[Function]}
+          >
+            Submit
+          </Component>
+        </Component>
+      </Component>
+    </Component>
+    <Component>
+      <Component
+        rowSpan={8}
+        span={4}
+      />
+    </Component>
+  </Component>
+</Fragment>
+`;

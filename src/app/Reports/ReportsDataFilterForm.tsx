@@ -133,8 +133,6 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
     renderTable = () => {
         const columnTitle = {
             namespace: 'Report Name',
-            //activationTime: 'Report Date',
-            //node: 'Node',
             podUsageCpuCoreSeconds: 'Pod CPU Usage in Seconds',
             network: 'Network Usage in Megabits per Second',
             memory: 'Memory Usage in Gigabytes'
