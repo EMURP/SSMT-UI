@@ -5,9 +5,11 @@ import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
 import { Button, Checkbox} from '@patternfly/react-core';
 import ReportsList from './ReportsList';
 import sampleData from './sampleReportData.json';
+import sampleAnalyticalData from './sampleAnalyticalData.json';
 import CsvDownload from 'react-json-to-csv';
 import ReportTypeDropdown from './ReportTypeDropdown';
 import ReportFrequencyDropdown from './ReportFrequencyDropdown';
+import ReportsAnalytical from './ReportsAnalytical';
 
 type myProps = {};
 type myState = {
@@ -88,8 +90,6 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                 res.data.forEach(clusterInfo => {
                     tableData.push({
                         namespace: clusterInfo['namespace'],
-                        //activationTime: clusterInfo['activation_time'],
-                        //node: clusterInfo['node'],
                         podUsageCpuCoreSeconds: clusterInfo['pod_usage_cpu_core_seconds'],
                         network: clusterInfo['network'], 
                         memory: clusterInfo['memory']
@@ -130,7 +130,8 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         this.setState({ ...this.state, changingReportFrequency: true, reportFrequency: aFrequency});
     };
 
-    renderTable = () => {
+    // Renders a simple table for the Standard Report Type
+    renderStandard = () => {
         const columnTitle = {
             namespace: 'Report Name',
             podUsageCpuCoreSeconds: 'Pod CPU Usage in Seconds',
@@ -153,6 +154,22 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         );
     };
 
+    // Renders line graphs for the Analytical Report Type 
+    renderAnalytical = () => {
+        const columnTitle = {
+
+        };
+        return (
+            <div>
+                <ReportsAnalytical
+                    key={'ReportsAnalytical'}
+                    columnTitle={columnTitle}
+                    tableData={sampleAnalyticalData}
+                />
+            </div>
+        )
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -170,9 +187,6 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                         <GridItem span={2}>
                             <CsvDownload data={sampleData}>Download as CSV</CsvDownload>
                         </GridItem>
-                        {/* <GridItem span={2}>
-                            <Checkbox label="Generate Line Graph" onChange={this.toggleLineGraph} aria-label="toggle line graph" id="toggle-line-graph"/>
-                        </GridItem> */}
                     </Grid>
                     <Grid>
                         <GridItem span={2}>
@@ -193,7 +207,8 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                     </Grid>
                     <Grid>
                         <GridItem span={4} rowSpan={8}>
-                            {this.state.isLoaded && this.renderTable()}
+                            {this.state.isLoaded && this.renderAnalytical()}
+                            {/* Standard Report Table {this.state.isLoaded && this.renderStandard()} */}
                             {!this.state.isLoaded && this.state.err !== null && <div>{this.state.err.toString()}</div>}
                         </GridItem>
                     </Grid>
