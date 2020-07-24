@@ -161,13 +161,18 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         };
         return (
             <div>
-                <ReportsAnalytical
-                    key={'ReportsAnalytical'}
-                    columnTitle={columnTitle}
-                    tableData={sampleAnalyticalData}
-                    startDate={this.state.startDate}
-                    reportFrequency={"weekly"}
-                />
+                {sampleAnalyticalData['reports']
+                    .map((value, index) => {
+                    return(
+                    <ReportsAnalytical
+                        key={index}
+                        columnTitle={columnTitle}
+                        cpuUsage={value['cpu_usage']}
+                        networkUsage={value['network_usage']}
+                        memoryUsage={value['memory_usage']}
+                        namespace={value['namespace']}
+                        startDate={this.state.startDate}
+                        reportFrequency={"weekly"}/>)})}
             </div>
         )
     }

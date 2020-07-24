@@ -1,18 +1,24 @@
 import '@patternfly/react-core/dist/styles/base.css';
-import React, { Component } from "react";
+import React, { Component, ObjectHTMLAttributes } from "react";
 import ReactApexChart from "react-apexcharts";
 
 type myProps = {
   columnTitle: object;
-  tableData: object;
+  cpuUsage: object;
+  networkUsage: object;
+  memoryUsage: object;
   startDate: Date;
   reportFrequency: string;
+  namespace: string;
 };
+
 type myState = {
   options: any;
   series: any;
 };
 
+// Represents a line graph for one namespace with lines detailing 
+// CPU, Network, and Memory usage. 
 class ReportsAnalytical extends React.Component<myProps, myState> {
   constructor(props) {
     super(props);
@@ -21,15 +27,15 @@ class ReportsAnalytical extends React.Component<myProps, myState> {
       series:  [{
         name: 'CPU Usage',
         type: 'line',
-        data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6]
+        data: this.props.cpuUsage 
       }, {
         name: 'Network Usage',
         type: 'line',
-        data: [1.1, 3, 3.1, 4, 4.1, 4.9, 6.5, 8.5]
+        data: this.props.networkUsage 
       }, {
         name: 'Memory Usage',
         type: 'line',
-        data: [20, 29, 37, 36, 44, 45, 50, 58]
+        data: this.props.memoryUsage 
       }],
       options: {
         chart: {
@@ -44,7 +50,7 @@ class ReportsAnalytical extends React.Component<myProps, myState> {
           width: [1, 1, 4]
         },
         title: {
-          text: 'XYZ - Stock Analysis (2009 - 2016)',
+          text: 'Analytical Report: '+this.props.namespace+this.props.startDate+'\n'+this.props.reportFrequency,
           align: 'left',
           offsetX: 110
         },
