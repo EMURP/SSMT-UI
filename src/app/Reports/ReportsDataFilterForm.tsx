@@ -165,6 +165,8 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                     key={'ReportsAnalytical'}
                     columnTitle={columnTitle}
                     tableData={sampleAnalyticalData}
+                    startDate={this.state.startDate}
+                    reportFrequency={"weekly"}
                 />
             </div>
         )

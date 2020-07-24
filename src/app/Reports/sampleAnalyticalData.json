@@ -1053,6 +1053,6 @@
     ],
     "request_parameters": {
       "start": "10/22/2019",
-      "frequency": "week"
+      "frequency": "weekly"
     }
   }
