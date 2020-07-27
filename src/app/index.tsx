@@ -34,6 +34,7 @@ class App extends React.Component<myProps, myState> {
 
   logout = () => {
     this.setState({ role: Role.NONE });
+    localStorage.removeItem('login')
   }
 
   render() {
