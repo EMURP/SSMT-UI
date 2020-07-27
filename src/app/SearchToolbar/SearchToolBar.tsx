@@ -62,6 +62,8 @@ class SearchToolBar extends React.Component<myProps, myState> {
           </ToolbarItem>
         </ToolbarContent>
         </Toolbar>
+        {console.log(this.state.displayData)}
+        {console.log(this.props.columnTitle)}
         <DashboardTable tableData={this.state.displayData} columnTitle={this.props.columnTitle} />
       </React.Fragment>
     );

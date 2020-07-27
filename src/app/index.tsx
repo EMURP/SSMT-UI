@@ -38,8 +38,8 @@ class App extends React.Component<myProps, myState> {
 
   render() {
     return (
-      <div>
-        {this.state.role === Role.NONE && <LoginPage setRole={this.handleRoleChange} />}
+      <div role="heading" aria-label="OCP Metering">
+        {this.state.role=== Role.NONE && <LoginPage setRole={this.handleRoleChange}/>}
         {this.state.role !== Role.NONE && (
           <Router>
             <AppLayout role={this.state.role} logout={this.logout}>

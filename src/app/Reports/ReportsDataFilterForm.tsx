@@ -4,8 +4,10 @@ import axios from 'axios';
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
 import { Button, Checkbox} from '@patternfly/react-core';
 import ReportsList from './ReportsList';
-import sampleData from './sampleReportData.json'
-import CsvDownload from 'react-json-to-csv'
+import sampleData from './sampleReportData.json';
+import CsvDownload from 'react-json-to-csv';
+import ReportTypeDropdown from './ReportTypeDropdown';
+import ReportFrequencyDropdown from './ReportFrequencyDropdown';
 
 type myProps = {};
 type myState = {
@@ -17,17 +19,27 @@ type myState = {
     clusterData: Array<dataObject> | null;
     err: string | null;
     isLoaded: boolean;
-    generateLineGraph: boolean;
+    reportType: string;
+    changingReportType: boolean;
+    reportFrequency: string;
+    changingReportFrequency: boolean;
 };
 export type dataObject = {
     namespace: Element;
-    activationTime: number;
+    podUsageCpuCoreSeconds: number;
+    network: Element;
+    memory: Element;
 };
 
 const convertDateToUTC = (date: Date) => {
     return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), 0, 0, 0);
 };
 
+/*
+Form for users to specify the start date, report frequency(daily, weekly, monthly), and report type
+(standard, analytical, custom) of a metering report. Also offers an option to export metering data from the
+backend as csv. 
+*/
 class ReportsDataFilterForm extends React.Component<myProps, myState> {
     constructor(myProps) {
         super(myProps);
@@ -45,7 +57,10 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
             clusterData: null,
             err: null,
             isLoaded: false,
-            generateLineGraph: false,
+            reportType: '',
+            changingReportType: false,
+            reportFrequency: '',
+            changingReportFrequency: false
         };
 
         this.callAPI(false);
@@ -73,7 +88,12 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                 res.data.forEach(clusterInfo => {
                     tableData.push({
                         namespace: clusterInfo['namespace'],
-                        activationTime: clusterInfo['activation_time']
+                        //activationTime: clusterInfo['activation_time'],
+                        //node: clusterInfo['node'],
+                        podUsageCpuCoreSeconds: clusterInfo['pod_usage_cpu_core_seconds'],
+                        network: clusterInfo['network'], 
+                        memory: clusterInfo['memory']
+
                     });
                 });
                 this.setState({ ...this.state, isLoaded: true, clusterData: tableData });
@@ -102,18 +122,20 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         this.setState({ ...this.state, changingDate: true, endDate: new Date(date) });
     };
 
-    // change handler for line graph option checkbox
-    // if true, report results should include a line graph.
-    toggleLineGraph(checked) {
-        this.setState({
-            generateLineGraph: checked
-        }); 
+    setReportType = (aType: string) => {
+        this.setState({ ...this.state, changingReportType: true, reportType: aType});
+    };
+
+    setReportFrequency = (aFrequency: string) => {
+        this.setState({ ...this.state, changingReportFrequency: true, reportFrequency: aFrequency});
     };
 
     renderTable = () => {
         const columnTitle = {
             namespace: 'Report Name',
-            activationTime: 'Report Date'
+            podUsageCpuCoreSeconds: 'Pod CPU Usage in Seconds',
+            network: 'Network Usage in Megabits per Second',
+            memory: 'Memory Usage in Gigabytes'
         };
 
         return (
@@ -148,8 +170,18 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                         <GridItem span={2}>
                             <CsvDownload data={sampleData}>Download as CSV</CsvDownload>
                         </GridItem>
-                        <GridItem span={2}>
+                        {/* <GridItem span={2}>
                             <Checkbox label="Generate Line Graph" onChange={this.toggleLineGraph} aria-label="toggle line graph" id="toggle-line-graph"/>
+                        </GridItem> */}
+                    </Grid>
+                    <Grid>
+                        <GridItem span={2}>
+                            <ReportTypeDropdown setReportType={this.setReportType} ReportType={this.state.reportType} />
+                        </GridItem>
+                    </Grid>
+                    <Grid>
+                        <GridItem span={2}>
+                            <ReportFrequencyDropdown setReportFrequency={this.setReportFrequency} ReportFrequency={this.state.reportFrequency}/>
                         </GridItem>
                     </Grid>
                     <Grid>
