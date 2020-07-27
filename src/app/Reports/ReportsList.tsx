@@ -2,10 +2,11 @@ import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
 import { Table, TableHeader, TableBody, TableVariant, BodyCell } from '@patternfly/react-table';
 import { Link } from 'react-router-dom';
+import { dataObject } from './ReportsDataFilterForm';
 
 type myProps = {
   columnTitle: object;
-  tableData: Array<object>;
+  tableData: Array<dataObject> | null;
   startDate: Date;
   endDate: Date;
 };

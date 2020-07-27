@@ -2,9 +2,9 @@ import React from 'react';
 import { Grid, GridItem, Form, ActionGroup } from '@patternfly/react-core';
 import axios from 'axios';
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
-import { Button, Checkbox} from '@patternfly/react-core';
+import { Button, Checkbox } from '@patternfly/react-core';
 import ReportsList from './ReportsList';
-import sampleData from './sampleReportData.json';
+//import sampleData from './sampleReportData.json';
 import CsvDownload from 'react-json-to-csv';
 import ReportTypeDropdown from './ReportTypeDropdown';
 import ReportFrequencyDropdown from './ReportFrequencyDropdown';
@@ -26,7 +26,7 @@ type myState = {
 };
 export type dataObject = {
     namespace: Element;
-    podUsageCpuCoreSeconds: number;
+    podUsageCpuCoreSeconds: Element;
     network: Element;
     memory: Element;
 };
@@ -88,10 +88,8 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                 res.data.forEach(clusterInfo => {
                     tableData.push({
                         namespace: clusterInfo['namespace'],
-                        //activationTime: clusterInfo['activation_time'],
-                        //node: clusterInfo['node'],
                         podUsageCpuCoreSeconds: clusterInfo['pod_usage_cpu_core_seconds'],
-                        network: clusterInfo['network'], 
+                        network: clusterInfo['network'],
                         memory: clusterInfo['memory']
 
                     });
@@ -123,11 +121,11 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
     };
 
     setReportType = (aType: string) => {
-        this.setState({ ...this.state, changingReportType: true, reportType: aType});
+        this.setState({ ...this.state, changingReportType: true, reportType: aType });
     };
 
     setReportFrequency = (aFrequency: string) => {
-        this.setState({ ...this.state, changingReportFrequency: true, reportFrequency: aFrequency});
+        this.setState({ ...this.state, changingReportFrequency: true, reportFrequency: aFrequency });
     };
 
     renderTable = () => {
@@ -141,13 +139,13 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         return (
             <div>
                 {/* {this.state.clusterData !== null && ( */}
-                    <ReportsList
-                        key={'ReportsList'}
-                        startDate={this.state.startDate}
-                        endDate={this.state.endDate}
-                        columnTitle={columnTitle}
-                        tableData={sampleData}
-                    />
+                <ReportsList
+                    key={'ReportsList'}
+                    startDate={this.state.startDate}
+                    endDate={this.state.endDate}
+                    columnTitle={columnTitle}
+                    tableData={this.state.clusterData}
+                />
                 {/* )} */}
             </div>
         );
@@ -168,7 +166,8 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                     </Grid>
                     <Grid>
                         <GridItem span={2}>
-                            <CsvDownload data={sampleData}>Download as CSV</CsvDownload>
+                            <CsvDownload data={this.state.clusterData}>Download as CSV</CsvDownload>
+                            {/* <CsvDownload data={sampleData}>Download as CSV</CsvDownload> */}
                         </GridItem>
                         {/* <GridItem span={2}>
                             <Checkbox label="Generate Line Graph" onChange={this.toggleLineGraph} aria-label="toggle line graph" id="toggle-line-graph"/>
@@ -181,7 +180,7 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                     </Grid>
                     <Grid>
                         <GridItem span={2}>
-                            <ReportFrequencyDropdown setReportFrequency={this.setReportFrequency} ReportFrequency={this.state.reportFrequency}/>
+                            <ReportFrequencyDropdown setReportFrequency={this.setReportFrequency} ReportFrequency={this.state.reportFrequency} />
                         </GridItem>
                     </Grid>
                     <Grid>
