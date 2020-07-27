@@ -6,7 +6,7 @@ import { dataObject } from './ReportsDataFilterForm';
 
 type myProps = {
   columnTitle: object;
-  tableData: Array<dataObject> | null;
+  tableData: Array<dataObject>;
   startDate: Date;
   endDate: Date;
 };
@@ -20,7 +20,7 @@ type row = {
   cells: cells;
 };
 
-type cells = Array<string>;
+type cells = Array<JSX.Element | number | string>;
 
 /*
 The table/list which displays metering report data for the Standard Report Type. 

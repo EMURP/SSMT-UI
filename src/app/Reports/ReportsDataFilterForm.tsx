@@ -25,10 +25,10 @@ type myState = {
     changingReportFrequency: boolean;
 };
 export type dataObject = {
-    namespace: Element;
-    podUsageCpuCoreSeconds: Element;
-    network: Element;
-    memory: Element;
+    namespace: string;
+    podUsageCpuCoreSeconds: number;
+    network: number;
+    memory: number;
 };
 
 const convertDateToUTC = (date: Date) => {
@@ -138,15 +138,15 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
 
         return (
             <div>
-                {/* {this.state.clusterData !== null && ( */}
-                <ReportsList
-                    key={'ReportsList'}
-                    startDate={this.state.startDate}
-                    endDate={this.state.endDate}
-                    columnTitle={columnTitle}
-                    tableData={this.state.clusterData}
-                />
-                {/* )} */}
+                {this.state.clusterData !== null && (
+                    <ReportsList
+                        key={'ReportsList'}
+                        startDate={this.state.startDate}
+                        endDate={this.state.endDate}
+                        columnTitle={columnTitle}
+                        tableData={this.state.clusterData}
+                    />
+                )}
             </div>
         );
     };
