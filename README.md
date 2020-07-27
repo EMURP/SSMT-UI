@@ -11,6 +11,17 @@ cd SSMT-UI # navigate into the project directory
 npm install # install project dependencies
 npm run start:dev # start the development server
 ```
+
+## Login
+
+To login, use one of the following username/password combinations.
+
+* Username = admin, password = admin
+* Username = developer1, password = developer1
+* Username = developer2, password = developer2
+
+Or log in using [CILogon](https://cilogon.org/) with your university or Google account. 
+
 ## Development Scripts
 
 Install development/build dependencies
