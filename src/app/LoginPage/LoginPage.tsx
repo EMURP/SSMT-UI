@@ -38,7 +38,15 @@ class LoginPage extends React.Component<LoginProps, LoginState> {
       // remove query & CILogon state from URL, without reloading page
       const urlWithoutQuery = window.location.protocol + "//" + window.location.host + window.location.pathname
       window.history.pushState({path: urlWithoutQuery}, '' ,urlWithoutQuery); 
-      this.props.setRole(Role.ADMIN)
+      this.props.setRole(Role.ADMIN);
+      localStorage.setItem('login', 'ADMIN');
+    } else if (localStorage.getItem('login')) {
+      const storedRole = localStorage.getItem('login');
+      if (storedRole === 'ADMIN') {
+        this.props.setRole(Role.ADMIN);
+      } else if (storedRole === 'DEVELOPER') {
+        this.props.setRole(Role.DEVELOPER);
+      }
     }
   }
 
@@ -57,8 +65,10 @@ class LoginPage extends React.Component<LoginProps, LoginState> {
     let role: Role;
     if (username === 'admin' && password === 'admin') {
       role = Role.ADMIN;
+      localStorage.setItem('login', 'ADMIN');
     } else if ((username === 'developer1' && password === 'developer1') || (username === 'developer2' && password === 'developer2')) {
       role = Role.DEVELOPER;
+      localStorage.setItem('login', 'DEVELOPER');
     } else {
       role = Role.NONE;
       this.setState({ ...this.state, error: "Invalid Username/Password" })
