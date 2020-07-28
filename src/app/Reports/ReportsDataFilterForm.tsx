@@ -2,9 +2,8 @@ import React from 'react';
 import { Grid, GridItem, Form, ActionGroup } from '@patternfly/react-core';
 import axios from 'axios';
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
-import { Button, Checkbox } from '@patternfly/react-core';
+import { Button } from '@patternfly/react-core';
 import ReportsList from './ReportsList';
-//import sampleData from './sampleReportData.json';
 import CsvDownload from 'react-json-to-csv';
 import ReportTypeDropdown from './ReportTypeDropdown';
 import ReportFrequencyDropdown from './ReportFrequencyDropdown';
@@ -108,14 +107,12 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
 
     setStartDate = (date: Date) => {
         date = new Date(date);
-        //date.setHours(this.state.startHrs);
         date.setDate(date.getDate() + 1);
         this.setState({ ...this.state, changingDate: true, startDate: new Date(date) });
     };
 
     setEndDate = (date: Date) => {
         date = new Date(date);
-        //date.setHours(this.state.endHrs);
         date.setDate(date.getDate() + 1);
         this.setState({ ...this.state, changingDate: true, endDate: new Date(date) });
     };
@@ -167,11 +164,7 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                     <Grid>
                         <GridItem span={2}>
                             <CsvDownload data={this.state.clusterData}>Download as CSV</CsvDownload>
-                            {/* <CsvDownload data={sampleData}>Download as CSV</CsvDownload> */}
                         </GridItem>
-                        {/* <GridItem span={2}>
-                            <Checkbox label="Generate Line Graph" onChange={this.toggleLineGraph} aria-label="toggle line graph" id="toggle-line-graph"/>
-                        </GridItem> */}
                     </Grid>
                     <Grid>
                         <GridItem span={2}>
