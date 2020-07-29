@@ -1,14 +1,4 @@
 import React, { EventHandler } from 'react';
-import {
-  Button,
-  InputGroup,
-  TextInput,
-  Dropdown,
-  DropdownToggle,
-  DropdownItem
-} from '@patternfly/react-core';
-
-
 
 type myProps = {
   setReportFrequency: Function;
@@ -44,14 +34,12 @@ class ReportFrequencyDropdown extends React.Component<myProps,myState>{
         } )}
       </select>
 
-      </React.Fragment>
-      
-    )
-    
+      </React.Fragment>      
+    )  
   }
 
   render() {
-    const reportTypes: Array<string> = ['Daily', 'Weekly', 'Monthly']
+    const reportTypes: Array<string> = ['day', 'week', 'month']
     return (
       
       <div>

@@ -2,12 +2,12 @@ import React from 'react';
 import '@patternfly/react-core/dist/styles/base.css';
 import { Table, TableHeader, TableBody, TableVariant, BodyCell } from '@patternfly/react-table';
 import { Link } from 'react-router-dom';
+import { dataObject } from './ReportsDataFilterForm';
 
 type myProps = {
   columnTitle: object;
-  tableData: Array<object>;
+  tableData: Array<dataObject>;
   startDate: Date;
-  endDate: Date;
 };
 
 type myState = {
@@ -19,7 +19,7 @@ type row = {
   cells: cells;
 };
 
-type cells = Array<string>;
+type cells = Array<JSX.Element | number | string>;
 
 /*
 The table/list which displays metering report data for the Standard Report Type. 
@@ -30,7 +30,6 @@ class ReportsList extends React.Component<myProps, myState> {
     super(myProps);
 
     const rowData: Array<row> = [];
-    console.log(myProps.tableData);
     myProps.tableData.forEach(dataRow => {
       rowData.push({
         cells: [
@@ -56,7 +55,6 @@ class ReportsList extends React.Component<myProps, myState> {
       rows: rowData
     };
   }
-
 
   shouldComponentUpdate(nextProps: myProps,nextState: myState){
     console.log(nextProps.tableData);
