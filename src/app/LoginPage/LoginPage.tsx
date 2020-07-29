@@ -18,7 +18,7 @@ async function getUserEmail(code: string) {
       "Content-Type": "application/x-www-form-urlencoded"
     },
     method: "POST",
-    body: `grant_type=authorization_code&client_id=cilogon:/client_id/566ba77604386302bd6e0f63cfa0efe0&client_secret=BAnTxybJlIIo_JUD311BB5gKKVZgkVWwCD8Mj088bpHPDlz8BuwlmPGi1VNKIeBJfr4zZF6nP8L80dJOSVnUww&redirect_uri=http://localhost:9000&code=${code}`
+    body: `grant_type=authorization_code&client_id=cilogon:/client_id/566ba77604386302bd6e0f63cfa0efe0&client_secret=${process.env.CILOGON_SECRET}&redirect_uri=http://localhost:9000&code=${code}`
   }).then(r => r.json());
   const userInfo = await fetch('https://cilogon.org/oauth2/userinfo', {
     headers: {

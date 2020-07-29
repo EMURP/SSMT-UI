@@ -20,7 +20,7 @@ To login, use one of the following username/password combinations.
 * Username = developer1, password = developer1
 * Username = developer2, password = developer2
 
-Or log in using [CILogon](https://cilogon.org/) with your university or Google account. 
+Or log in using [CILogon](https://cilogon.org/) with your university or Google account. You must set the CILOGON_SECRET environmental variable to do so. 
 
 ## Development Scripts
 
