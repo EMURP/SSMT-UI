@@ -2,7 +2,7 @@
 
 
 
-<img width="1058" alt="Out of box dashboard view of patternfly seed" src="https://user-images.githubusercontent.com/5942899/62715686-fa954980-b9ce-11e9-9fc2-217b7a4d1d81.png">
+<img width="1058" alt="Screenshot of main view" src="assets/Screenshot.PNG">
 
 ## Quick-start
 ```bash
