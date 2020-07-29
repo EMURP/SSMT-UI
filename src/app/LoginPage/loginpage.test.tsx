@@ -5,7 +5,7 @@ import { Role } from '..';
 
 describe('LoginPage tests', () => {
   test('should render default LoginPage component', () => {
-    const view = shallow(<LoginPage setRole={() => {}} />);
+    const view = shallow(<LoginPage setRole={() => {}} setEmail={() => {}} />);
     expect(view).toMatchSnapshot();
   });
 
@@ -14,9 +14,9 @@ describe('LoginPage tests', () => {
     delete window.location;
     // @ts-ignore mock window location to include CILogon code
     window.location = {
-        href: 'http://localhost:9000/?code=123',
+        search: '?code=123',
     };
-    shallow(<LoginPage setRole={setRole} />);
+    shallow(<LoginPage setRole={setRole} setEmail={() => {}} />);
     expect(setRole).toBeCalledWith(Role.ADMIN)
   })
 });
