@@ -22,7 +22,7 @@ describe('ReportsList tests', () => {
         network: 'Network Usage in Megabits per Second',
         memory: 'Memory Usage in Gigabytes'
     }
-    const view = shallow(<ReportsList key={'ReportsList'} startDate={testDate} endDate={testDate}
+    const view = shallow(<ReportsList key={'ReportsList'} startDate={testDate}
         tableData={testTableData} columnTitle={testColumnTitle}/>);
     expect(view).toMatchSnapshot();
   })

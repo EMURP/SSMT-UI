@@ -16,15 +16,6 @@ exports[`Reports Page Filter Form tests should render default Reports page filte
           key="StartDate"
         />
       </Component>
-      <Component
-        span={2}
-      >
-        <SimpleInputGroups
-          changeDate={[Function]}
-          dateType="EndDate"
-          key="EndDate"
-        />
-      </Component>
     </Component>
     <Component>
       <Component
@@ -42,7 +33,7 @@ exports[`Reports Page Filter Form tests should render default Reports page filte
         span={2}
       >
         <ReportTypeDropdown
-          ReportType=""
+          ReportType="standard"
           setReportType={[Function]}
         />
       </Component>
@@ -52,7 +43,7 @@ exports[`Reports Page Filter Form tests should render default Reports page filte
         span={2}
       >
         <ReportFrequencyDropdown
-          ReportFrequency=""
+          ReportFrequency="day"
           setReportFrequency={[Function]}
         />
       </Component>
