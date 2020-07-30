@@ -12,7 +12,6 @@ import ReportsAnalytical from './ReportsAnalytical';
 type myProps = {};
 type myState = {
     startDate: Date;
-    //endDate: Date;
     conditionalRender: number;
     changingDate: boolean;
     api: string;
@@ -44,12 +43,8 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
     constructor(myProps) {
         super(myProps);
 
-        const startDate = new Date();
-        const endDate = new Date();
-
         this.state = {
             startDate: new Date(),
-            //endDate: new Date(),
             conditionalRender: 0,
             changingDate: true,
             api: 'https://ba2ce7a1-886d-4b07-aa05-7711f84006ec.mock.pstmn.io/reports',
@@ -92,7 +87,6 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
     changeToggle() {
         this.callAPI(true);
     }
-
 
     setStartDate = (date: Date) => {
         date = new Date(date);
@@ -146,8 +140,9 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
             this.state.clusterData['reports'].forEach(clusterInfo => {
                 tableData.push({
                     namespace: clusterInfo['namespace'],
-                    // Note it is pod *request* because this is what the Postman api call returns.
-                    // I want to ensure that table info renders. Should be *usage*!
+                    // Note: The line below should be `podUsageCpuCoreSeconds: clusterInfo['pod_usage_cpu_core_seconds']`
+                    // The mock API call only supports 'pod_request_cpu_core_seconds' but 
+                    // I want to ensure that the value gets rendered.
                     podUsageCpuCoreSeconds: clusterInfo['pod_request_cpu_core_seconds'],
                     network: clusterInfo['network'],
                     memory: clusterInfo['memory']
@@ -173,20 +168,23 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
     // lines denoting CPU, network, and memory usage.
     renderAnalytical = () => {
         const columnTitle = {};
+        let idx = 0;
         return (
             <div>
                 {this.state.clusterData !== null && (this.state.clusterData['reports']
-                    .map((value, index) => {
+                    .map((value, idx) => {
+                        idx++;
                         return (
                             <ReportsAnalytical
-                                key={index}
+                                key={idx}
+                                indexNum={idx}
                                 columnTitle={columnTitle}
                                 cpuUsage={value['cpu_usage']}
                                 networkUsage={value['network_usage']}
                                 memoryUsage={value['memory_usage']}
                                 namespace={value['namespace']}
                                 startDate={this.state.startDate}
-                                reportFrequency={"weekly"} />)
+                                reportFrequency={this.state.reportFrequency} />)
                     }))}
             </div>
         )

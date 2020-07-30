@@ -3,6 +3,7 @@ import React, { Component, ObjectHTMLAttributes } from "react";
 import ReactApexChart from "react-apexcharts";
 
 type myProps = {
+  indexNum: number,
   columnTitle: object;
   cpuUsage: object;
   networkUsage: object;
@@ -24,18 +25,18 @@ class ReportsAnalytical extends React.Component<myProps, myState> {
     super(props);
 
     this.state = {
-      series:  [{
+      series: [{
         name: 'CPU Usage',
         type: 'line',
-        data: this.props.cpuUsage 
+        data: this.props.cpuUsage
       }, {
         name: 'Network Usage',
         type: 'line',
-        data: this.props.networkUsage 
+        data: this.props.networkUsage
       }, {
         name: 'Memory Usage',
         type: 'line',
-        data: this.props.memoryUsage 
+        data: this.props.memoryUsage
       }],
       options: {
         chart: {
@@ -50,7 +51,8 @@ class ReportsAnalytical extends React.Component<myProps, myState> {
           width: [1, 1, 4]
         },
         title: {
-          text: 'Analytical Report: '+this.props.namespace+this.props.startDate+'\n'+this.props.reportFrequency,
+          text: 'Namespace: ' + this.props.namespace + ' Start Date: ' + this.props.startDate + ' '
+            + this.props.reportFrequency + ': ' + this.props.indexNum,
           align: 'left',
           offsetX: 110
         },
@@ -156,12 +158,12 @@ class ReportsAnalytical extends React.Component<myProps, myState> {
         break;
       case "weekly":
         for (var i = 0; i < 7; i++) {
-          xScale.push(new Date(startDate.getTime() + i*24*60*60*1000).toDateString());
+          xScale.push(new Date(startDate.getTime() + i * 24 * 60 * 60 * 1000).toDateString());
         }
         break;
       default: //daily as default 
         for (var i = 0; i < 4; i++) {
-         //TODO: generate a scale of 24 hours
+          //TODO: generate a scale of 24 hours
         }
     }
     return xScale;
