@@ -63,10 +63,10 @@ class LoginPage extends React.Component<LoginProps, LoginState> {
     // dynamic call
     const { username, password } = this.state;
     let role: Role;
-    if (username === 'admin' && password === 'admin') {
+    if (username === 'admin' && password === 'adminpass') {
       role = Role.ADMIN;
       localStorage.setItem('login', 'ADMIN');
-    } else if ((username === 'developer1' && password === 'developer1') || (username === 'developer2' && password === 'developer2')) {
+    } else if ((username === 'developer1' && password === 'developer1pass') || (username === 'developer2' && password === 'developer2pass')) {
       role = Role.DEVELOPER;
       localStorage.setItem('login', 'DEVELOPER');
     } else {

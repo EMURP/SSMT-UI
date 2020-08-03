@@ -16,9 +16,9 @@ npm run start:dev # start the development server
 
 To login, use one of the following username/password combinations.
 
-* Username = admin, password = admin
-* Username = developer1, password = developer1
-* Username = developer2, password = developer2
+* Username = admin, password = adminpass
+* Username = developer1, password = developer1pass
+* Username = developer2, password = developer2pass
 
 Or log in using [CILogon](https://cilogon.org/) with your university or Google account. 
 
