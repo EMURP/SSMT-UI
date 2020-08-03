@@ -1,14 +1,4 @@
 import React, { EventHandler } from 'react';
-import {
-  Button,
-  InputGroup,
-  TextInput,
-  Dropdown,
-  DropdownToggle,
-  DropdownItem
-} from '@patternfly/react-core';
-
-
 
 type myProps = {
   setReportType: Function;
@@ -46,14 +36,12 @@ class ReportTypeDropdown extends React.Component<myProps,myState>{
 
       </React.Fragment>
       
-    )
-    
+    )    
   }
 
   render() {
-    const reportTypes: Array<string> = ['Standard Report', 'Analytical Report', 'Custom Report']
-    return (
-      
+    const reportTypes: Array<string> = ['standard', 'analytics', 'custom']
+    return (   
       <div>
         {this.createDropDowns("Report Type",reportTypes,this.ReportType,this.props.ReportType)}
       </div>

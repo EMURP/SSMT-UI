@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, GridItem, Form, ActionGroup } from '@patternfly/react-core';
+import { Grid, GridItem, Form, ActionGroup, Alert } from '@patternfly/react-core';
 import axios from 'axios';
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
 import { Button } from '@patternfly/react-core';
@@ -7,11 +7,11 @@ import ReportsList from './ReportsList';
 import CsvDownload from 'react-json-to-csv';
 import ReportTypeDropdown from './ReportTypeDropdown';
 import ReportFrequencyDropdown from './ReportFrequencyDropdown';
+import ReportsAnalytical from './ReportsAnalytical';
 
 type myProps = {};
 type myState = {
     startDate: Date;
-    endDate: Date;
     conditionalRender: number;
     changingDate: boolean;
     api: string;
@@ -43,22 +43,17 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
     constructor(myProps) {
         super(myProps);
 
-        const startDate = new Date();
-        const endDate = new Date();
-
         this.state = {
             startDate: new Date(),
-            endDate: new Date(),
             conditionalRender: 0,
             changingDate: true,
-            // TODO: update api from backend once available
-            api: 'https://c507295a-b340-4a31-a144-749e6fb4c08a.mock.pstmn.io/project_list_with_activation_time',
+            api: 'https://ba2ce7a1-886d-4b07-aa05-7711f84006ec.mock.pstmn.io/reports',
             clusterData: null,
             err: null,
             isLoaded: false,
-            reportType: '',
+            reportType: 'standard',
             changingReportType: false,
-            reportFrequency: '',
+            reportFrequency: 'day',
             changingReportFrequency: false
         };
 
@@ -72,28 +67,17 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
 
 
     callAPI(onSubmit) {
-        const startDate = new Date(convertDateToUTC(this.state.startDate)).toISOString().split('.')[0] + 'Z';
-        const endDate = new Date(convertDateToUTC(this.state.endDate)).toISOString().split('.')[0] + 'Z';
+        const startDate = new Date(convertDateToUTC(this.state.startDate)).toISOString().split('T', 1)[0];
 
         let apiUrl = this.state.api;
         if (onSubmit) {
-            apiUrl = apiUrl + '/' + startDate + '/' + endDate;
+            apiUrl = apiUrl + '/' + this.state.reportType + '?start=' + startDate + '&frequency=' + this.state.reportFrequency;
         }
 
         axios
             .get(apiUrl)
             .then(res => {
-                const tableData: Array<dataObject> = [];
-                res.data.forEach(clusterInfo => {
-                    tableData.push({
-                        namespace: clusterInfo['namespace'],
-                        podUsageCpuCoreSeconds: clusterInfo['pod_usage_cpu_core_seconds'],
-                        network: clusterInfo['network'],
-                        memory: clusterInfo['memory']
-
-                    });
-                });
-                this.setState({ ...this.state, isLoaded: true, clusterData: tableData });
+                this.setState({ ...this.state, isLoaded: true, clusterData: res.data });
             })
             .catch(err => {
                 this.setState({ ...this.state, isLoaded: false, err: err });
@@ -104,17 +88,10 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         this.callAPI(true);
     }
 
-
     setStartDate = (date: Date) => {
         date = new Date(date);
         date.setDate(date.getDate() + 1);
         this.setState({ ...this.state, changingDate: true, startDate: new Date(date) });
-    };
-
-    setEndDate = (date: Date) => {
-        date = new Date(date);
-        date.setDate(date.getDate() + 1);
-        this.setState({ ...this.state, changingDate: true, endDate: new Date(date) });
     };
 
     setReportType = (aType: string) => {
@@ -125,7 +102,31 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         this.setState({ ...this.state, changingReportFrequency: true, reportFrequency: aFrequency });
     };
 
-    renderTable = () => {
+    renderReport = () => {
+        switch (this.state.reportType) {
+            case 'standard':
+                return (this.renderStandard());
+            case 'analytics':
+                return (this.renderAnalytical());
+            case '':
+                return (this.renderReportingError('Unable to generate report. Report Type not specified.'));
+            default:
+                return (this.renderReportingError('Unable to generate report. Report Type not yet supported.'));
+        }
+    }
+
+    // Renders a error banner which displays a provided string value
+    renderReportingError(message: string) {
+        return (
+            <React.Fragment>
+                <Alert variant="danger" isInline title={message} />
+            </React.Fragment>
+        )
+    }
+
+    // Generates a standard report, a table with columns for namespace, cpu usage, network usage, 
+    // and memory usage. 
+    renderStandard = () => {
         const columnTitle = {
             namespace: 'Report Name',
             podUsageCpuCoreSeconds: 'Pod CPU Usage in Seconds',
@@ -133,20 +134,61 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
             memory: 'Memory Usage in Gigabytes'
         };
 
+        const tableData: Array<dataObject> = [];
+
+        if (this.state.clusterData !== null) {
+            this.state.clusterData['reports'].forEach(clusterInfo => {
+                tableData.push({
+                    namespace: clusterInfo['namespace'],
+                    // Note: The line below should be `podUsageCpuCoreSeconds: clusterInfo['pod_usage_cpu_core_seconds']`
+                    // The mock API call only supports 'pod_request_cpu_core_seconds' but 
+                    // I want to ensure that the value gets rendered.
+                    podUsageCpuCoreSeconds: clusterInfo['pod_request_cpu_core_seconds'],
+                    network: clusterInfo['network'],
+                    memory: clusterInfo['memory']
+                })
+            })
+        }
+
         return (
             <div>
                 {this.state.clusterData !== null && (
                     <ReportsList
                         key={'ReportsList'}
                         startDate={this.state.startDate}
-                        endDate={this.state.endDate}
                         columnTitle={columnTitle}
-                        tableData={this.state.clusterData}
+                        tableData={tableData}
                     />
                 )}
             </div>
         );
     };
+
+    // Generates an analytical report: line graphs for each namespace with
+    // lines denoting CPU, network, and memory usage.
+    renderAnalytical = () => {
+        const columnTitle = {};
+        let idx = 0;
+        return (
+            <div>
+                {this.state.clusterData !== null && (this.state.clusterData['reports']
+                    .map((value, idx) => {
+                        idx++;
+                        return (
+                            <ReportsAnalytical
+                                key={idx}
+                                indexNum={idx}
+                                columnTitle={columnTitle}
+                                cpuUsage={value['cpu_usage']}
+                                networkUsage={value['network_usage']}
+                                memoryUsage={value['memory_usage']}
+                                namespace={value['namespace']}
+                                startDate={this.state.startDate}
+                                reportFrequency={this.state.reportFrequency} />)
+                    }))}
+            </div>
+        )
+    }
 
     render() {
         return (
@@ -156,9 +198,6 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                     <Grid>
                         <GridItem span={2}>
                             <SimpleInputGroups changeDate={this.setStartDate} dateType="StartDate" key="StartDate" />
-                        </GridItem>
-                        <GridItem span={2}>
-                            <SimpleInputGroups changeDate={this.setEndDate} dateType="EndDate" key="EndDate" />
                         </GridItem>
                     </Grid>
                     <Grid>
@@ -185,7 +224,7 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                     </Grid>
                     <Grid>
                         <GridItem span={4} rowSpan={8}>
-                            {this.state.isLoaded && this.renderTable()}
+                            {this.state.isLoaded && this.renderReport()}
                             {!this.state.isLoaded && this.state.err !== null && <div>{this.state.err.toString()}</div>}
                         </GridItem>
                     </Grid>

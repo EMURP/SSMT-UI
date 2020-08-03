@@ -8,7 +8,6 @@ type myProps = {
   columnTitle: object;
   tableData: Array<dataObject>;
   startDate: Date;
-  endDate: Date;
 };
 
 type myState = {
@@ -31,7 +30,6 @@ class ReportsList extends React.Component<myProps, myState> {
     super(myProps);
 
     const rowData: Array<row> = [];
-    console.log(myProps.tableData);
     myProps.tableData.forEach(dataRow => {
       rowData.push({
         cells: [
@@ -57,7 +55,6 @@ class ReportsList extends React.Component<myProps, myState> {
       rows: rowData
     };
   }
-
 
   shouldComponentUpdate(nextProps: myProps,nextState: myState){
     console.log(nextProps.tableData);
