@@ -6,6 +6,7 @@ exports[`App tests should render default App component 1`] = `
   role="heading"
 >
   <LoginPage
+    setEmail={[Function]}
     setRole={[Function]}
   />
 </div>

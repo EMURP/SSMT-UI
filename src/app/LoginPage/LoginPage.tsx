@@ -10,6 +10,26 @@ import * as OAuth from 'oauth2-client-js';
 
 import { Role } from '..';
 import mocLogo from './moc_logo.png';
+
+// get user info from CILogon
+async function getUserEmail(code: string) {
+  const { access_token } = await fetch('https://cilogon.org/oauth2/token', {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    method: "POST",
+    body: `grant_type=authorization_code&client_id=cilogon:/client_id/566ba77604386302bd6e0f63cfa0efe0&client_secret=${process.env.CILOGON_SECRET}&redirect_uri=http://localhost:9000&code=${code}`
+  }).then(r => r.json());
+  const userInfo = await fetch('https://cilogon.org/oauth2/userinfo', {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    method: 'POST',
+    body: `access_token=${access_token}`
+  }).then(r => r.json());
+  return userInfo.email;
+}
+
 type LoginState = {
   username: string;
   password: string;
@@ -19,6 +39,7 @@ type LoginState = {
 
 type LoginProps = {
   setRole: Function;
+  setEmail: Function;
 };
 
 class LoginPage extends React.Component<LoginProps, LoginState> {
@@ -32,14 +53,21 @@ class LoginPage extends React.Component<LoginProps, LoginState> {
   }
 
   // Detect if CILogon has authenticated, then log into app if it has.
-  componentDidMount() {
-    const query = new URL(window.location.href).search;
+  async componentDidMount() {
+    const query = window.location.search;
     if (query.includes('code')) { // CILogon has returned with code
       // remove query & CILogon state from URL, without reloading page
+      console.log('hi')
+      const code = new URLSearchParams(query).get('code');
       const urlWithoutQuery = window.location.protocol + "//" + window.location.host + window.location.pathname
-      window.history.pushState({path: urlWithoutQuery}, '' ,urlWithoutQuery); 
+      window.history.pushState({ path: urlWithoutQuery }, '', urlWithoutQuery);
       this.props.setRole(Role.ADMIN);
       localStorage.setItem('login', 'ADMIN');
+      if (code) {
+        const email = await getUserEmail(code);
+        this.props.setEmail(email);
+        localStorage.setItem('email', email);
+      }
     } else if (localStorage.getItem('login')) {
       const storedRole = localStorage.getItem('login');
       if (storedRole === 'ADMIN') {
@@ -47,6 +75,9 @@ class LoginPage extends React.Component<LoginProps, LoginState> {
       } else if (storedRole === 'DEVELOPER') {
         this.props.setRole(Role.DEVELOPER);
       }
+    }
+    if (localStorage.getItem('email')) {
+      this.props.setEmail(localStorage.getItem('email'));
     }
   }
 
@@ -87,7 +118,7 @@ class LoginPage extends React.Component<LoginProps, LoginState> {
     var request = new OAuth.Request({
       client_id: 'cilogon:/client_id/566ba77604386302bd6e0f63cfa0efe0',  // required
       redirect_uri: 'http://localhost:9000',
-      scope: 'openid+profile+email+org.cilogon.userinfo+edu.uiuc.ncsa.myproxy.getcert',
+      scope: 'openid+profile+email+org.cilogon.userinfo',
       response_type: 'code'
     });
 
@@ -99,7 +130,7 @@ class LoginPage extends React.Component<LoginProps, LoginState> {
   }
 
   render() {
-    
+
     const loginForm = (
       <LoginForm
         showHelperText={!!this.state.error}
@@ -117,7 +148,7 @@ class LoginPage extends React.Component<LoginProps, LoginState> {
 
     return (
       <PatternflyLoginPage
-        style={{ 
+        style={{
           background: 'linear-gradient(0deg, gray, transparent)',
         }}
         footerListVariants={ListVariant.inline}

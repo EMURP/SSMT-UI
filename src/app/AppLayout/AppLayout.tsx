@@ -20,10 +20,11 @@ import { css } from '@patternfly/react-styles';
 interface IAppLayout {
   children: React.ReactNode;
   role: Role;
+  email: string;
   logout: Function;
 }
 
-const AppLayout: React.FunctionComponent<IAppLayout> = ({ children, role, logout }) => {
+const AppLayout: React.FunctionComponent<IAppLayout> = ({ children, role, email, logout }) => {
   
   const [isNavOpen, setIsNavOpen] = React.useState(true);
   const [isMobileView, setIsMobileView] = React.useState(true);
@@ -44,7 +45,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children, role, logout
       headerTools={
         <PageHeaderTools>
           <a className={css(styles.pageHeaderBrandLink)}>
-          {RoleMap[role]}
+          {email || RoleMap[role]}
           </a>
           &nbsp;
           <Button onClick={() => logout()}> LOGOUT </Button>

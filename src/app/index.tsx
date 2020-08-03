@@ -9,6 +9,7 @@ import { LoginPage } from './LoginPage/LoginPage';
 
 type myState = {
   role: Role;
+  email?: string;
 };
 
 export const enum Role {
@@ -32,18 +33,23 @@ class App extends React.Component<myProps, myState> {
     this.setState({ role: role });
   }
 
+  handleEmailChange = (email: string) => {
+    this.setState({ email });
+  }
+
   logout = () => {
-    this.setState({ role: Role.NONE });
-    localStorage.removeItem('login')
+    this.setState({ role: Role.NONE, email: ''});
+    localStorage.removeItem('login');
+    localStorage.removeItem('email');
   }
 
   render() {
     return (
       <div role="heading" aria-label="OCP Metering">
-        {this.state.role=== Role.NONE && <LoginPage setRole={this.handleRoleChange}/>}
+        {this.state.role=== Role.NONE && <LoginPage setRole={this.handleRoleChange} setEmail={this.handleEmailChange} />}
         {this.state.role !== Role.NONE && (
           <Router>
-            <AppLayout role={this.state.role} logout={this.logout}>
+            <AppLayout role={this.state.role} logout={this.logout} email={this.state.email || ''}>
               <AppRoutes />
             </AppLayout>
           </Router>
