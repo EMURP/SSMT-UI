@@ -8,7 +8,7 @@ exports[`Reports Page Filter Form tests should render default Reports page filte
     </div>
     <Component>
       <Component
-        span={2}
+        span={8}
       >
         <SimpleInputGroups
           changeDate={[Function]}
@@ -19,7 +19,7 @@ exports[`Reports Page Filter Form tests should render default Reports page filte
     </Component>
     <Component>
       <Component
-        span={2}
+        span={6}
       >
         <CsvDownload
           data={null}
@@ -30,7 +30,7 @@ exports[`Reports Page Filter Form tests should render default Reports page filte
     </Component>
     <Component>
       <Component
-        span={2}
+        span={8}
       >
         <ReportTypeDropdown
           ReportType="standard"
@@ -40,7 +40,7 @@ exports[`Reports Page Filter Form tests should render default Reports page filte
     </Component>
     <Component>
       <Component
-        span={2}
+        span={8}
       >
         <ReportFrequencyDropdown
           ReportFrequency="day"
@@ -51,7 +51,7 @@ exports[`Reports Page Filter Form tests should render default Reports page filte
     <Component>
       <Component>
         <Component
-          span={1}
+          span={6}
         >
           <Component
             onClick={[Function]}
@@ -64,7 +64,7 @@ exports[`Reports Page Filter Form tests should render default Reports page filte
     <Component>
       <Component
         rowSpan={8}
-        span={4}
+        span={10}
       />
     </Component>
   </Component>

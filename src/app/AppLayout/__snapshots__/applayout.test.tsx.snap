@@ -95,14 +95,6 @@ exports[`AppLayout tests should render AppLayout component 1`] = `
       theme="dark"
     />
   }
-  skipToContent={
-    <SkipToContent
-      href="#primary-app-container"
-      show={false}
-    >
-      Skip to Content
-    </SkipToContent>
-  }
 >
   <span />
 </Page>
