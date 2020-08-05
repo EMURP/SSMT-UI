@@ -196,34 +196,34 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                 <Form>
                     <div>Select a date range to view available Daily, Weekly, and Monthly reports.</div>
                     <Grid>
-                        <GridItem span={2}>
+                        <GridItem span={8}>
                             <SimpleInputGroups changeDate={this.setStartDate} dateType="StartDate" key="StartDate" />
                         </GridItem>
                     </Grid>
                     <Grid>
-                        <GridItem span={2}>
+                        <GridItem span={6}>
                             <CsvDownload data={this.state.clusterData}>Download as CSV</CsvDownload>
                         </GridItem>
                     </Grid>
                     <Grid>
-                        <GridItem span={2}>
+                        <GridItem span={8}>
                             <ReportTypeDropdown setReportType={this.setReportType} ReportType={this.state.reportType} />
                         </GridItem>
                     </Grid>
                     <Grid>
-                        <GridItem span={2}>
+                        <GridItem span={8}>
                             <ReportFrequencyDropdown setReportFrequency={this.setReportFrequency} ReportFrequency={this.state.reportFrequency} />
                         </GridItem>
                     </Grid>
                     <Grid>
                         <ActionGroup>
-                            <GridItem span={1}>
+                            <GridItem span={6}>
                                 <Button onClick={() => this.changeToggle()}>Submit</Button>
                             </GridItem>
                         </ActionGroup>
                     </Grid>
                     <Grid>
-                        <GridItem span={4} rowSpan={8}>
+                        <GridItem span={10} rowSpan={8}>
                             {this.state.isLoaded && this.renderReport()}
                             {!this.state.isLoaded && this.state.err !== null && <div>{this.state.err.toString()}</div>}
                         </GridItem>

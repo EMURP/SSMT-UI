@@ -9,8 +9,7 @@ import {
   PageSidebar,
   SkipToContent,
   PageHeaderTools,
-  Button,
-  Text
+  Button
 } from '@patternfly/react-core';
 import { routes } from '@app/routes';
 import { Role, RoleMap } from '@app/index';
@@ -73,7 +72,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children, role, logout
     </Nav>
   );
   const Sidebar = <PageSidebar theme="dark" nav={Navigation} isNavOpen={isMobileView ? isNavOpenMobile : isNavOpen} />;
-  const PageSkipToContent = <SkipToContent href="#primary-app-container">Skip to Content</SkipToContent>;
+  //const PageSkipToContent = <SkipToContent href="#primary-app-container">Skip to Content</SkipToContent>;
 
   return (
     <Page
@@ -81,7 +80,7 @@ const AppLayout: React.FunctionComponent<IAppLayout> = ({ children, role, logout
       header={Header}
       sidebar={Sidebar}
       onPageResize={onPageResize}
-      skipToContent={PageSkipToContent}
+     // skipToContent={PageSkipToContent}
     >
       {children}
     </Page>
