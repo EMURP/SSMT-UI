@@ -153,7 +153,7 @@ class LoginPage extends React.Component<LoginProps, LoginState> {
         }}
         footerListVariants={ListVariant.inline}
         footerListItems={[
-          <Button onClick={this.handleCiLogon} key="cilogon">Login with CILogon</Button>
+          <Button onClick={this.handleCiLogon} key="cilogon">Login with Institution/Google Account</Button>
         ]}
         brandImgSrc={mocLogo}
         brandImgAlt="MOC logo"
