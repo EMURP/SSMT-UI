@@ -9,7 +9,7 @@ exports[`LoginPage tests should render default LoginPage component 1`] = `
       <Unknown
         onClick={[Function]}
       >
-        Login with CILogon
+        Login with Institution/Google Account
       </Unknown>,
     ]
   }
