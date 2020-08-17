@@ -155,31 +155,31 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
       <React.Fragment>
         <Form>
           <Grid>
-            <GridItem span={2}>
+            <GridItem span={6}>
               <SimpleInputGroups changeDate={this.setStartDate} dateType="StartDate" key="StartDate" />
               {/* {convertDateToUTC(this.state.startDate).toISOString()} */}
             </GridItem>
-            <GridItem span={2}>
+            <GridItem span={6}>
               <SimpleInputGroups changeDate={this.setEndDate} dateType="EndDate" key="EndDate" />
             </GridItem>
           </Grid>
           <Grid>
-            <GridItem span={2}>
+            <GridItem span={6}>
               <DropdownComponent key={'startHrs'} setHrs={this.setStartHrs} Hrs={this.state.startHrs} />
             </GridItem>
-            <GridItem span={2}>
+            <GridItem span={6}>
               <DropdownComponent key={'endHrs'} setHrs={this.setEndHrs} Hrs={this.state.endHrs} />
             </GridItem>
           </Grid>
           <Grid>
             <ActionGroup>
-              <GridItem span={1}>
+              <GridItem span={6}>
                 <Button onClick={() => this.changeToggle()}>Search</Button>
               </GridItem>
             </ActionGroup>
           </Grid>
           <Grid>
-            <GridItem span={4} rowSpan={8}>
+            <GridItem span={11} rowSpan={8}>
               {/* <ProjectListTable
               changingDate={this.state.changingDate}
               renderCount={this.state.conditionalRender}
