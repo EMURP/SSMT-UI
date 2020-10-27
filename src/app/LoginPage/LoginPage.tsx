@@ -1,15 +1,16 @@
 import React from 'react';
 import {
-  LoginForm,
   LoginPage as PatternflyLoginPage,
   ListVariant,
   Button
 } from '@patternfly/react-core';
+import { LoginForm } from './LoginPageForm';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 import * as OAuth from 'oauth2-client-js';
 
 import { Role } from '..';
 import mocLogo from './moc_logo.png';
+import { ResetPasswordForm } from './ResetPasswordForm';
 
 // get user info from CILogon
 async function getUserEmail(code: string) {
@@ -35,6 +36,15 @@ type LoginState = {
   password: string;
   submit: boolean;
   error?: string;
+  isLoginPage: boolean;
+};
+
+type ResetPasswordState = {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+  submit: boolean;
+  error?: string;
 };
 
 type LoginProps = {
@@ -42,17 +52,20 @@ type LoginProps = {
   setEmail: Function;
 };
 
-class LoginPage extends React.Component<LoginProps, LoginState> {
+class LoginPage extends React.Component<LoginProps, LoginState, ResetPasswordState> {
   constructor(props: LoginProps) {
     super(props);
     this.state = {
       username: '',
       password: '',
       submit: false,
+      isLoginPage: true,
     };
+
+
   }
 
-  // Detect if CILogon has authenticated, then log into app if it has.
+  // Detect if CILogon has authenticated, then log into app
   async componentDidMount() {
     const query = window.location.search;
     if (query.includes('code')) { // CILogon has returned with code
@@ -129,6 +142,13 @@ class LoginPage extends React.Component<LoginProps, LoginState> {
     window.location.href = uri;
   }
 
+  showResetPasswordScreen = () => {
+    this.setState({ isLoginPage: false });
+  }
+  showLoginScreen = () => {
+    this.setState({ isLoginPage: true });
+  }
+
   render() {
 
     const loginForm = (
@@ -143,10 +163,27 @@ class LoginPage extends React.Component<LoginProps, LoginState> {
         passwordValue={this.state.password}
         onChangePassword={this.handlePasswordChange}
         onLoginButtonClick={this.handleSubmit}
+        onResetButtonClick={this.showResetPasswordScreen}
+      />
+
+    );
+
+    const resetForm = (
+      <ResetPasswordForm
+        showHelperText={!!this.state.error}
+        helperText={this.state.error}
+        helperTextIcon={<ExclamationCircleIcon />}
+        oldPasswordValue={this.state.username}
+        onChangeUsername={this.handleUsernameChange}
+        newPasswordValue={this.state.password}
+        onChangePassword={this.handlePasswordChange}
+        onLoginButtonClick={this.handleSubmit}
+        onResetButtonClick={this.showLoginScreen}
       />
     );
 
     return (
+
       <PatternflyLoginPage
         style={{
           background: 'linear-gradient(0deg, gray, transparent)',
@@ -158,11 +195,11 @@ class LoginPage extends React.Component<LoginProps, LoginState> {
         brandImgSrc={mocLogo}
         brandImgAlt="MOC logo"
         textContent="Mass Open Cloud OCP Metering"
-        loginTitle="Log in to your account"
-        loginSubtitle="Please use your MOC credentials"
+        loginTitle={this.state.isLoginPage ? "Log in to your account" : "Reset Your Password"}
+        loginSubtitle={this.state.isLoginPage ? "Please use your MOC credentials" : "Please use your MOC previous credentials to reset your password"}
       >
-        {loginForm}
-      </PatternflyLoginPage>
+        {this.state.isLoginPage ? loginForm : resetForm}
+      </PatternflyLoginPage >
     );
   }
 }
