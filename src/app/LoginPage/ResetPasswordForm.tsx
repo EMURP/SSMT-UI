@@ -5,34 +5,48 @@ import { Button } from '@patternfly/react-core/src/components/Button';
 import { ValidatedOptions } from '@patternfly/react-core/src/helpers/constants';
 
 export interface LoginFormProps extends React.HTMLProps<HTMLFormElement> {
+    /** Flag to indicate if the first dropdown item should not gain initial focus */
     noAutoFocus?: boolean;
     /** Additional classes added to the Login Main Body's Form */
-    
     className?: string;
+    /** Flag indicating the Helper Text is visible * */
     showHelperText?: boolean;
+    /** Content displayed in the Helper Text component * */
     helperText?: React.ReactNode;
+    /** Icon displayed to the left in the Helper Text */
     helperTextIcon?: React.ReactNode;
+    /** Label for the Username Input Field */
     oldPasswordLabel?: string;
+    /** Value for the Username */
     oldPasswordValue?: string;
-    onChangeUsername?: (value: string, event: React.FormEvent<HTMLInputElement>) => void;
+    onChangeOldPassword?: (value: string, event: React.FormEvent<HTMLInputElement>) => void;
+    /** Function that handles the onChange event for the Username */
+    onBlurOldPasswordValue?: (event: React.FocusEvent<HTMLInputElement>) => void;
+    /** Flag indicating if the Username is valid */
     isValidUsername?: boolean;
+    /** Label for the Password Input Field */
     newPasswordLabel?: string;
     confirmPasswordLabel?: string;
-   
+    /** Value for the Password */
     newPasswordValue?: string;
     confirmPasswordValue?: string;
-    /** Function that handles the onChange event for the Password */    
-    
-    onChangePassword?: (value: string, event: React.FormEvent<HTMLInputElement>) => void;
+    /** Function that handles the onChange event for the Password */
+    onChangeNewPassword?: (value: string, event: React.FormEvent<HTMLInputElement>) => void;
+    onChangeConfirmPassword?: (value: string, event: React.FormEvent<HTMLInputElement>) => void;
+    /** Flag indicating if the Password is valid */
     isValidPassword?: boolean;
+    /** Label for the Log in Button Input */
     resetButtonLabel?: string;
+    /** Flag indicating if the Login Button is disabled */
     isResetButtonDisabled?: boolean;
     /** Function that is called when the Login button is clicked */
-    
     onLoginButtonClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     onResetButtonClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    /** Label for the Remember Me Checkbox that indicates the user should be kept logged in.  If the label is not provided, the checkbox will not show. */
     rememberMeLabel?: string;
+    /** Flag indicating if the remember me Checkbox is checked. */
     isRememberMeChecked?: boolean;
+    /** Function that handles the onChange event for the Remember Me Checkbox */
     onChangeRememberMe?: (checked: boolean, event: React.FormEvent<HTMLInputElement>) => void;
 }
 
@@ -44,13 +58,15 @@ export const ResetPasswordForm: React.FunctionComponent<LoginFormProps> = ({
     helperTextIcon = null,
     oldPasswordLabel = 'Old Password',
     oldPasswordValue = '',
-    onChangeUsername = () => undefined as any,
+    onChangeOldPassword = () => undefined as any,
+    onBlurOldPasswordValue = () => undefined as any,
     isValidUsername = true,
     newPasswordLabel = 'New Password',
     newPasswordValue = '',
     confirmPasswordLabel = 'Confirm New Password',
     confirmPasswordValue = '',
-    onChangePassword = () => undefined as any,
+    onChangeNewPassword = () => undefined as any,
+    onChangeConfirmPassword = () => undefined as any,
     isValidPassword = true,
     resetButtonLabel = 'Reset Password',
     isResetButtonDisabled = false,
@@ -79,7 +95,8 @@ export const ResetPasswordForm: React.FunctionComponent<LoginFormProps> = ({
                     type="text"
                     name="pf-login-username-id"
                     value={oldPasswordValue}
-                    onChange={onChangeUsername}
+                    onChange={onChangeOldPassword}
+                    onBlur={onBlurOldPasswordValue}
                 />
             </FormGroup>
             <FormGroup
@@ -95,7 +112,7 @@ export const ResetPasswordForm: React.FunctionComponent<LoginFormProps> = ({
                     name="pf-login-password-id"
                     validated={isValidPassword ? ValidatedOptions.default : ValidatedOptions.error}
                     value={newPasswordValue}
-                    onChange={onChangePassword}
+                    onChange={onChangeNewPassword}
                 />
             </FormGroup>
             <FormGroup
@@ -111,7 +128,7 @@ export const ResetPasswordForm: React.FunctionComponent<LoginFormProps> = ({
                     name="pf-login-password-id"
                     validated={isValidPassword ? ValidatedOptions.default : ValidatedOptions.error}
                     value={confirmPasswordValue}
-                    onChange={onChangePassword}
+                    onChange={onChangeConfirmPassword}
                 />
             </FormGroup>
             <ActionGroup>
