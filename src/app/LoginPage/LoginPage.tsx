@@ -77,8 +77,6 @@ class LoginPage extends React.Component<LoginProps, LoginState, ResetPasswordSta
       newPassword: "",
       confirmPassword: "",
     };
-
-
   }
 
   // Detect if CILogon has authenticated, then log into app if it has.
