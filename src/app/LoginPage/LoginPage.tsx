@@ -131,7 +131,6 @@ class LoginPage extends React.Component<LoginProps, LoginState, ResetPasswordSta
     axios
       .get(apiUrl + this.state.oldPassword)
       .then(res => {
-        debugger
         if (res && res.data) {
           if (res.data["is_valid"] == "true") {
             this.setState({ ...this.state, isValidOldPassword: true });
@@ -157,7 +156,6 @@ class LoginPage extends React.Component<LoginProps, LoginState, ResetPasswordSta
     axios
       .post(apiUrl, { credential })
       .then(res => {
-        debugger
         if (res && res.data) {
           if (res.data["status"] == "true") {
             this.setState({ ...this.state, isResetPasswordProcessed: true });
@@ -184,7 +182,6 @@ class LoginPage extends React.Component<LoginProps, LoginState, ResetPasswordSta
       username: username,
       password: password
     };
-    debugger
     axios
       .post(apiUrl, { credential })
       .then(res => {
