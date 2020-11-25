@@ -135,7 +135,7 @@ export const ResetPasswordForm: React.FunctionComponent<LoginFormProps> = ({
                 <Button variant="primary" type="submit" onClick={onLoginButtonClick} isBlock isDisabled={isResetButtonDisabled}>
                     {resetButtonLabel}
                 </Button>
-                <a href='javascript:void(0)' onClick={onResetButtonClick} style={{ paddingLeft: "40%" }}>Login</a>
+                <a href="#" onClick={onResetButtonClick} style={{ paddingLeft: "40%" }}>Login</a>
             </ActionGroup>
         </Form>
     );
