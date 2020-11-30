@@ -57,7 +57,7 @@ class SearchToolBar extends React.Component<myProps, myState> {
               <Button variant={ButtonVariant.control} aria-label="search button for search input">
                 <SearchIcon />
               </Button>
-              <Button onClick={() => this.reset()}> <CloseIcon /> </Button>
+              <Button aria-label="search button for search input close icon" onClick={() => this.reset()}> <CloseIcon /> </Button>
             </InputGroup>
           </ToolbarItem>
         </ToolbarContent>
