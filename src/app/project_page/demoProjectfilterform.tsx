@@ -2,15 +2,17 @@ import React from 'react';
 import { Grid, GridItem, Form, ActionGroup } from '@patternfly/react-core';
 import axios from 'axios';
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
-import { DropdownComponent } from '../Dropdown/DropdownComponent';
-import { Button } from '@patternfly/react-core';
-
+// import { TimeComponent } from '@app/DateComponent/TimeComponent';
+// import { DropdownComponent } from '../Dropdown/DropdownComponent';
+import { Button, FormGroup, InputGroup, TextInput } from '@patternfly/react-core';
+// import TimePicker from 'react-time-picker';
 import SearchToolBar from '@app/SearchToolbar/SearchToolBar';
+// import TimeField from 'react-simple-timefield';
 
 type myProps = {};
 type myState = {
-  startHrs: number;
-  endHrs: number;
+  startHrs: string;
+  endHrs: string;
   startDate: Date;
   endDate: Date;
   conditionalRender: number;
@@ -44,8 +46,8 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
     endDate.setSeconds(0);
 
     this.state = {
-      startHrs: (new Date().getHours() - 1 + 24) % 24, // javascript Modulo function is buggy
-      endHrs: new Date().getHours() % 24,
+      startHrs: ((new Date().getHours() - 1)).toString() + ":" + (new Date().getMinutes().toString().length == 1 ? "0" + new Date().getMinutes().toString() : new Date().getMinutes().toString()),
+      endHrs: (new Date().getHours()).toString() + ":" + (new Date().getMinutes().toString().length == 1 ? "0" + new Date().getMinutes().toString() : new Date().getMinutes().toString()),
       startDate: new Date(startDate),
       endDate: new Date(endDate),
       conditionalRender: 0,
@@ -71,7 +73,7 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
     if (onSubmit) {
       apiUrl = apiUrl + '/' + startDate + '/' + endDate;
     }
-    
+
     axios
       .get(apiUrl)
       .then(res => {
@@ -91,6 +93,7 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
 
   changeToggle = () => {
     this.callAPI(true);
+    console.log(this.state.startHrs)
     // const conditionalRender: number = this.state.conditionalRender;
     // this.setState({
     //   ...this.state,
@@ -99,38 +102,49 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
     // });
   };
 
-  setStartHrs = (hrs: number) => {
+  setStartHrs = (hrs: string) => {
+    var hrsMints = hrs.split(":")
+    console.log(hrsMints)
     const date = new Date(this.state.startDate);
-    date.setHours(hrs);
+    date.setHours(parseInt(hrsMints[0]));
+    date.setMinutes(parseInt(hrsMints[1]));
     this.setState({
       ...this.state,
       changingDate: true,
-      startHrs: hrs % 24,
+      startHrs: hrs,
       startDate: new Date(date)
     });
+    console.log(this.state.startHrs)
   };
 
-  setEndHrs = (hrs: number) => {
+  setEndHrs = (hrs: string) => {
+    var hrsMints = hrs.split(":")
     const date = new Date(this.state.endDate);
-    date.setHours(hrs);
+    date.setHours(parseInt(hrsMints[0]));
+    date.setMinutes(parseInt(hrsMints[1]));
     this.setState({
       ...this.state,
       changingDate: true,
-      endHrs: hrs % 24,
+      endHrs: hrs,
       endDate: new Date(date)
     });
+    console.log(this.state.endHrs)
   };
 
   setStartDate = (date: Date) => {
+    var hrsMints = this.state.startHrs.split(":")
     date = new Date(date);
-    date.setHours(this.state.startHrs);
+    date.setHours(parseInt(hrsMints[0]));
+    date.setMinutes(parseInt(hrsMints[1]));
     date.setDate(date.getDate() + 1);
     this.setState({ ...this.state, changingDate: true, startDate: new Date(date) });
   };
 
   setEndDate = (date: Date) => {
+    var hrsMints = this.state.endHrs.split(":")
     date = new Date(date);
-    date.setHours(this.state.endHrs);
+    date.setHours(parseInt(hrsMints[0]));
+    date.setMinutes(parseInt(hrsMints[1]));
     date.setDate(date.getDate() + 1);
     this.setState({ ...this.state, changingDate: true, endDate: new Date(date) });
   };
@@ -144,7 +158,7 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
     return (
       <div>
         {this.state.clusterData !== null && (
-          <SearchToolBar  data={this.state.clusterData} columnTitle={columnTitle}/>
+          <SearchToolBar data={this.state.clusterData} columnTitle={columnTitle} />
         )}
       </div>
     );
@@ -152,6 +166,7 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
 
   render() {
     return (
+
       <React.Fragment>
         <Form>
           <Grid>
@@ -165,10 +180,36 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
           </Grid>
           <Grid>
             <GridItem span={6}>
-              <DropdownComponent key={'startHrs'} setHrs={this.setStartHrs} Hrs={this.state.startHrs} />
+              {/* Time element for start and end hours for data filter. Using default patternfly components */}
+              <FormGroup label="Start Hrs" isRequired
+                fieldId="Start Hrs">
+                <InputGroup className="timergroup">
+                  <TextInput
+                    name="textInput"
+                    id="Start Hrs"
+                    type="time"
+                    aria-label="Input Time"
+                    onChange={value => { this.setStartHrs(value); }}
+                    value={this.state.startHrs}
+                  />
+                </InputGroup>
+              </FormGroup>
             </GridItem>
             <GridItem span={6}>
-              <DropdownComponent key={'endHrs'} setHrs={this.setEndHrs} Hrs={this.state.endHrs} />
+              {/* Time element for start and end hours for data filter. Using default patternfly components */}
+              <FormGroup label="End Hrs" isRequired
+                fieldId="End Hrs">
+                <InputGroup className="timergroup">
+                  <TextInput
+                    name="textInput"
+                    id="End Hrs"
+                    type="time"
+                    aria-label="Input Time"
+                    onChange={value => { this.setEndHrs(value); }}
+                    value={this.state.endHrs}
+                  />
+                </InputGroup>
+              </FormGroup>
             </GridItem>
           </Grid>
           <Grid>
