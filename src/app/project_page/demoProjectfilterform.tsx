@@ -2,11 +2,12 @@ import React from 'react';
 import { Grid, GridItem, Form, ActionGroup } from '@patternfly/react-core';
 import axios from 'axios';
 import { SimpleInputGroups } from '@app/DateComponent/DateComponent';
-import { TimeComponent } from '@app/DateComponent/TimeComponent';
-import { DropdownComponent } from '../Dropdown/DropdownComponent';
-import { Button } from '@patternfly/react-core';
-
+// import { TimeComponent } from '@app/DateComponent/TimeComponent';
+// import { DropdownComponent } from '../Dropdown/DropdownComponent';
+import { Button, FormGroup, InputGroup, TextInput } from '@patternfly/react-core';
+// import TimePicker from 'react-time-picker';
 import SearchToolBar from '@app/SearchToolbar/SearchToolBar';
+// import TimeField from 'react-simple-timefield';
 
 type myProps = {};
 type myState = {
@@ -45,8 +46,8 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
     endDate.setSeconds(0);
 
     this.state = {
-      startHrs: ((new Date().getHours()-1)).toString() + ":" + new Date().getMinutes().toString(),
-      endHrs: (new Date().getHours()).toString() + ":" + new Date().getMinutes().toString(),
+      startHrs: ((new Date().getHours() - 1)).toString() + ":" + (new Date().getMinutes().toString().length == 1 ? "0" + new Date().getMinutes().toString() : new Date().getMinutes().toString()),
+      endHrs: (new Date().getHours()).toString() + ":" + (new Date().getMinutes().toString().length == 1 ? "0" + new Date().getMinutes().toString() : new Date().getMinutes().toString()),
       startDate: new Date(startDate),
       endDate: new Date(endDate),
       conditionalRender: 0,
@@ -165,6 +166,7 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
 
   render() {
     return (
+
       <React.Fragment>
         <Form>
           <Grid>
@@ -178,12 +180,36 @@ class DemoProjectFilterForm extends React.Component<myProps, myState> {
           </Grid>
           <Grid>
             <GridItem span={6}>
-              {/* <DropdownComponent key={'startHrs'} setHrs={this.setStartHrs} Hrs={this.state.startHrs} /> */}
-              <TimeComponent changeDate={this.setStartHrs} dateType="Start Hrs" key="StartHrs" currentTime={this.state.startHrs} />
+              {/* Time element for start and end hours for data filter. Using default patternfly components */}
+              <FormGroup label="Start Hrs" isRequired
+                fieldId="Start Hrs">
+                <InputGroup className="timergroup">
+                  <TextInput
+                    name="textInput"
+                    id="Start Hrs"
+                    type="time"
+                    aria-label="Input Time"
+                    onChange={value => { this.setStartHrs(value); }}
+                    value={this.state.startHrs}
+                  />
+                </InputGroup>
+              </FormGroup>
             </GridItem>
             <GridItem span={6}>
-              {/* <DropdownComponent key={'endHrs'} setHrs={this.setEndHrs} Hrs={this.state.endHrs} /> */}
-              <TimeComponent changeDate={this.setEndHrs} dateType="End Hrs" key="EndHrs" currentTime={this.state.endHrs} />
+              {/* Time element for start and end hours for data filter. Using default patternfly components */}
+              <FormGroup label="End Hrs" isRequired
+                fieldId="End Hrs">
+                <InputGroup className="timergroup">
+                  <TextInput
+                    name="textInput"
+                    id="End Hrs"
+                    type="time"
+                    aria-label="Input Time"
+                    onChange={value => { this.setEndHrs(value); }}
+                    value={this.state.endHrs}
+                  />
+                </InputGroup>
+              </FormGroup>
             </GridItem>
           </Grid>
           <Grid>
