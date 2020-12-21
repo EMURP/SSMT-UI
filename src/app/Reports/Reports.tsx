@@ -17,7 +17,7 @@ type myState = {
 };
 
 /*
-Component which allows users to generate and view metering reports. 
+Component which allows users to generate and view metering reports.
 */
 class Reports extends React.Component<myProps, myState> {
     constructor(myProps) {
@@ -34,7 +34,7 @@ class Reports extends React.Component<myProps, myState> {
         return (
             <PageSection>
                 <Title headingLevel="h1" size="lg">
-                    Reports
+                    Resource Usage
                 </Title>
                 <Stack>
                     <StackItem>

@@ -22,7 +22,7 @@ type row = {
 type cells = Array<JSX.Element | number | string>;
 
 /*
-The table/list which displays metering report data for the Standard Report Type. 
+The table/list which displays metering report data for the Standard Report Type.
 Currently displays columns for namespace, cpu usage, network usage, and memory usage.
 */
 class ReportsList extends React.Component<myProps, myState> {
@@ -39,8 +39,7 @@ class ReportsList extends React.Component<myProps, myState> {
             </Link>
           </BodyCell>,
           dataRow['podUsageCpuCoreSeconds'],
-          dataRow['network'],
-          dataRow['memory']
+
         ]
       });
     })
@@ -48,9 +47,7 @@ class ReportsList extends React.Component<myProps, myState> {
     this.state = {
       columns: [
         myProps.columnTitle['namespace'],
-        myProps.columnTitle['podUsageCpuCoreSeconds'],
-        myProps.columnTitle['network'],
-        myProps.columnTitle['memory']
+        myProps.columnTitle['podUsageCpuCoreSeconds']
       ],
       rows: rowData
     };
@@ -70,12 +67,10 @@ class ReportsList extends React.Component<myProps, myState> {
           cells: [
             <BodyCell key={`/projectlist/${dataRow['namespace']}`}>
               <Link to={`/projectlist/${dataRow['namespace']}`} key={`/projectlist/${dataRow['namespace']}`}>
-              {dataRow['namespace']} 
+              {dataRow['namespace']}
               </Link>
             </BodyCell>,
-            dataRow['podUsageCpuCoreSeconds'],
-            dataRow['network'],
-            dataRow['memory']
+            dataRow['podUsageCpuCoreSeconds']
           ]
         });
       });

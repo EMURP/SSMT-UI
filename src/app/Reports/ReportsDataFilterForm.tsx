@@ -26,8 +26,7 @@ type myState = {
 export type dataObject = {
     namespace: string;
     podUsageCpuCoreSeconds: number;
-    network: number;
-    memory: number;
+
 };
 
 const convertDateToUTC = (date: Date) => {
@@ -37,7 +36,7 @@ const convertDateToUTC = (date: Date) => {
 /*
 Form for users to specify the start date, report frequency(daily, weekly, monthly), and report type
 (standard, analytical, custom) of a metering report. Also offers an option to export metering data from the
-backend as csv. 
+backend as csv.
 */
 class ReportsDataFilterForm extends React.Component<myProps, myState> {
     constructor(myProps) {
@@ -47,7 +46,7 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
             startDate: new Date(),
             conditionalRender: 0,
             changingDate: true,
-            api: 'https://ba2ce7a1-886d-4b07-aa05-7711f84006ec.mock.pstmn.io/reports',
+            api: 'http://localhost:8000/namespace-cpu-request',
             clusterData: null,
             err: null,
             isLoaded: false,
@@ -124,14 +123,13 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         )
     }
 
-    // Generates a standard report, a table with columns for namespace, cpu usage, network usage, 
-    // and memory usage. 
+    // Generates a standard report, a table with columns for namespace, cpu usage, network usage,
+    // and memory usage.
     renderStandard = () => {
         const columnTitle = {
-            namespace: 'Report Name',
+            namespace: 'namespace',
             podUsageCpuCoreSeconds: 'Pod CPU Usage in Seconds',
-            network: 'Network Usage in Megabits per Second',
-            memory: 'Memory Usage in Gigabytes'
+
         };
 
         const tableData: Array<dataObject> = [];
@@ -141,11 +139,9 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                 tableData.push({
                     namespace: clusterInfo['namespace'],
                     // Note: The line below should be `podUsageCpuCoreSeconds: clusterInfo['pod_usage_cpu_core_seconds']`
-                    // The mock API call only supports 'pod_request_cpu_core_seconds' but 
+                    // The mock API call only supports 'pod_request_cpu_core_seconds' but
                     // I want to ensure that the value gets rendered.
                     podUsageCpuCoreSeconds: clusterInfo['pod_request_cpu_core_seconds'],
-                    network: clusterInfo['network'],
-                    memory: clusterInfo['memory']
                 })
             })
         }
@@ -197,7 +193,7 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                     <div>Select a date range to view available Daily, Weekly, and Monthly reports.</div>
                     <Grid>
                         <GridItem span={8}>
-                            <SimpleInputGroups changeDate={this.setStartDate} dateType="StartDate" key="StartDate" />
+                            <SimpleInputGroups changeDate={this.setStartDate} dateType="StartDate" key="Date" />
                         </GridItem>
                     </Grid>
                     <Grid>
