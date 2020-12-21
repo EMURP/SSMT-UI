@@ -87,7 +87,7 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
         this.callAPI(true);
     }
 
-    setStartDate = (date: Date) => {
+    setDate = (date: Date) => {
         date = new Date(date);
         date.setDate(date.getDate() + 1);
         this.setState({ ...this.state, changingDate: true, startDate: new Date(date) });
@@ -193,7 +193,7 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
                     <div>Select a date range to view available Daily, Weekly, and Monthly reports.</div>
                     <Grid>
                         <GridItem span={8}>
-                            <SimpleInputGroups changeDate={this.setStartDate} dateType="StartDate" key="Date" />
+                            <SimpleInputGroups changeDate={this.setDate} dateType="Date" key="Date" />
                         </GridItem>
                     </Grid>
                     <Grid>
