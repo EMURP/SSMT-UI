@@ -46,7 +46,7 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
             startDate: new Date(),
             conditionalRender: 0,
             changingDate: true,
-            api: 'http://localhost:8000/namespace-cpu-request',
+            api: 'http://localhost:8000/namespace_cpu_request',
             clusterData: null,
             err: null,
             isLoaded: false,
