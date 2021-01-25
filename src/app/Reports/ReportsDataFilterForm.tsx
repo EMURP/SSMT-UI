@@ -42,6 +42,7 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
     constructor(myProps) {
         super(myProps);
 
+        // Set api as 'https://ssmt.redhat.com/namespace_cpu_request' if ssl certificate is set up.
         this.state = {
             startDate: new Date(),
             conditionalRender: 0,
@@ -89,7 +90,7 @@ class ReportsDataFilterForm extends React.Component<myProps, myState> {
 
     setDate = (date: Date) => {
         date = new Date(date);
-        date.setDate(date.getDate() + 1);
+        date.setDate(date.getDate());
         this.setState({ ...this.state, changingDate: true, startDate: new Date(date) });
     };
 

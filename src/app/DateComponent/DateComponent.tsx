@@ -21,19 +21,6 @@ class SimpleInputGroups extends React.Component<myProps, myState> {
     };
   }
 
-  formatDate(date) {
-    var d = new Date(date);
-    var month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear();
-
-    if (month.length < 2)
-      month = '0' + month;
-    if (day.length < 2)
-      day = '0' + day;
-
-    return [year, month, day].join('-');
-  }
 
   updateDateValue(newDate) {
     this.setState({ currentDate: newDate });
@@ -54,7 +41,7 @@ class SimpleInputGroups extends React.Component<myProps, myState> {
               type="date"
               aria-label="Input Date"
               onChange={value => { this.props.changeDate(value); this.updateDateValue(value) }}
-              value={this.formatDate(this.state.currentDate)}
+              value={this.state.currentDate}
             />
 
             <InputGroupText component="label" htmlFor="textInput9">
